@@ -7,7 +7,9 @@
 		body {
 			font-size: 12pt;
 			font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial,
-        	sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+        		sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+			padding-left: 40px !important;
+			padding-right: 40px !important;
 		}
 		.label {
 			display: inline-block;
@@ -222,7 +224,7 @@
 					    <tr>
 					        <td>{{ $no++ }}. {{ $dataquest->questiontext }}</td>
 					        @for ($i = 5; $i >= 1; $i--) 
-					            <td style="text-align: center; width: 40px; margin-right: 2px; padding-top: 10px; vertical-align: middle;">
+					            <td style="text-align: center; width: 40px; margin-right: 2px; padding-top: 5px; padding-bottom: 5px; vertical-align: middle;">
 					                @if ($savedRating == $i)
 					                    <img src="{{ public_path('assets/images/rate/' . $i . '.png') }}" alt="{{ $i }}" width="20">
 					                @else
