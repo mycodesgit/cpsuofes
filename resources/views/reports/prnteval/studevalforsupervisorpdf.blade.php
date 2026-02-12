@@ -234,7 +234,7 @@
 		    <table id="table" border="1" style="border-collapse: collapse; width: 100%; margin-top: -1px">
 		        <thead>
 		            <tr>
-		                <th style="font-weight: bold !important; text-align: left; color: #fff; background-color:#303030" colspan="6">{{ $catName }}</th>
+		                <th style="font-weight: bold !important; text-align: left; color: #fff; background-color:#303030" colspan="7">{{ $catName }}</th>
 		            </tr>
 		        </thead>
 		        <tbody>
@@ -249,9 +249,13 @@
 		                    }
 					    @endphp
 					    <tr>
-					        <td style="padding: 5px">{{ $no++ }}. {{ $dataquest->questiontext }}</td>
+					        <td style="padding: 5px; width: 30px;">{{ $no++ }}. {{ $dataquest->questiontext }}</td>
+							<td style="text-align: left; width: 50px;">
+								• Daily time record<br>
+								•Faculty schedule and timetable
+							</td>
 					        @for ($i = 5; $i >= 1; $i--) 
-					            <td style="text-align: center; width: 40px; margin-right: 2px; padding-top: 5px; padding-bottom: 5px; vertical-align: middle;">
+					            <td style="text-align: center; width: 10px; margin-right: 2px; padding-top: 5px; padding-bottom: 5px; vertical-align: middle;">
 					                @if ($savedRating == $i)
 					                    <img src="{{ public_path('assets/images/rate/' . $i . '.png') }}" alt="{{ $i }}" width="20">
 					                @else
