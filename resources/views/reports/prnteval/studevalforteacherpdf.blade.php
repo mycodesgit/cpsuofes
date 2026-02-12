@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title></title>
+	<title>STUDENT EVALUATION OF TEACHERS</title>
 	<style>
 		body {
 			font-size: 12pt;
@@ -38,7 +38,7 @@
         	vertical-align: center !important;
     		text-align: left;
             border: 1px solid #000;
-            font-size: 12pt;
+            font-size: 11pt;
 			font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial,
         	sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
         } 
@@ -129,7 +129,7 @@
 		</div>
 	</div>
 	<div style="margin-top: -30px; text-align: right; font-size: 10pt">
-		<p>ANNEX A- Student Evaluation of Teachers</p>
+		<p>ANNEX A - Student Evaluation of Teachers</p>
 	</div>
 
 	<div style="margin-top: 20px; text-align: center; font-weight: bold">
@@ -183,7 +183,7 @@
 				@foreach($ratingscale as $dataratingscale)
 					<tr>
 						<td class="ratingscaletd" style="text-align: center; font-weight: bold">{{ $dataratingscale->inst_scale }}</td>
-						<td class="ratingscaletd">{{ $dataratingscale->inst_descRating }}</td>
+						<td class="ratingscaletd" style="text-align: center; font-weight: normal">{{ $dataratingscale->inst_descRating }}</td>
 						<td class="ratingscaletd">{{ $dataratingscale->inst_qualDescription }}</td>
 					</tr>
 				@endforeach
@@ -297,7 +297,7 @@
 
 		<div class="" style="margin-top: 20px;">
 			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Signature of Evaluator</span>:
-			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 270px;">
+			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 370px;">
 				@if($mysign)
 					&nbsp; <img img id="signature-img" src="{{ public_path('storage/' . $mysign) }}" alt="Signature" style="width: 350px; height: auto; display: flex; justify-content: center; align-items: center; position: absolute; margin-top: 0px">
 				@else
@@ -324,17 +324,20 @@
 
 		<div class="" style="margin-top: 20px;">
 			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Name of Evaluator/ID number</span>:
-			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 290px;">
+			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 370px;">
 				<span style="font-weight: normal">{{ $evaluatorName }}</span>
 			</div>
 		</div>
 
 		<div class="" style="margin-top: 20px;">
 			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Date</span>:
-			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 290px;">
+			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 370px;">
 				<span style="font-weight: normal">{{ $qcedatesubmit }}</span>
 			</div>
 		</div>
-		
+	</div>
+	<div style="margin-top: 10px; font-size: 11pt">
+		<span style="font-weight: bold; text-align: justify;">Note:</span> <span style="font-style: italic">Your feedback is important in enhancing the educational programs of State Universities and Colleges (SUCs). Please be informed that any information provided in this instrument will be treated as strictly confidential.</span>
+	</div>
 </body>
 </html>

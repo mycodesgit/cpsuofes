@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title></title>
+	<title>SUPERVISOR'S EVALUATION OF FACULTY</title>
 	<style>
 		body {
 			font-size: 12pt;
@@ -38,7 +38,7 @@
         	vertical-align: center !important;
     		text-align: left;
             border: 1px solid #000;
-            font-size: 12pt;
+            font-size: 11pt;
 			font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial,
         	sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
         } 
@@ -123,19 +123,29 @@
 		$underlineFaculty = str_pad($facultyName, $underlineLengthName, '_', STR_PAD_BOTH);
 		$underlineRank = str_pad($academicRank, $underlineLengthRank, '_', STR_PAD_BOTH);
 	@endphp
+
+	@php
+		use Carbon\Carbon;
+
+		$evaluatorName = $facrated->first()->evaluatorname ?? '';
+		$qcetype = $facrated->first()->qceevaluator ?? '';
+		$qcedatesubmit = optional($facrated->first())->created_at ? Carbon::parse($facrated->first()->created_at)->format('F d, Y') : '';
+
+		$mysign = $esig->first()->studesig ?? null;
+	@endphp
 	<div>
 		<div style="margin-top: -30px; text-align: right; color: rgb(185, 185, 185); z-index: -9999">
 			<p>{{ $facrated->first()->ratecount }}</p>
 		</div>
 	</div>
 	<div style="margin-top: -30px; text-align: right; font-size: 10pt">
-		<p>ANNEX A- Student Evaluation of Teachers</p>
+		<p>ANNEX B - Supervisor's Evaluation of Faculty</p>
 	</div>
 
 	<div style="margin-top: 20px; text-align: center; font-weight: bold">
 		<p>
 			EVALUATION INSTRUMENT<br>
-			STUDENT EVALUATION OF TEACHERS (SET)
+			SUPERVISOR'S EVALUATION OF FACULTY
 		</p>
 	</div>
 
@@ -150,6 +160,10 @@
 			<span class="colon">:</span> {{ $facultyName }}
 		</p>
 		<p>
+			<span class="label">Academic Rank</span>
+			<span class="colon">:</span> {{ $academicRank }}
+		</p>
+		<p>
 			<span class="label">College/Department</span>
 			<span class="colon">:</span> {{ $facultyProg }}
 		</p>
@@ -158,7 +172,7 @@
 			<span class="colon">:</span> {{ $facultyProgCode }}
 		</p>
 		<p>
-			<span class="label">Program Level</span>
+			<span class="label">Program Year</span>
 			<span class="colon">:</span>
 		</p>
 		<p>
@@ -183,7 +197,7 @@
 				@foreach($ratingscale as $dataratingscale)
 					<tr>
 						<td class="ratingscaletd" style="text-align: center; font-weight: bold">{{ $dataratingscale->inst_scale }}</td>
-						<td class="ratingscaletd">{{ $dataratingscale->inst_descRating }}</td>
+						<td class="ratingscaletd" style="text-align: center; font-weight: normal">{{ $dataratingscale->inst_descRating }}</td>
 						<td class="ratingscaletd">{{ $dataratingscale->inst_qualDescription }}</td>
 					</tr>
 				@endforeach
@@ -192,7 +206,7 @@
 	</div>
 
 	<div style="margin-top: 30px;">
-		<p><span style="font-weight: bold">C. Instruction:</span> {{ $instrctn->first()->instruction }}</p>
+		<p><span style="font-weight: bold">C. Instruction:</span> {{ $instrctn->instruction }}</p>
 
 		@php 
 		    $no = 1; 
@@ -204,7 +218,8 @@
 		<table id="table" border="1" style="border-collapse: collapse; width: 100%;">
 			<thead>
 				<tr>
-					<th style="font-weight: bold !important; text-align: center; font-size: 11pt; background-color:#e4f0f5">Benchmark Statements for Faculty Teaching<br> Effectiveness</th>
+					<th style="font-weight: bold !important; text-align: center; font-size: 11pt; background-color:#e4f0f5">Benchmark Statements</th>
+					<th style="font-weight: bold !important; text-align: center; font-size: 11pt; background-color:#e4f0f5">Suggested Means for Verification</th>
 					<th style="font-weight: bold !important; text-align: center; background-color:#e4f0f5; width: 33%">Rating</th>
 				</tr>
 			</thead>
@@ -220,11 +235,6 @@
 		        <thead>
 		            <tr>
 		                <th style="font-weight: bold !important; text-align: left; color: #fff; background-color:#303030" colspan="6">{{ $catName }}</th>
-		            </tr>
-		        </thead>
-		        <thead>
-		            <tr>
-		                <th style="font-weight: normal !important; text-align: left; font-size: 10pt; font-style: italic" colspan="6">{{ $catDesc }}</th>
 		            </tr>
 		        </thead>
 		        <tbody>
@@ -284,19 +294,8 @@
 	</div>
 
 	<div>
-		@php
-			use Carbon\Carbon;
-
-		    $evaluatorName = $facrated->first()->evaluatorname ?? '';
-		    $qcetype = $facrated->first()->qceevaluator ?? '';
-		    $qcedatesubmit = optional($facrated->first())->created_at ? Carbon::parse($facrated->first()->created_at)->format('F d, Y') : '';
-
-			$mysign = $esig->first()->studesig ?? null;
-		@endphp
-
-
 		<div class="" style="margin-top: 20px;">
-			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Signature of Evaluator</span>:
+			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Signature of Supervisor</span>:
 			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 270px;">
 				@if($mysign)
 					&nbsp; <img img id="signature-img" src="{{ public_path('storage/' . $mysign) }}" alt="Signature" style="width: 350px; height: auto; display: flex; justify-content: center; align-items: center; position: absolute; margin-top: 0px">
@@ -323,9 +322,16 @@
 		</script>
 
 		<div class="" style="margin-top: 20px;">
-			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Name of Evaluator/ID number</span>:
+			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Name of Supervisor</span>:
 			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 290px;">
 				<span style="font-weight: normal">{{ $evaluatorName }}</span>
+			</div>
+		</div>
+
+		<div class="" style="margin-top: 20px;">
+			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Designation</span>:
+			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 290px;">
+				<span style="font-weight: normal">{{ $qcetype }}</span>
 			</div>
 		</div>
 

@@ -48,10 +48,16 @@ class ReportsPrintEvalController extends Controller
             })
             ->orderBy('id', 'DESC')
             ->get();
-        return view('reports.prnteval.evaluationprint', compact('currsem'));
+
+        $currsemfac = QCEsemester::select('id', 'qceschlyear', 'qceratingfrom', 'qceratingto')
+            ->orderBy('id', 'DESC')
+            ->get();
+        $collegelist = College::whereIn('id', [2, 3, 4, 5, 6, 7, 8])->get();
+
+        return view('reports.prnteval.evaluationprint', compact('currsem', 'currsemfac', 'collegelist'));
     }
 
-    public function subprint_searchresultStore()
+    public function subprintstudent_searchresultStore()
     {
         //$currsem = QCEsemester::all();
         $currsem = QCEsemester::select('id', 'qceschlyear')
@@ -62,7 +68,21 @@ class ReportsPrintEvalController extends Controller
             })
             ->orderBy('id', 'DESC')
             ->get();
-        return view('reports.prnteval.evaluationprintsearchresult', compact('currsem'));
+        return view('reports.prnteval.evaluationprintsearchresultstudent', compact('currsem'));
+    }
+
+    public function subprintsupervisor_searchresultStore()
+    {
+        //$currsem = QCEsemester::all();
+        $currsem = QCEsemester::select('id', 'qceschlyear')
+            ->whereIn('id', function($query) {
+                $query->select(DB::raw('MAX(id)'))
+                    ->from('qceschlyearsem')
+                    ->groupBy('qceschlyear');
+            })
+            ->orderBy('id', 'DESC')
+            ->get();
+        return view('reports.prnteval.evaluationprintsearchresultsupervisor', compact('currsem'));
     }
 
     public function getevalsubratelistRead(Request $request) 
@@ -217,7 +237,7 @@ class ReportsPrintEvalController extends Controller
         return response()->json($courses);
     }
 
-    public function exportPrintEvalPDF(Request $request)
+    public function exportPrintStudentEvalPDF(Request $request)
     {
         $id = $request->query('id');
         $semester = $request->query('semester');
@@ -228,24 +248,10 @@ class ReportsPrintEvalController extends Controller
         $studSec = $request->query('studSec');
         $studidno = $request->query('studidno');
 
-        // Debugging logs
-        // \Log::info("PDF Parameters:", [
-        //     'id' => $id,
-        //     'progCod' => $progCod,
-        //     'studYear' => $studYear,
-        //     'studSec' => $studSec,
-        //     'schlyear' => $schlyear,
-        //     'semester' => $semester,
-        //     'campus' => $campus,
-        //     'studidno' => $studidno,
-        // ]);
-
-        // Validate parameters
         if (!$id || !$progCod || !$studYear || !$studSec || !$schlyear || !$semester || !$campus || !$studidno) {
             return response()->json(['error' => 'Missing required parameters'], 400);
         }
 
-        // Fetch necessary data
         $facrated = QCEfevalrate::where('id', $id)
             ->where('semester', $semester)
             ->where('schlyear', $schlyear)
@@ -261,7 +267,6 @@ class ReportsPrintEvalController extends Controller
             ->where('faculty.id', $facrated->first()->qcefacID)
             ->get();
 
-        // Fetch supporting data
         $ratingscale = QCEratingscale::orderBy('inst_scale', 'DESC')->where('instratingscalestat', 1)->get();
         $instrctn = QCEinstruction::where('instructcat', 1)->get();
         $currsem = QCEsemester::where('qcesemstat', 2)->get();
@@ -275,10 +280,53 @@ class ReportsPrintEvalController extends Controller
             ->select('studsignature.studesig')
             ->get();
 
-        // Generate the PDF
         $pdf = PDF::loadView('reports.prnteval.studevalforteacherpdf', compact('ratingscale', 'instrctn', 'currsem', 'quest', 'facrated', 'progCod', 'studYear', 'studSec', 'schlyear', 'semester', 'campus', 'facRanck', 'esig'))->setPaper('Legal', 'portrait');
 
-        return $pdf->stream('evaluation.pdf');
+        return $pdf->stream('Student Evaluation for Teacher.pdf');
+    }
+
+    public function exportPrintSupervisorEvalPDF(Request $request)
+    {
+        $campus = $request->query('campus');
+        $schlyear = $request->query('schlyear');
+        $semester = $request->query('semester');
+        $faclty = $request->query('faclty');
+        $ratingFrom = $request->query('ratingfrom');
+        $ratingTo   = $request->query('ratingto');
+        $rating_period = $ratingFrom . ' - ' . $ratingTo;
+
+        if (!$schlyear || !$semester || !$campus || !$faclty) {
+            return response()->json(['error' => 'Missing required parameters'], 400);
+        }
+
+        $facrated = QCEfevalrate::where('campus', $campus)
+            ->where('schlyear', $schlyear)
+            ->where('semester', $semester)
+            ->where('qcefacID', $faclty)
+            ->where('qceevaluator', '=', 'Supervisor')
+            ->select('qceformevalrate.*')
+            ->get();
+
+        $facRanck = DB::connection('schedule')->table('faculty')
+            ->where('faculty.id', $facrated->first()->qcefacID)
+            ->get();
+
+        $ratingscale = QCEratingscale::orderBy('inst_scale', 'DESC')->where('instratingscalestat', 1)->get();
+        $instrctn = QCEinstruction::where('instructcat', 2)->first();
+        $currsem = QCEsemester::where('qcesemstat', 2)->get();
+        $quest = QCEquestion::join('qcecategory', 'qcequestion.catName_id', '=', 'qcecategory.id')
+            ->select('qcecategory.catName', 'qcecategory.catDesc', 'qcequestion.*')
+            ->where('qcecategory.catstatus', '2')
+            ->get();
+        
+        $esig = StudeSig::leftJoin('qceformevalrate', 'studsignature.studIDno', '=', 'qceformevalrate.studidno')
+            ->where('qceformevalrate.studidno', $facrated->first()->qcefacID)
+            ->select('studsignature.studesig')
+            ->get();
+
+        $pdf = PDF::loadView('reports.prnteval.studevalforsupervisorpdf', compact('ratingscale', 'instrctn', 'currsem', 'quest', 'facrated', 'schlyear', 'semester', 'campus', 'facRanck', 'esig'))->setPaper('Legal', 'portrait');
+
+        return $pdf->stream('Supervisors Evaluation of Faculty.pdf');
     }
 
     public function updateStatprint(Request $request) 

@@ -29,7 +29,7 @@
                                 <div class="tab-content mt-3" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-studeval" role="tabpanel" aria-labelledby="pills-studeval-tab" tabindex="0">
                                         <div class="bg-light p-2 rounded-2">
-                                            <form method="GET" action="{{ route('subprint_searchresultStore') }}" id="enrollStud">
+                                            <form method="GET" action="{{ route('subprintstudent_searchresultStore') }}" id="enrollStud">
                                                 @csrf
 
                                                 <div class="row container">
@@ -86,58 +86,77 @@
                                     </div>
                                     <div class="tab-pane fade" id="pills-supeval" role="tabpanel" aria-labelledby="pills-supeval-tab" tabindex="0">
                                         <div class="bg-light p-2 rounded-2">
-                                            <form method="GET" action="#" id="enrollStud">
+                                            <form method="GET" action="{{ route('subprintsupervisor_searchresultStore') }}" id="enrollStud">
                                                 @csrf
 
-                                                <div class="row container">
-                                                    <div class="col-md-2 mt-2">
-                                                        <label class="mb-1">Campus <span class="text-danger">*</span></label>
-                                                        <select class="form-control" name="campus" id="campus">
-                                                            <option disabled selected> --Select-- </option>
-                                                            <option value="MC">Main</option>
-                                                            <option value="VC">Victorias</option>
-                                                            <option value="SCC">San Carlos</option>
-                                                            <option value="HC">Hinigaran</option>
-                                                            <option value="MP">Moises Padilla</option>
-                                                            <option value="IC">Ilog</option>
-                                                            <option value="CA">Candoni</option>
-                                                            <option value="CC">Cauayan</option>
-                                                            <option value="SC">Sipalay</option>
-                                                            <option value="HinC">Hinobaan</option>
-                                                        </select>
-                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-3 mb-3">
+                                                            <label>Campus<span class="text-danger">*</span></label>
+                                                            <select class="form-control form-control-sm" name="campus" id="campusprint">
+                                                                <option disabled selected> --Select-- </option>
+                                                                <option value="MC">Main</option>
+                                                                <option value="VC">Victorias</option>
+                                                                <option value="SCC">San Carlos</option>
+                                                                <option value="HC">Hinigaran</option>
+                                                                <option value="MP">Moises Padilla</option>
+                                                                <option value="IC">Ilog</option>
+                                                                <option value="CA">Candoni</option>
+                                                                <option value="CC">Cauayan</option>
+                                                                <option value="SC">Sipalay</option>
+                                                                <option value="HinC">Hinobaan</option>
+                                                                <option value="VE">Valladolid</option>
+                                                            </select>
+                                                        </div>
 
-                                                    <div class="col-md-2 mt-2">
-                                                        <label class="mb-1">School Year <span class="text-danger">*</span></label>
-                                                        <select class="form-control" name="schlyear" id="schlyear">
-                                                            @foreach($currsem as $datacurrsem)
-                                                                <option value="{{ $datacurrsem->qceschlyear }}">{{ $datacurrsem->qceschlyear }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
+                                                        <div class="col-md-3 mb-3">
+                                                            <label>School Year<span class="text-danger">*</span></label>
+                                                            <select class="form-control form-control-sm" name="schlyear" id="schlyearprint">
+                                                                @foreach($currsemfac as $datacurrsemfac)
+                                                                    <option 
+                                                                        value="{{ $datacurrsemfac->qceschlyear }}"
+                                                                        data-from="{{ $datacurrsemfac->qceratingfrom }}"
+                                                                        data-to="{{ $datacurrsemfac->qceratingto }}"
+                                                                    >
+                                                                        {{ $datacurrsemfac->qceschlyear }} ({{ $datacurrsemfac->qceratingfrom }} - {{ $datacurrsemfac->qceratingto }})
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            <input type="hidden" name="ratingfrom" id="ratingfrom">
+                                                            <input type="hidden" name="ratingto" id="ratingto">
+                                                        </div>
 
-                                                    <div class="col-md-3 mt-2">
-                                                        <label class="mb-1">Semester <span class="text-danger">*</span></label>
-                                                        <select class="form-control" name="semester" id="semester">
-                                                            <option disabled selected>Select</option>
-                                                            <option value="1" @if (old('type') == 1) {{ 'selected' }} @endif>First Semester</option>
-                                                            <option value="2" @if (old('type') == 2) {{ 'selected' }} @endif>Second Semester</option>
-                                                            <option value="3" @if (old('type') == 3) {{ 'selected' }} @endif>Summer</option>
-                                                        </select>
-                                                    </div>
+                                                        <div class="col-md-3 mb-3">
+                                                            <label>Semester<span class="text-danger">*</span></label>
+                                                            <select class="form-control form-control-sm" name="semester" id="semesterprint">
+                                                                <option disabled selected>Select</option>
+                                                                <option value="1" @if (old('type') == 1) {{ 'selected' }} @endif>First Semester</option>
+                                                                <option value="2" @if (old('type') == 2) {{ 'selected' }} @endif>Second Semester</option>
+                                                                <option value="3" @if (old('type') == 3) {{ 'selected' }} @endif>Summer</option>
+                                                            </select>
+                                                        </div>
 
-                                                    <div class="col-md-3 mt-2">
-                                                        <label class="mb-1">Course <span class="text-danger">*</span></label>
-                                                        <select class="form-control select2bs4" name="progCod" id="progCod">
-                                                            <option disabled selected>Select a course</option>
-                                                        </select>
-                                                    </div>
+                                                        <div class="col-md-3 mb-3">
+                                                            <label>College<span class="text-danger">*</span></label>
+                                                            <select class="form-control form-control-sm" name="dept" id="dept">
+                                                                <option disabled selected> ---Select---</option>
+                                                                @foreach($collegelist as $datacollegelist)
+                                                                    <option value="{{ $datacollegelist->college_abbr }}">{{ $datacollegelist->college_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
 
-                                                    <div class="col-md-2 mt-2">
-                                                        <label class="mb-1">&nbsp;</label>
-                                                        <button type="submit" class="form-control btn btn-success btn-md">OK</button>
+                                                        <div class="col-md-12 mb-3">
+                                                            <label>Faculty<span class="text-danger">*</span></label>
+                                                            <select class="form-control form-control-sm select2bs4" name="faclty" id="faclty">
+                                                                <option disabled selected>Select a Faculty</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <label>&nbsp;</label>
+                                                            <button type="submit" class="form-control form-control-sm btn btn-success btn-sm">Search</button>
+                                                        </div>
                                                     </div>
-                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -152,5 +171,20 @@
 
     <script>
         var classenrollyrsecReadRoute = "{{ route('getCoursesyearsec') }}";
+    </script>
+
+    <script>
+        var getfacltyReadRoute = "{{ route('getFacultycamp') }}";
+    </script>
+    
+    <script>
+        document.getElementById('schlyearprint').addEventListener('change', function() {
+            let selected = this.options[this.selectedIndex];
+            document.getElementById('ratingfrom').value = selected.getAttribute('data-from');
+            document.getElementById('ratingto').value = selected.getAttribute('data-to');
+        });
+
+        // Run once on page load for the default selected value
+        document.getElementById('schlyearprint').dispatchEvent(new Event('change'));
     </script>
 @endsection

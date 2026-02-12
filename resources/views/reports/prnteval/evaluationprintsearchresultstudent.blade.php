@@ -67,7 +67,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <iframe id="pdfIframe" src="" style="width: 100%; height: 500px;" frameborder="0" class="mt-3"></iframe>
+                    <iframe id="pdfIframe" src="" style="width: 100%; height: 550px;" frameborder="0" class="mt-3"></iframe>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -83,7 +83,7 @@
     <script>
         var submissionReadRoute = "{{ route('getevalsubratelistRead') }}";
         var doneprintReadRoute = "{{ route('getevalsubrateprintedlistRead') }}";
-        var studentevalsubPDFReadRoute = "{{ route('exportPrintEvalPDF') }}";
+        var studentevalsubPDFReadRoute = "{{ route('exportPrintStudentEvalPDF') }}";
         var studentevalsubPDFprintUpdateReadRoute = "{{ route('updateStatprint') }}";
         var classenrollyrsecReadRoute = "{{ route('getCoursesyearsec') }}";
     </script>

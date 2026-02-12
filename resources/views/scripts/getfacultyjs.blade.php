@@ -78,4 +78,33 @@
 
         $('#schlyeardean, #semesterdean').trigger('change'); // auto load on page ready
     });
+
+    $(document).ready(function () {
+        $('campusprint, #schlyearprint, #semesterprint').change(function () {
+            var campus = $('#campusprint').val();
+            var schlyear = $('#schlyearprint').val();
+            var semester = $('#semesterprint').val();
+
+            if (schlyear && semester) {
+                $.ajax({
+                    url: getfacltyReadRoute, 
+                    type: 'GET',
+                    data: {
+                        campus: campus,
+                        schlyear: schlyear,
+                        semester: semester
+                    },
+                    success: function (data) {
+                        $('#faclty').empty();
+                        $('#faclty').append('<option disabled selected>Select a Faculty</option>');
+                        $.each(data, function (key, value) {
+                            $('#faclty').append('<option value="' + value.fctyid + '">' + value.lname + ', ' + value.fname + '</option>');
+                        });
+                    }
+                });
+            }
+        });
+
+        $('#schlyearprint, #semesterprint').trigger('change'); // auto load on page ready
+    });
 </script>

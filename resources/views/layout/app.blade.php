@@ -287,11 +287,12 @@
     @endif
 
     @if (request()->routeIs('printeval.index'))
+        @include('scripts.getfacultyjs')
         @include('scripts.getclassenrolljs')
         @include('scripts.validations.printevalvalidation')
     @endif
 
-    @if (request()->routeIs('subprint_searchresultStore'))
+    @if (request()->routeIs('subprintstudent_searchresultStore'))
         @include('scripts.evalsubmissionprintjs')
     @endif
 

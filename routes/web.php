@@ -101,11 +101,13 @@ use App\Http\Controllers\ReportsPrintSumEvalresultController;
 
     Route::prefix('/reports')->group(function () {
         Route::get('/view/qce/printsearch', [ReportsPrintEvalController::class, 'index'])->name('printeval.index');
-        Route::get('/view/search/result', [ReportsPrintEvalController::class, 'subprint_searchresultStore'])->name('subprint_searchresultStore');
+        Route::get('/view/search/result/student', [ReportsPrintEvalController::class, 'subprintstudent_searchresultStore'])->name('subprintstudent_searchresultStore');
+        Route::get('/view/search/result/supervisor', [ReportsPrintEvalController::class, 'subprintsupervisor_searchresultStore'])->name('subprintsupervisor_searchresultStore');
         Route::get('/view/search/result/eval/submission/ajax', [ReportsPrintEvalController::class, 'getevalsubratelistRead'])->name('getevalsubratelistRead');
         Route::get('/view/search/result/eval/submission/printedajax', [ReportsPrintEvalController::class, 'getevalsubrateprintedlistRead'])->name('getevalsubrateprintedlistRead');
         Route::get('/info/getcourseyrsec/ajax', [ReportsPrintEvalController::class, 'getCoursesyearsec'])->name('getCoursesyearsec');
-        Route::get('/info/getevalpdf/print/evaluation', [ReportsPrintEvalController::class, 'exportPrintEvalPDF'])->name('exportPrintEvalPDF');
+        Route::get('/info/getevalpdf/print/evaluation/student', [ReportsPrintEvalController::class, 'exportPrintStudentEvalPDF'])->name('exportPrintStudentEvalPDF');
+        Route::get('/info/getevalpdf/print/evaluation/supervisor', [ReportsPrintEvalController::class, 'exportPrintSupervisorEvalPDF'])->name('exportPrintSupervisorEvalPDF');
         Route::post('/info/getevalpdf/print/evaluation/update-statprint', [ReportsPrintEvalController::class, 'updateStatprint'])->name('updateStatprint');
 
         Route::get('/eval/result/summary', [ReportsPrintSumEvalresultController::class, 'index'])->name('summaryevalresult.index');
