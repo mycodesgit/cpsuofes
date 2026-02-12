@@ -60,7 +60,8 @@ class InstructionConstroller extends Controller
     {
         $request->validate([
             'id' => 'required',
-            'catName' => 'required',
+            'instruction' => 'required',
+            'instructcat' => 'required',
         ]);
 
         try {

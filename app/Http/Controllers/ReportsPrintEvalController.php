@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use PDF;
 
 use App\Models\EvaluationDB\QCEratingscale;
+use App\Models\EvaluationDB\QCEinstruction;
 use App\Models\EvaluationDB\QCEcategory;
 use App\Models\EvaluationDB\QCEquestion;
 use App\Models\EvaluationDB\QCEsemester;

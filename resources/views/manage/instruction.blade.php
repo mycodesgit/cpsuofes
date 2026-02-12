@@ -93,10 +93,10 @@
                         <input type="hidden" name="id" id="editinstructionId">
                         <div class="col-md-12 mb-3">
                             <label for="editinstructionName">Instruction: <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="editinstructionName" name="instruction">
+                            <textarea class="form-control" rows="6" name="instruction" id="editinstructionName"></textarea>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="editinstructionName">Instruction Category: <span class="text-danger">*</span></label>
+                            <label for="editinstructionStatus">Instruction Category: <span class="text-danger">*</span></label>
                             <select name="instructcat" id="editinstructionStatus" class="form-control">
                                 <option value="1">Student</option>
                                 <option value="2">Faculty</option>

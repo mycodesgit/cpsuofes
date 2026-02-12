@@ -91,15 +91,15 @@
         });
     });
 
-    $(document).on('click', '.btn-catedit', function() {
-        var id = $(this).data('id');
-        var instructionName = $(this).data('instruction');
-        var instructCat = $(this).data('instructcat');
-        
-        $('#editinstructionId').val(id);
-        $('#editinstructionName').val(instructionName);
-        $('#editinstructionName').val(instructCat);
+    $(document).on('click', '.btn-catedit', function () {
+        var table = $('#instructionTable').DataTable();
+        var rowData = table.row($(this).closest('tr')).data();
+
+        $('#editinstructionId').val(rowData.id);
+        $('#editinstructionName').val(rowData.instruction);
+        $('#editinstructionStatus').val(rowData.instructcat);
         $('#editinstructionModal').modal('show');
+
     });
 
     $('#editinstructionForm').submit(function(event) {
@@ -116,7 +116,7 @@
             success: function(response) {
                 if(response.success) {
                     toastr.success(response.message);
-                    $('#editCatModal').modal('hide');
+                    $('#editinstructionModal').modal('hide');
                     $(document).trigger('instructionsAdded');
                 } else {
                     toastr.error(response.message);
