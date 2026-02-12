@@ -43,6 +43,7 @@ class CategoryController extends Controller
             try {
                 QCEcategory::create([
                     'catName' => $request->input('catName'),
+                    'catDesc' => $request->input('catDesc'),
                     'postedBy' => 1,
                 ]);
 
@@ -71,6 +72,7 @@ class CategoryController extends Controller
             $cat = QCEcategory::findOrFail($request->input('id'));
             $cat->update([
                 'catName' => $categoryName,
+                'catDesc' => $request->input('catDesc'),
                 'catstatus' => $request->input('catstatus'),
                 'postedBy' => 1,
         ]);

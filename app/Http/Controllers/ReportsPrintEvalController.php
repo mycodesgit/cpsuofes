@@ -262,10 +262,11 @@ class ReportsPrintEvalController extends Controller
             ->get();
 
         // Fetch supporting data
-        $inst = QCEratingscale::orderBy('inst_scale', 'DESC')->where('instratingscalestat', 1)->get();
+        $ratingscale = QCEratingscale::orderBy('inst_scale', 'DESC')->where('instratingscalestat', 1)->get();
+        $instrctn = QCEinstruction::where('instructcat', 1)->get();
         $currsem = QCEsemester::where('qcesemstat', 2)->get();
         $quest = QCEquestion::join('qcecategory', 'qcequestion.catName_id', '=', 'qcecategory.id')
-            ->select('qcecategory.catName', 'qcequestion.*')
+            ->select('qcecategory.catName', 'qcecategory.catDesc', 'qcequestion.*')
             ->where('qcecategory.catstatus', '2')
             ->get();
         
@@ -275,7 +276,7 @@ class ReportsPrintEvalController extends Controller
             ->get();
 
         // Generate the PDF
-        $pdf = PDF::loadView('reports.prnteval.studevalforteacherpdf', compact('inst', 'currsem', 'quest', 'facrated', 'progCod', 'studYear', 'studSec', 'schlyear', 'semester', 'campus', 'facRanck', 'esig'))->setPaper('Legal', 'portrait');
+        $pdf = PDF::loadView('reports.prnteval.studevalforteacherpdf', compact('ratingscale', 'instrctn', 'currsem', 'quest', 'facrated', 'progCod', 'studYear', 'studSec', 'schlyear', 'semester', 'campus', 'facRanck', 'esig'))->setPaper('Legal', 'portrait');
 
         return $pdf->stream('evaluation.pdf');
     }

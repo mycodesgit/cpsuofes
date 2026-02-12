@@ -124,7 +124,7 @@
 		$underlineRank = str_pad($academicRank, $underlineLengthRank, '_', STR_PAD_BOTH);
 	@endphp
 	<div>
-		<div style="margin-top: -30px; text-align: right; color: gray; z-index: -999">
+		<div style="margin-top: -30px; text-align: right; color: rgb(185, 185, 185); z-index: -9999">
 			<p>{{ $facrated->first()->ratecount }}</p>
 		</div>
 	</div>
@@ -180,34 +180,51 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach($inst as $datainst)
+				@foreach($ratingscale as $dataratingscale)
 					<tr>
-						<td class="ratingscaletd" style="text-align: center; font-weight: bold">{{ $datainst->inst_scale }}</td>
-						<td class="ratingscaletd">{{ $datainst->inst_descRating }}</td>
-						<td class="ratingscaletd">{{ $datainst->inst_qualDescription }}</td>
+						<td class="ratingscaletd" style="text-align: center; font-weight: bold">{{ $dataratingscale->inst_scale }}</td>
+						<td class="ratingscaletd">{{ $dataratingscale->inst_descRating }}</td>
+						<td class="ratingscaletd">{{ $dataratingscale->inst_qualDescription }}</td>
 					</tr>
 				@endforeach
 			</tbody>
 		</table>
 	</div>
 
-	<div style="margin-top: 30px">
+	<div style="margin-top: 30px;">
+		<p><span style="font-weight: bold">C. Instruction:</span> {{ $instrctn->first()->instruction }}</p>
+
 		@php 
 		    $no = 1; 
 		    $lastCategory = $quest->groupBy('catName')->keys()->last(); // Get the last category name
+		    $totalScore = 0; // Initialize grand total outside the loop
 		    $grandTotal = 0; // Initialize grand total outside the loop
 		@endphp
+
+		<table id="table" border="1" style="border-collapse: collapse; width: 100%;">
+			<thead>
+				<tr>
+					<th style="font-weight: bold !important; text-align: center; font-size: 11pt; background-color:#e4f0f5">Benchmark Statements for Faculty Teaching<br> Effectiveness</th>
+					<th style="font-weight: bold !important; text-align: center; background-color:#e4f0f5; width: 33%">Rating</th>
+				</tr>
+			</thead>
+		</table>
+
 		@foreach ($quest->groupBy('catName') as $catName => $questions)
-		    @php 
-		    	$no = 1; 
+		    @php  
 		    	$sectionTotal = 0;
+				$catDesc = $questions->first()->catDesc;
 		    @endphp 
 
-		    <table id="table" border="1" style="border-collapse: collapse; width: 100%;">
+		    <table id="table" border="1" style="border-collapse: collapse; width: 100%; margin-top: -1px">
 		        <thead>
 		            <tr>
-		                <th style="font-weight: bold !important; text-align: left;">{{ $catName }}</th>
-		                <th style="font-weight: bold !important; text-align: center;" colspan="5">Scale</th>
+		                <th style="font-weight: bold !important; text-align: left; color: #fff; background-color:#303030" colspan="6">{{ $catName }}</th>
+		            </tr>
+		        </thead>
+		        <thead>
+		            <tr>
+		                <th style="font-weight: normal !important; text-align: left; font-size: 10pt; font-style: italic" colspan="6">{{ $catDesc }}</th>
 		            </tr>
 		        </thead>
 		        <tbody>
@@ -222,7 +239,7 @@
 		                    }
 					    @endphp
 					    <tr>
-					        <td>{{ $no++ }}. {{ $dataquest->questiontext }}</td>
+					        <td style="padding: 5px">{{ $no++ }}. {{ $dataquest->questiontext }}</td>
 					        @for ($i = 5; $i >= 1; $i--) 
 					            <td style="text-align: center; width: 40px; margin-right: 2px; padding-top: 5px; padding-bottom: 5px; vertical-align: middle;">
 					                @if ($savedRating == $i)
@@ -234,37 +251,30 @@
 					        @endfor
 					    </tr>
 					@endforeach
-
-					{{-- Total Score for Section --}}
-					<tr>
-						<td style="font-weight: bold; text-align: right;">Total Score:</td>
-					    <td colspan="5" style="text-align: left; font-weight: bold; padding-left: 10px"> {{ $sectionTotal  }}</td>
-					</tr>
-					
-					{{-- Grand Total Row (Only for Last Category) --}}
-					@php
-		                $grandTotal += $sectionTotal;
-		            @endphp
-					@if ($catName == $lastCategory)
-					    <tr>
-					    	<td style="font-weight: bold; text-align: right;">GRAND TOTAL:</td>
-					        <td colspan="5" style="font-weight: bold; text-align: left; padding-left: 10px"> {{ $grandTotal }}</td>
-					    </tr>
-					@endif
 		        </tbody>
 		    </table>
-		    <br>
+			@php
+				$totalScore += $sectionTotal;
+			@endphp
 		@endforeach
+		<table id="table" border="1" style="border-collapse: collapse; margin-top: -1px">
+			<tbody>
+				<tr>
+					<td style="text-align: right; font-weight: bold; padding: 5px; width: 60%">TOTAL SCORE:</td>
+					<td style="text-align: left; font-weight: bold; padding: 5px; width: 30%">{{ $totalScore }}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
-	<div>
+	<div style="margin-top: 30px">
 		<div>
-		    <label style="font-weight: bold;">Comments:</label>
+		    <label style="font-weight: bold;">Other comments and suggestions (Optional):</label>
 		    <div class="comment-lines">
 		        @php
 		            $comments = explode("\n", wordwrap($facrated->first()->qcecomments ?? '', 900, "\n", true));
 		        @endphp
-		        @for($i = 0; $i < 8; $i++)
+		        @for($i = 0; $i < 4; $i++)
 		            <div class="line">
 		                {{ isset($comments[$i]) ? $comments[$i] : '' }}
 		            </div>
@@ -286,10 +296,10 @@
 
 
 		<div class="" style="margin-top: 20px;">
-			<span style="display: inline-block; width: 190px; vertical-align: top;">Signature of Evaluator</span>:
+			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Signature of Evaluator</span>:
 			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 270px;">
 				@if($mysign)
-					&nbsp; <img img id="signature-img" src="{{ public_path('storage/' . $mysign) }}" alt="Signature" style="width: 350px; height: auto; display: flex; justify-content: center; align-items: center; position: absolute; margin-top: -60px">
+					&nbsp; <img img id="signature-img" src="{{ public_path('storage/' . $mysign) }}" alt="Signature" style="width: 350px; height: auto; display: flex; justify-content: center; align-items: center; position: absolute; margin-top: 0px">
 				@else
 					<span style="font-weight: normal;">&nbsp;</span>
 				@endif
@@ -312,36 +322,16 @@
 			});
 		</script>
 
-		{{-- <div class="" style="margin-top: 20px;">
-			<span style="display: inline-block; width: 190px; vertical-align: top;">Signature of Evaluator</span>:
-			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 270px; position: relative;">
-				@if($mysign)
-					<img src="{{ public_path('storage/' . $mysign) }}"
-						alt="Signature"
-						style="max-height: 100px; position: absolute; top: 0; left: 50%; transform: translateX(-50%);">
-				@else
-					<span style="font-weight: normal;">No Signature Available</span>
-				@endif
-			</div>
-		</div> --}}
-
 		<div class="" style="margin-top: 20px;">
-			<span style="display: inline-block; width: 190px; vertical-align: top;">Name of Evaluator</span>:
-			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 270px;">
+			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Name of Evaluator/ID number</span>:
+			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 290px;">
 				<span style="font-weight: normal">{{ $evaluatorName }}</span>
 			</div>
 		</div>
 
 		<div class="" style="margin-top: 20px;">
-			<span style="display: inline-block; width: 190px; vertical-align: top;">Position of Evaluator</span>:
-			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 270px;">
-				<span style="font-weight: normal">{{ $qcetype }}</span>
-			</div>
-		</div>
-
-		<div class="" style="margin-top: 20px;">
-			<span style="display: inline-block; width: 190px; vertical-align: top;">Date</span>:
-			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 270px;">
+			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Date</span>:
+			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 290px;">
 				<span style="font-weight: normal">{{ $qcedatesubmit }}</span>
 			</div>
 		</div>

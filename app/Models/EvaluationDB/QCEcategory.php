@@ -13,6 +13,7 @@ class QCEcategory extends Model
 
     protected $fillable = [
         'catName', 
+        'catDesc', 
         'catstatus',
         'postedBy',
     ];

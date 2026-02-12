@@ -45,6 +45,7 @@
             "order": [[1, "asc"]],
             "columns": [
                 {data: 'catName'},
+                {data: 'catDesc'},
                 {
                     data: 'catstatus',
                     render: function(data, type, row) {
@@ -69,7 +70,7 @@
                             var dropdown = '<div class="d-inline-block">' +
                                 '<a class="btn btn-default btn-sm dropdown-toggle text-light dropdown-icon" data-bs-toggle="dropdown" style="background-color: #65ac86 !important; border-color: #65ac86 !important"></a>' +
                                 '<div class="dropdown-menu">' +
-                                '<a href="#" class="dropdown-item btn-catedit" data-id="' + row.id + '" data-catname="' + row.catName + '" data-catstatus="' + row.catstatus + '">' +
+                                '<a href="#" class="dropdown-item btn-catedit" data-id="' + row.id + '" data-catname="' + row.catName + '" data-catdesc="' + row.catDesc + '" data-catstatus="' + row.catstatus + '">' +
                                 '<i class="fas fa-pen"></i> Edit' +
                                 '</a>' +
                                 '<button type="button" value="' + data + '" class="dropdown-item cat-delete">' +
@@ -96,10 +97,12 @@
     $(document).on('click', '.btn-catedit', function() {
         var id = $(this).data('id');
         var categoryName = $(this).data('catname');
+        var categoryDesc = $(this).data('catdesc');
         var categoryStatus = $(this).data('catstatus');
         
         $('#editCatId').val(id);
         $('#editCatName').val(categoryName);
+        $('#editCatDesc').val(categoryDesc);
         $('#editCatStatus').val(categoryStatus);
         $('#editCatModal').modal('show');
     });

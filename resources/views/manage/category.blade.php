@@ -26,6 +26,14 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group mb-3">
+                                        <div class="form-row">
+                                            <div class="col-md-12">
+                                                <label>Description: <span class="text-danger">*</span></label>
+                                                <textarea class="form-control" rows="8" name="catDesc"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="form-group">
                                         <div class="form-row">
@@ -52,6 +60,7 @@
                                     <thead>
                                         <tr>
                                             <th>Category</th>
+                                            <th>Description</th>
                                             <th>Status</th>
                                             <th width="10%">Actions</th>
                                         </tr>
@@ -81,6 +90,10 @@
                         <div class="col-md-12 mb-3">
                             <label for="editCatName">Category Name: <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="editCatName" name="catName">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="editCatName">Category Description: <span class="text-danger">*</span></label>
+                            <textarea class="form-control" rows="8" id="editCatDesc" name="catDesc"></textarea>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="editCatName">Category Status: <span class="text-danger">*</span></label>

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('qcecategory', function (Blueprint $table) {
             $table->id();
             $table->string('catName')->nullable();
+            $table->text('catDesc')->nullable();
             $table->enum('catstatus', [1, 2, 3])->default(1);
             $table->integer('postedBy')->nullable();
             $table->timestamps();
