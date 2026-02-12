@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('conf/instuction*') ? 'active' : '' }}" href="{{ route('instruction.index') }}">
+                    <a class="nav-link {{ request()->is('conf/instruction*') ? 'active' : '' }}" href="{{ route('instruction.index') }}">
                         <i class="ti ti-alert-circle"></i> Instruction
                     </a>
                 </li>

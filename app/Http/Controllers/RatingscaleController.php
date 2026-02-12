@@ -40,13 +40,13 @@ class RatingscaleController extends Controller
             $instructdescRating = $request->input('inst_descRating');
             $instructqualDescription = $request->input('inst_qualDescription'); 
 
-            $existingInstruction = QCEratingscale::where('inst_scale', $instructScale)
+            $existingRatingScale = QCEratingscale::where('inst_scale', $instructScale)
                                 ->where('inst_descRating', $instructdescRating)
                                 ->where('inst_qualDescription', $instructqualDescription)
                                 ->first();
 
-            if ($existingInstruction) {
-                return response()->json(['error' => true, 'message' => 'Instruction already exists'], 404);
+            if ($existingRatingScale) {
+                return response()->json(['error' => true, 'message' => 'Rating Scale already exists'], 404);
             }
 
             try {
@@ -58,9 +58,9 @@ class RatingscaleController extends Controller
                     'postedBy' => 1,
                 ]);
 
-                return response()->json(['success' => true, 'message' => 'Instruction stored successfully'], 200);
+                return response()->json(['success' => true, 'message' => 'Rating Scale stored successfully'], 200);
             } catch (\Exception $e) {
-                return response()->json(['error' => true, 'message' => 'Failed to store Instruction'], 404);
+                return response()->json(['error' => true, 'message' => 'Failed to store Rating Scale'], 404);
             }
         }
     }
@@ -79,14 +79,14 @@ class RatingscaleController extends Controller
             $instructdescRating = $request->input('inst_descRating');
             $instructqualDescription = $request->input('inst_qualDescription'); 
 
-            $existingInstruction = QCEratingscale::where('inst_scale', $instructScale)
+            $existingRatingScale = QCEratingscale::where('inst_scale', $instructScale)
                                 ->where('inst_descRating', $instructdescRating)
                                 ->where('inst_qualDescription', $instructqualDescription)
                                 ->where('id', '!=', $request->input('id'))
                                 ->first();
 
-            if ($existingInstruction) {
-                return response()->json(['error' => true, 'message' => 'Instruction already exists'], 404);
+            if ($existingRatingScale) {
+                return response()->json(['error' => true, 'message' => 'Rating Scale already exists'], 404);
             }
 
             $inst = QCEratingscale::findOrFail($request->input('id'));
@@ -97,9 +97,9 @@ class RatingscaleController extends Controller
                 'instratingscalestat' => $request->input('instratingscalestat'),
                 'postedBy' => 1,
         ]);
-            return response()->json(['success' => true, 'message' => 'Instruction update successfully'], 200);
+            return response()->json(['success' => true, 'message' => 'Rating Scale update successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => true, 'message' => 'Failed to Update Instruction'], 404);
+            return response()->json(['error' => true, 'message' => 'Failed to Update Rating Scale'], 404);
         }
     }
 

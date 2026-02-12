@@ -119,7 +119,7 @@
                         <ul class="list-unstyled p-0 m-0">
                             <li class="p-3 border-bottom ">
                                 <div class="d-flex gap-3">
-                                    <img src="{{ asset('assets/images/avatar-1.jpg') }}" alt="" class="avatar avatar-sm rounded-circle" />
+                                    <img src="{{ asset('assets/images/user.png') }}" alt="" class="avatar avatar-sm rounded-circle" />
                                     <div class="flex-grow-1 small">
                                         <p class="mb-0">New order received</p>
                                         <p class="mb-1">Order #12345 has been placed</p>
@@ -129,7 +129,7 @@
                             </li>
                             <li class="p-3 border-bottom ">
                                 <div class="d-flex gap-3">
-                                    <img src="{{ asset('assets/images/avatar-1.jpg') }}" alt="" class="avatar avatar-sm rounded-circle" />
+                                    <img src="{{ asset('assets/images/user.png') }}" alt="" class="avatar avatar-sm rounded-circle" />
                                     <div class="flex-grow-1 small">
                                         <p class="mb-0">New user registered</p>
                                         <p class="mb-1">User @john_doe has signed up</p>
@@ -139,7 +139,7 @@
 
                             <li class="p-3 border-bottom">
                                 <div class="d-flex gap-3">
-                                    <img src="{{ asset('assets/images/avatar-1.jpg') }}" alt="" class="avatar avatar-sm rounded-circle" />
+                                    <img src="{{ asset('assets/images/user.png') }}" alt="" class="avatar avatar-sm rounded-circle" />
                                     <div class="flex-grow-1 small">
                                         <p class="mb-0">Payment confirmed</p>
                                         <p class="mb-1">Payment of $299 has been received</p>
@@ -256,6 +256,11 @@
     @if (request()->routeIs('ratingscale.index'))
         @include('scripts.ratingscalejs')
         @include('scripts.validations.ratingscalevalidation')
+    @endif
+
+    @if (request()->routeIs('instruction.index'))
+        @include('scripts.instructionjs')
+        @include('scripts.validations.instructionvalidation')
     @endif
 
     @if (request()->routeIs('category.index'))

@@ -52,7 +52,11 @@ use App\Http\Controllers\ReportsPrintSumEvalresultController;
         Route::post('/ratingscale/update', [RatingscaleController::class,'update'])->name('ratingscale.update');
         Route::post('/ratingscale/delete{id}', [RatingscaleController::class,'destroy'])->name('ratingscale.delete');
 
-        Route::get('/instruction/view', [InstructionConstroller::class,'index'])->name('instruction.index');
+        Route::get('/instruction/rating', [InstructionConstroller::class,'index'])->name('instruction.index');
+        Route::get('/instruction/fetch/ajax', [InstructionConstroller::class,'show'])->name('instruction.show');
+        Route::post('/instruction/insert', [InstructionConstroller::class,'create'])->name('instruction.create');
+        Route::post('/instruction/update', [InstructionConstroller::class,'update'])->name('instruction.update');
+        Route::post('/instruction/delete{id}', [InstructionConstroller::class,'destroy'])->name('instruction.delete');
 
         Route::get('/category/view', [CategoryController::class,'index'])->name('category.index');
         Route::get('/category/fetch/ajax', [CategoryController::class,'show'])->name('category.show');

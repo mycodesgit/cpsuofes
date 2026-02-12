@@ -20,8 +20,21 @@
                                     <div class="form-group mb-3">
                                         <div class="form-row">
                                             <div class="col-md-12">
-                                                <label>Category Name: <span class="text-danger">*</span></label>
-                                                <input type="text" name="catName" class="form-control">
+                                                <label>Instruction: <span class="text-danger">*</span></label>
+                                                <textarea class="form-control" rows="4" name="instruction"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <div class="form-row">
+                                            <div class="col-md-12">
+                                                <label>Instruction Category: <span class="text-danger">*</span></label>
+                                                <select class="form-control" name="instructcat">
+                                                    <option disabled selected> --Select-- </option>
+                                                    <option value="1">Student</option>
+                                                    <option value="2">Faculty</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -48,11 +61,11 @@
                                 </h6>
                             </div>
                             <div class="card-body">
-                                <table id="categoryTable" class="table table-hover">
+                                <table id="instructionTable" class="table table-hover">
                                     <thead>
                                         <tr>
+                                            <th>Instruction</th>
                                             <th>Category</th>
-                                            <th>Status</th>
                                             <th width="10%">Actions</th>
                                         </tr>
                                     </thead>
@@ -68,26 +81,25 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editCatModal" tabindex="-1" role="dialog" aria-labelledby="editCatModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editinstructionModal" tabindex="-1" role="dialog" aria-labelledby="editinstructionModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" id="editCatModalLabel">Edit Category Name</h6>
+                    <h6 class="modal-title" id="editinstructionModalLabel">Edit Instruction Name</h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editCatForm">
+                <form id="editinstructionForm">
                     <div class="modal-body">
-                        <input type="hidden" name="id" id="editCatId">
+                        <input type="hidden" name="id" id="editinstructionId">
                         <div class="col-md-12 mb-3">
-                            <label for="editCatName">Category Name: <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="editCatName" name="catName">
+                            <label for="editinstructionName">Instruction: <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="editinstructionName" name="instruction">
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="editCatName">Category Status: <span class="text-danger">*</span></label>
-                            <select name="catstatus" id="editCatStatus" class="form-control">
-                                <option value="1">Not Active</option>
-                                <option value="2">Active</option>
-                                <option value="3">Upcoming</option>
+                            <label for="editinstructionName">Instruction Category: <span class="text-danger">*</span></label>
+                            <select name="instructcat" id="editinstructionStatus" class="form-control">
+                                <option value="1">Student</option>
+                                <option value="2">Faculty</option>
                             </select>
                         </div>
                     </div>
@@ -101,9 +113,9 @@
     </div>
 
     <script>
-        var categoryReadRoute = "{{ route('category.show') }}";
-        var categoryCreateRoute = "{{ route('category.create') }}";
-        var categoryUpdateRoute = "{{ route('category.update', ['id' => ':id']) }}";
-        var categoryDeleteRoute = "{{ route('category.delete', ['id' => ':id']) }}";
+        var instructionReadRoute = "{{ route('instruction.show') }}";
+        var instructionCreateRoute = "{{ route('instruction.create') }}";
+        var instructionUpdateRoute = "{{ route('instruction.update', ['id' => ':id']) }}";
+        var instructionDeleteRoute = "{{ route('instruction.delete', ['id' => ':id']) }}";
     </script>
 @endsection
