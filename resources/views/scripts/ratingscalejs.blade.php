@@ -5,7 +5,7 @@
         "positionClass": "toast-bottom-left"
     };
     $(document).ready(function() {
-        $('#addInstruction').submit(function(event) {
+        $('#addRatingscale').submit(function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
 
@@ -107,7 +107,7 @@
         $('#editInstModal').modal('show');
     });
 
-    $('#editInstForm').submit(function(event) {
+    $('#editRatingscaleForm').submit(function(event) {
         event.preventDefault();
         var formData = $(this).serialize();
 

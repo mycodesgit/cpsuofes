@@ -14,7 +14,7 @@
                                 </h6>
                             </div>
                             <div class="card-body">
-                                <form method="POST" id="addInstruction">
+                                <form method="POST" id="addRatingscale">
                                     @csrf
 
                                     <div class="form-group mb-3">
@@ -107,7 +107,7 @@
                     <h6 class="modal-title" id="editInstModalLabel">Edit Rating Scale</h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editInstForm">
+                <form id="editRatingscaleForm">
                     <div class="modal-body">
                         <input type="hidden" name="id" id="editInstId">
                         <div class="row">

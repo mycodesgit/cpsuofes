@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\RatingscaleController;
+use App\Http\Controllers\InstructionConstroller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SemesterController;
@@ -50,6 +51,8 @@ use App\Http\Controllers\ReportsPrintSumEvalresultController;
         Route::post('/ratingscale/insert', [RatingscaleController::class,'create'])->name('ratingscale.create');
         Route::post('/ratingscale/update', [RatingscaleController::class,'update'])->name('ratingscale.update');
         Route::post('/ratingscale/delete{id}', [RatingscaleController::class,'destroy'])->name('ratingscale.delete');
+
+        Route::get('/instruction/view', [InstructionConstroller::class,'index'])->name('instruction.index');
 
         Route::get('/category/view', [CategoryController::class,'index'])->name('category.index');
         Route::get('/category/fetch/ajax', [CategoryController::class,'show'])->name('category.show');

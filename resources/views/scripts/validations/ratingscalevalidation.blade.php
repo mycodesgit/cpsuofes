@@ -1,6 +1,6 @@
 <script>
     $(function () {
-        $('#addInstruction').validate({
+        $('#addRatingscale').validate({
             rules: {
                 inst_scale: {
                     required: true,
