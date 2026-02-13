@@ -71,12 +71,12 @@
     </li>
     <li>
         <a class="nav-link {{ request()->is('studaccount*') ? 'active' : '' }}" href="{{ route('studaccount.index') }}">
-            <i class="ti ti-user-circle"></i> Student Account
+            <i class="ti ti-user-circle"></i> <span class="nav-text">Student Account</span>
         </a>
     </li>
     <li>
         <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('user.index') }}">
-            <i class="ti ti-user-plus"></i> Users
+            <i class="ti ti-user-plus"></i> <span class="nav-text">Users</span>
         </a>
     </li>
 
@@ -84,17 +84,17 @@
     <li class="px-4 pt-4 pb-2"><small class="nav-text text-muted">Reports</small></li>
     <li>
         <a class="nav-link {{ request()->is('reports/view*') ? 'active' : '' }}" href="{{ route('printeval.index') }}">
-            <i class="ti ti-receipt"></i> Print Evaluation
+            <i class="ti ti-receipt"></i> <span class="nav-text">Print Evaluation</span>
         </a>
     </li>
     <li>
         <a class="nav-link {{ request()->is('reports/eval*') ? 'active' : '' }}" href="{{ route('summaryevalresult.index') }}">
-            <i class="ti ti-files"></i> Evaluation Result
+            <i class="ti ti-files"></i> <span class="nav-text">Evaluation Result</span>
         </a>
     </li>
     <li>
         <a class="nav-link" href="#">
-            <i class="ti ti-report-analytics"></i> Conducted Eval.
+            <i class="ti ti-report-analytics"></i> <span class="nav-text">Conducted Eval.</span>
         </a>
     </li>
 </ul>
