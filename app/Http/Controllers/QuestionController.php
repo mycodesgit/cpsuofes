@@ -25,6 +25,18 @@ class QuestionController extends Controller
     {
         $data = QCEquestion::join('qcecategory', 'qcequestion.catName_id', '=', 'qcecategory.id')
                 ->select('qcecategory.catName', 'qcequestion.*')
+                ->where('qcequestion.questcat', '1')
+                ->where('qcecategory.catstatus', '2')
+                ->get();
+
+        return response()->json(['data' => $data]);
+    }
+
+    public function fetch() 
+    {
+        $data = QCEquestion::join('qcecategory', 'qcequestion.catName_id', '=', 'qcecategory.id')
+                ->select('qcecategory.catName', 'qcequestion.*')
+                ->where('qcequestion.questcat', '2')
                 ->where('qcecategory.catstatus', '2')
                 ->get();
 
@@ -41,7 +53,8 @@ class QuestionController extends Controller
             ]);
 
             $questionName = $request->input('questiontext'); 
-            $existingQuesttion = QCEquestion::where('questiontext', $questionName)->first();
+            $questionCat = $request->input('questcat'); 
+            $existingQuesttion = QCEquestion::where('questiontext', $questionName)->where('questcat', $questionCat)->first();
 
             if ($existingQuesttion) {
                 return response()->json(['error' => true, 'message' => 'Question already exists'], 404);

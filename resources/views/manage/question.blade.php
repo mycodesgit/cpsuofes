@@ -70,23 +70,58 @@
                         <div class="card">
                             <div class="card-header pt-3">
                                 <h6 class="card-title">
-                                    <i class="fas fa-list"></i> List
+                                    <ul class="nav nav-pills mb-3 bg-light p-2 rounded-2 d-inline-flex" id="pills-tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="pills-questStudent-tab" data-bs-toggle="pill"
+                                            data-bs-target="#pills-questStudent" type="button" role="tab"
+                                            aria-controls="pills-questStudent" aria-selected="true">
+                                            <i class="ti ti-help"></i> List of Questions Student 
+                                        </button>
+                                    </li>
+                                    &nbsp;
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="pills-questSupervisor-tab" data-bs-toggle="pill"
+                                            data-bs-target="#pills-questSupervisor" type="button" role="tab"
+                                            aria-controls="pills-questSupervisor" aria-selected="false" tabindex="-1">
+                                            <i class="ti ti-help"></i> List of Questions Faculty
+                                        </button>
+                                    </li>
+                                </ul>
                                 </h6>
                             </div>
                             <div class="card-body">
-                                <table id="questTable" class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Category</th>
-                                            <th>Question</th>
-                                            <th>Type</th>
-                                            <th width="10%">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                <div class="tab-content mt-3" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-questStudent" role="tabpanel" aria-labelledby="pills-questStudent-tab" tabindex="0">
+                                        <table id="questTableStudent" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Category</th>
+                                                    <th>Question</th>
+                                                    <th>Type</th>
+                                                    <th width="10%">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                    </tbody>
-                                </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-questSupervisor" role="tabpanel" aria-labelledby="pills-questSupervisor-tab" tabindex="0">
+                                        <table id="questTableSupervisor" class="table table-hover" style="width: 100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Category</th>
+                                                    <th>Question</th>
+                                                    <th>Type</th>
+                                                    <th width="10%">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -137,6 +172,7 @@
 
     <script>
         var questionReadRoute = "{{ route('question.show') }}";
+        var questionFetchRoute = "{{ route('question.fetch') }}";
         var questionCreateRoute = "{{ route('question.create') }}";
         var questionUpdateRoute = "{{ route('question.update', ['id' => ':id']) }}";
         var questionDeleteRoute = "{{ route('question.delete', ['id' => ':id']) }}";

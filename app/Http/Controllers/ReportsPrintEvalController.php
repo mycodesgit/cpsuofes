@@ -272,6 +272,7 @@ class ReportsPrintEvalController extends Controller
         $currsem = QCEsemester::where('qcesemstat', 2)->get();
         $quest = QCEquestion::join('qcecategory', 'qcequestion.catName_id', '=', 'qcecategory.id')
             ->select('qcecategory.catName', 'qcecategory.catDesc', 'qcequestion.*')
+            ->where('qcequestion.questcat', '1')
             ->where('qcecategory.catstatus', '2')
             ->get();
         
@@ -316,6 +317,7 @@ class ReportsPrintEvalController extends Controller
         $currsem = QCEsemester::where('qcesemstat', 2)->get();
         $quest = QCEquestion::join('qcecategory', 'qcequestion.catName_id', '=', 'qcecategory.id')
             ->select('qcecategory.catName', 'qcecategory.catDesc', 'qcequestion.*')
+            ->where('qcequestion.questcat', '2')
             ->where('qcecategory.catstatus', '2')
             ->get();
         

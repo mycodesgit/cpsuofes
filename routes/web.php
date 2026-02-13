@@ -65,7 +65,8 @@ use App\Http\Controllers\ReportsPrintSumEvalresultController;
         Route::post('/category/delete{id}', [CategoryController::class,'destroy'])->name('category.delete');
 
         Route::get('/question/view', [QuestionController::class,'index'])->name('question.index');
-        Route::get('/question/fetch/ajaxaaa', [QuestionController::class,'show'])->name('question.show');
+        Route::get('/question/show/student', [QuestionController::class,'show'])->name('question.show');
+        Route::get('/question/fetch/faculty', [QuestionController::class,'fetch'])->name('question.fetch');
         Route::post('/question/insert', [QuestionController::class,'create'])->name('question.create');
         Route::post('/question/update', [QuestionController::class,'update'])->name('question.update');
         Route::post('/question/delete{id}', [QuestionController::class,'destroy'])->name('question.delete');

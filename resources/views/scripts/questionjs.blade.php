@@ -31,9 +31,67 @@
             });
         });
 
-        var dataTable = $('#questTable').DataTable({
+        var dataTable = $('#questTableStudent').DataTable({
             "ajax": {
                 "url": questionReadRoute,
+                "type": "GET",
+            },
+            destroy: true,
+            info: true,
+            responsive: true,
+            lengthChange: true,
+            searching: true,
+            paging: true,
+            "columns": [
+                {
+                    data: 'catName',
+                    render: function(data, type, row) {
+                        return '<strong>' + data + '</strong>';
+                    }
+                },
+                {data: 'questiontext'},
+                {data: 'questcat',
+                        render: function(data, type, row) {
+                        switch(parseInt(data)) {
+                            case 1:
+                                return '<span class="badge bg-success-subtle text-success">Student</span>';
+                            case 2:
+                                return '<span class="badge bg-info-subtle text-info">Faculty</span>';
+                            default:
+                                return '<span class="badge bg-secondary-subtle text-secondary">Unknown Status</span>';
+                        }
+                    },
+                },
+                {
+                    data: 'id',
+                    render: function(data, type, row) {
+                        if (type === 'display') {
+                            var dropdown = '<div class="d-inline-block">' +
+                                '<a class="btn btn-default btn-sm dropdown-toggle text-light dropdown-icon" data-bs-toggle="dropdown" style="background-color: #65ac86 !important; border-color: #65ac86 !important"></a>' +
+                                '<div class="dropdown-menu">' +
+                                '<a href="#" class="dropdown-item btn-questedit" data-id="' + row.id + '" data-catname="' + row.catName_id + '" data-questcat="' + row.questcat + '" data-question="' + row.questiontext + '">' +
+                                '<i class="fas fa-pen"></i> Edit' +
+                                '</a>' +
+                                '<button type="button" value="' + data + '" class="dropdown-item quest-delete">' +
+                                '<i class="fas fa-trash"></i> Delete' +
+                                '</button>' +
+                                '</div>' +
+                                '</div>';
+                            return dropdown;
+                        } else {
+                            return data;
+                        }
+                    },
+                },
+            ],
+            "createdRow": function (row, data, index) {
+                $(row).attr('id', 'tr-' + data.id); 
+            }
+        });
+
+        var dataTable = $('#questTableSupervisor').DataTable({
+            "ajax": {
+                "url": questionFetchRoute,
                 "type": "GET",
             },
             destroy: true,
