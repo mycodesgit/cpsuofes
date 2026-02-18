@@ -103,7 +103,7 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="editSubquestionDesc">Sub Question Description: <span class="text-danger">*</span></label>
-                            <textarea class="form-control" rows="8" id="editSubquestionDesc" name="subquestiondesc"></textarea>
+                            <textarea class="form-control" rows="8" id="editSubquestionDesc" name="subquestionstext"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

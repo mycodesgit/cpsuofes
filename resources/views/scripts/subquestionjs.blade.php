@@ -42,7 +42,7 @@
             lengthChange: true,
             searching: true,
             paging: true,
-            "order": [[1, "asc"]],
+            "order": [[0, "asc"]],
             "columns": [
                 {data: 'catName'},
                 {data: 'questiontext'},
@@ -68,7 +68,7 @@
                                 '<a href="#" class="dropdown-item btn-subquestionedit" data-id="' + row.id + '" data-questiontext="' + row.questionID + '" data-subquestionstext="' + row.subquestionstext + '">' +
                                 '<i class="fas fa-pen"></i> Edit' +
                                 '</a>' +
-                                '<button type="button" value="' + data + '" class="dropdown-item cat-delete">' +
+                                '<button type="button" value="' + data + '" class="dropdown-item subquestion-delete">' +
                                 '<i class="fas fa-trash"></i> Delete' +
                                 '</button>' +
                                 '</div>' +
@@ -114,8 +114,8 @@
             success: function(response) {
                 if(response.success) {
                     toastr.success(response.message);
-                    $('#editCatModal').modal('hide');
-                    $(document).trigger('categoryAdded');
+                    $('#editSubquestionModal').modal('hide');
+                    $(document).trigger('subquestionAdded');
                 } else {
                     toastr.error(response.message);
                 }
@@ -127,7 +127,7 @@
         });
     });
 
-    $(document).on('click', '.cat-delete', function(e) {
+    $(document).on('click', '.subquestion-delete', function(e) {
         var id = $(this).val();
         $.ajaxSetup({
             headers: {

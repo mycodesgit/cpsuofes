@@ -28,7 +28,7 @@ class SubQuestionController extends Controller
         $data = QCEsubquestion::join('qcequestion', 'qcesubquestion.questionID', '=', 'qcequestion.id')
             ->join('qcecategory', 'qcequestion.catName_id', '=', 'qcecategory.id')
             ->select('qcesubquestion.*', 'qcequestion.questiontext', 'qcecategory.catName')
-            ->orderBy('created_at', 'DESC')->get();
+            ->orderBy('qcecategory.catName', 'ASC')->get();
 
         return response()->json(['data' => $data]);
     }
@@ -65,7 +65,7 @@ class SubQuestionController extends Controller
     {
         $request->validate([
             'id' => 'required',
-            'catName' => 'required',
+            'subquestionstext' => 'required',
         ]);
 
         try {

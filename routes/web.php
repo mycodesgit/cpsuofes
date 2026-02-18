@@ -28,6 +28,9 @@ use App\Http\Controllers\ReportsPrintSumEvalresultController;
 |
 */
 
+    Route::get('/', function () {
+        return view('login');
+    });
 
     Route::get('/dashboard', [DashboardController::class,'index'])->name('index.dashboard');
 
