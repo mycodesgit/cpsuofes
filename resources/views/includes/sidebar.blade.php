@@ -38,32 +38,32 @@
             <ul class="nav flex-column ms-3 mt-1">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('conf/ratingscale*') ? 'active' : '' }}" href="{{ route('ratingscale.index') }}">
-                        <i class="ti ti-scale"></i> Rating Scale
+                        <i class="ti ti-scale"></i> <span class="nav-text">Rating Scale</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('conf/category*') ? 'active' : '' }}" href="{{ route('category.index') }}">
-                        <i class="ti ti-box"></i> Category
+                        <i class="ti ti-box"></i> <span class="nav-text">Category</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('conf/instruction*') ? 'active' : '' }}" href="{{ route('instruction.index') }}">
-                        <i class="ti ti-alert-circle"></i> Instruction
+                        <i class="ti ti-alert-circle"></i> <span class="nav-text">Instruction</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('conf/question*') ? 'active' : '' }}" href="{{ route('question.index') }}">
-                        <i class="ti ti-help"></i> Questions
+                        <i class="ti ti-help"></i> <span class="nav-text">Questions</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('conf/semester*') ? 'active' : '' }}" href="{{ route('semester.index') }}">
-                        <i class="ti ti-calendar"></i> Semester
+                        <i class="ti ti-calendar"></i> <span class="nav-text">Semester</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('conf/setting*') ? 'active' : '' }}" href="{{ route('setting.index') }}">
-                        <i class="ti ti-settings"></i> Setting
+                        <i class="ti ti-settings"></i> <span class="nav-text">Setting</span>
                     </a>
                 </li>
             </ul>

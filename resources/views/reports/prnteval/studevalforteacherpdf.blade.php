@@ -141,7 +141,7 @@
 
 
 	<div style="margin-top: 30px; font-weight: bold">
-		<p>A. Faculty Information</p>
+		<p>A. Faculty Information (to be accomplished by the Designated Office)</p>
 	</div>
 
 	<div style="font-weight: normal; padding-left: 20px; margin-top: -20px;">
@@ -155,7 +155,7 @@
 		</p>
 		<p>
 			<span class="label">Course Code/Title</span>
-			<span class="colon">:</span> {{ $facultyProgCode }}
+			<span class="colon">:</span> {{ $facrated->first()->sub_name }}
 		</p>
 		<p>
 			<span class="label">Program Level</span>

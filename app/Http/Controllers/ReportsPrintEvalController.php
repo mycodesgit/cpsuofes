@@ -263,6 +263,23 @@ class ReportsPrintEvalController extends Controller
             return response()->json(['error' => 'No data found for the provided parameters'], 404);
         }
 
+        $subjectIds = $facrated->pluck('subjidrate')->unique();
+
+        $subjects = DB::connection('schedule')
+            ->table('sub_offered')
+            ->join('subjects', 'sub_offered.subCode', '=', 'subjects.sub_code')
+            ->whereIn('sub_offered.id', $subjectIds)
+            ->select(
+                'sub_offered.id',
+                'subjects.sub_name'
+            )
+            ->get()
+            ->keyBy('id');
+
+        foreach ($facrated as $row) {
+            $row->sub_name = $subjects[$row->subjidrate]->sub_name ?? null;
+        }
+
         $facRanck = DB::connection('schedule')->table('faculty')
             ->where('faculty.id', $facrated->first()->qcefacID)
             ->get();
