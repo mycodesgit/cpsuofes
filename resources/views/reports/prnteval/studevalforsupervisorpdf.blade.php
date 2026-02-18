@@ -39,6 +39,7 @@
     		text-align: left;
             border: 1px solid #000;
             font-size: 11pt;
+			padding: 5px;
 			font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial,
         	sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
         } 
@@ -251,8 +252,10 @@
 					    <tr>
 					        <td style="padding: 5px; width: 30px;">{{ $no++ }}. {{ $dataquest->questiontext }}</td>
 							<td style="text-align: left; width: 50px;">
-								• Daily time record<br>
-								•Faculty schedule and timetable
+								{!! collect(explode('•', $dataquest->subquestionstext))
+									->filter()
+									->map(fn($item) => '•' . trim($item))
+									->implode('<br>') !!}
 							</td>
 					        @for ($i = 5; $i >= 1; $i--) 
 					            <td style="text-align: center; width: 10px; margin-right: 2px; padding-top: 5px; padding-bottom: 5px; vertical-align: middle;">

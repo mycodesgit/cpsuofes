@@ -273,6 +273,11 @@
         @include('scripts.validations.questionvalidation')
     @endif
 
+    @if (request()->routeIs('subquestion.index'))
+        @include('scripts.subquestionjs')
+        @include('scripts.validations.subquestionvalidation')
+    @endif
+
     @if (request()->routeIs('semester.index'))
         @include('scripts.semesterjs')
         @include('scripts.validations.semestervalidation')

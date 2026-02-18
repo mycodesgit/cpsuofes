@@ -16,6 +16,7 @@ use App\Models\EvaluationDB\QCEratingscale;
 use App\Models\EvaluationDB\QCEinstruction;
 use App\Models\EvaluationDB\QCEcategory;
 use App\Models\EvaluationDB\QCEquestion;
+use App\Models\EvaluationDB\QCEsubquestion;
 use App\Models\EvaluationDB\QCEsemester;
 use App\Models\EvaluationDB\QCEfevalrate;
 use App\Models\EvaluationDB\StudeSig;
@@ -333,7 +334,8 @@ class ReportsPrintEvalController extends Controller
         $instrctn = QCEinstruction::where('instructcat', 2)->first();
         $currsem = QCEsemester::where('qcesemstat', 2)->get();
         $quest = QCEquestion::join('qcecategory', 'qcequestion.catName_id', '=', 'qcecategory.id')
-            ->select('qcecategory.catName', 'qcecategory.catDesc', 'qcequestion.*')
+            ->leftJoin('qcesubquestion', 'qcesubquestion.questionID', '=', 'qcequestion.id')
+            ->select('qcecategory.catName', 'qcecategory.catDesc', 'qcequestion.*', 'qcesubquestion.subquestionstext')
             ->where('qcequestion.questcat', '2')
             ->where('qcecategory.catstatus', '2')
             ->get();

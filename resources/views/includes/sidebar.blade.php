@@ -3,7 +3,7 @@
 @endphp
 
 @php
-    $manageOpen = request()->routeIs('ratingscale.*', 'instruction.*', 'category.*', 'question.*', 'semester.*', 'setting.*');
+    $manageOpen = request()->routeIs('ratingscale.*', 'instruction.*', 'category.*', 'question.*', 'subquestion.*', 'semester.*', 'setting.*');
 @endphp
 
 <ul class="nav flex-column">
@@ -54,6 +54,11 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('conf/question*') ? 'active' : '' }}" href="{{ route('question.index') }}">
                         <i class="ti ti-help"></i> <span class="nav-text">Questions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('conf/subquestion*') ? 'active' : '' }}" href="{{ route('subquestion.index') }}">
+                        <i class="ti ti-help-circle-filled"></i> <span class="nav-text">Sub Questions</span>
                     </a>
                 </li>
                 <li class="nav-item">

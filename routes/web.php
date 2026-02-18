@@ -9,6 +9,7 @@ use App\Http\Controllers\RatingscaleController;
 use App\Http\Controllers\InstructionConstroller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SubQuestionController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StudentAccountController;
@@ -70,6 +71,12 @@ use App\Http\Controllers\ReportsPrintSumEvalresultController;
         Route::post('/question/insert', [QuestionController::class,'create'])->name('question.create');
         Route::post('/question/update', [QuestionController::class,'update'])->name('question.update');
         Route::post('/question/delete{id}', [QuestionController::class,'destroy'])->name('question.delete');
+
+        Route::get('/subquestion/view', [SubQuestionController::class,'index'])->name('subquestion.index');
+        Route::get('/subquestion/fetch/ajax', [SubQuestionController::class,'show'])->name('subquestion.show');
+        Route::post('/subquestion/insert', [SubQuestionController::class,'create'])->name('subquestion.create');
+        Route::post('/subquestion/update', [SubQuestionController::class,'update'])->name('subquestion.update');
+        Route::post('/subquestion/delete/{id}', [SubQuestionController::class,'destroy'])->name('subquestion.delete');
 
         Route::get('/semester/view', [SemesterController::class,'index'])->name('semester.index');
         Route::get('/semester/fetch/ajaxaaa', [SemesterController::class,'show'])->name('semester.show');
