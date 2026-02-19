@@ -133,7 +133,7 @@ Route::group(['middleware'=>['login_empauth']],function(){
         Route::get('/eval/result/summary', [ReportsPrintSumEvalresultController::class, 'index'])->name('summaryevalresult.index');
         Route::get('/eval/result/srch/summary/resultlist', [ReportsPrintSumEvalresultController::class, 'summaryEvalFilter'])->name('summaryEvalFilter');
         Route::get('/eval/result/srch/getfaclty/ajax', [ReportsPrintSumEvalresultController::class, 'getFacultycamp'])->name('getFacultycamp');
-        Route::get('/eval/result/srch/summary/resultlist/view/Summary/pdfeval', [ReportsPrintSumEvalresultController::class, 'gensummaryevalPDF'])->name('gensummaryevalPDF');
+        Route::get('/eval/result/srch/summary/resultlist/view/Summary/pdfeval', [ReportsPrintSumEvalresultController::class, 'individualresultEvalPDF'])->name('individualresultEvalPDF');
         Route::get('/eval/result/srch/summary/resultlist/view/Comments/pdfeval', [ReportsPrintSumEvalresultController::class, 'gencommentsevalPDF'])->name('gencommentsevalPDF');
         Route::get('/eval/result/srch/summary/resultlist/view/Points/pdfeval', [ReportsPrintSumEvalresultController::class, 'genpointsevalPDF'])->name('genpointsevalPDF');
         Route::get('/eval/result/srch/summary/resultlist/view/Sheet/pdfeval', [ReportsPrintSumEvalresultController::class, 'gensumsheetevalPDF'])->name('gensumsheetevalPDF');

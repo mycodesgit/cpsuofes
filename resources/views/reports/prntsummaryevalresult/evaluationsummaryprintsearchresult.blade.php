@@ -34,7 +34,11 @@
                                 <div class="tab-content mt-3" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-summaryevaluation" role="tabpanel" aria-labelledby="pills-summaryevaluation-tab" tabindex="0">
                                         <div class="bg-light p-2 rounded-2">
-                                            d
+                                            <iframe id="pdfIframe" src="{{ route('individualresultEvalPDF', ['campus' => request('campus'), 'ratingfrom' => request('ratingfrom'), 'ratingto' => request('ratingto'), 'schlyear' => request('schlyear'), 'semester' => request('semester'), 'faclty' => request('faclty')]) }}"
+                                                    style="width: 100%; height: 580px;" 
+                                                    frameborder="0" 
+                                                    class="mt-3">
+                                            </iframe>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="pills-monitoringevaluation" role="tabpanel" aria-labelledby="pills-monitoringevaluation-tab" tabindex="0">

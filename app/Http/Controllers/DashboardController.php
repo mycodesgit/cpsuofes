@@ -3,12 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+use PDF;
+
+use App\Models\EvaluationDB\QCEsemester;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('home.dashboard');
+        $currsem = QCEsemester::select('id', 'qceschlyear', 'qceratingfrom', 'qceratingto')
+            ->orderBy('id', 'DESC')
+            ->get();
+            
+        return view('home.dashboard', compact('currsem'));
     }
 
     public function logout()

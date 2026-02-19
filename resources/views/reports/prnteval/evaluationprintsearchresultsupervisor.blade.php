@@ -18,7 +18,7 @@
                                         style="width: 100%; height: 580px;" 
                                         frameborder="0" 
                                         class="mt-3">
-                                    </iframe>
+                                </iframe>
                             </div>
                         </div>
                     </div>
