@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LoginController;
+
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\FacultyController;
@@ -28,11 +30,18 @@ use App\Http\Controllers\ReportsPrintSumEvalresultController;
 |
 */
 
+Route::group(['middleware'=>['guest']],function(){
     Route::get('/', function () {
         return view('login');
     });
 
+    Route::get('/empqa', [LoginController::class,'login'])->name('login');
+    Route::post('/empqa/logsuccess/', [LoginController::class,'empstudlogin'])->name('empstudlogin');
+});
+
+Route::group(['middleware'=>['login_empauth']],function(){
     Route::get('/dashboard', [DashboardController::class,'index'])->name('index.dashboard');
+    Route::get('/logout', [DashboardController::class, 'logout'])->name('logout');
 
     Route::prefix('/schedule')->group(function () {
         Route::get('/eval/view', [CalendarController::class,'index'])->name('index.calendar');
@@ -130,3 +139,4 @@ use App\Http\Controllers\ReportsPrintSumEvalresultController;
         Route::get('/eval/result/srch/summary/resultlist/view/Sheet/pdfeval', [ReportsPrintSumEvalresultController::class, 'gensumsheetevalPDF'])->name('gensumsheetevalPDF');
         Route::get('/eval/result/srch/summary/resultlist/view/Sheet/pdfevaldecimal', [ReportsPrintSumEvalresultController::class, 'gensumsheetevalPDFdecimal'])->name('gensumsheetevalPDFdecimal');
     });
+});

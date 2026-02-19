@@ -9,10 +9,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/cpsulogov4.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/cpsulogov4.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/cpsulogov4.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
-    <!-- Toastr -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
 
     <style>
         body {
@@ -105,21 +105,19 @@
 
                 </div>
 
-                <form action="{{ route('empstudlogin') }}" method="post" class="needs-validation mt-3">
-                    @csrf
-
+                <form class="needs-validation mt-3" novalidate>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input id="email" type="email" name="email" class="form-control" placeholder="name@cpsu.edu.ph" required autofocus>
+                        <input id="email" type="email" class="form-control" placeholder="name@cpsu.edu.ph" required autofocus>
                         <div class="invalid-feedback">Please enter a valid email.</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="password" class="form-label d-flex justify-content-between">
                             <span>Password</span>
-                            {{-- <a href="#" class="small link-primary">Forgot Password?</a> --}}
+                            <a href="#" class="small link-primary">Forgot Password?</a>
                         </label>
-                        <input id="password" type="password" name="password" class="form-control" placeholder="Password" required minlength="6">
+                        <input id="password" type="password" class="form-control" placeholder="Password" required minlength="6">
                         <div class="invalid-feedback">Please provide a password (min 6 characters).</div>
                     </div>
 
@@ -140,35 +138,6 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
-    <!-- jQuery -->
-    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Moment -->
-    <script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
-    <!-- Toastr -->
-    <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
-
-    <script>
-        $(document).ready(function() {
-            @if(session('error'))
-                toastr.error("{{ session('error') }}", "Error", {
-                    closeButton: false,
-                    progressBar: true,
-                    positionClass: "toast-top-right",
-                    timeOut: 10000
-                });
-            @endif
-
-            @if(session('success'))
-                toastr.success("{{ session('success') }}", "Success", {
-                    closeButton: false,
-                    progressBar: true,
-                    positionClass: "toast-top-right",
-                    timeOut: 10000
-                });
-            @endif
-        });
-    </script>
-
+    <script type="module" src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 </html>
