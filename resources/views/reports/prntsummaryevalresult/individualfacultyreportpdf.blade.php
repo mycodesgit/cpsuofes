@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>SUPERVISOR'S EVALUATION OF FACULTY</title>
+	<title>INDIVIDUAL FACULTY EVALUATION REPORT</title>
 	<style>
 		body {
 			font-size: 12pt;
@@ -33,6 +33,7 @@
             border-collapse: collapse;
             width: 100%;
             border: 1px solid #000;
+            padding: 10px;
         }
         #table td {
         	vertical-align: center !important;
@@ -155,7 +156,7 @@
 		</p>
 		<p>
 			<span class="label">Semester/Term & Academic Year</span>
-			<span class="colon">:</span> {{ $facultySemester }}
+			<span class="colon">:</span> {{ $facultySemester }} / {{ request('schlyear') }}
 		</p>
 	</div>
 
@@ -185,13 +186,50 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($facrated as $facrateditem)
+                    <tr>
+                        <td style="text-align: center">{{ $loop->iteration }}</td>
+                        <td style="text-align: left">{{ $facrateditem->sub_name ?? 'N/A' }}</td>
+                        <td style="text-align: center">{{ $facrateditem->subSec ?? 'N/A' }}</td>
+                        <td style="text-align: center">{{ $facrateditem->noofstudents ?? 0 }}</td>
+                        <td style="text-align: center">{{ number_format($facrateditem->avgsetrating, 2) ?? 0 }}</td>
+                        <td style="text-align: center">{{ number_format($facrateditem->weightedsetscore, 2) ?? 0 }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 30px; font-weight: bold">
+		<p>C. SET and SEF Ratings</p>
+	</div>
+    <div style="
+        text-align: justify;
+        padding-left: 120px;
+        text-indent: -120px;
+        line-height: 1.6;
+    ">
+        <span style="font-weight:bold;">Computation:</span>
+        Calculate the Overall SET Rating by dividing the total Weighted SET Score
+        by the total number of students. In the example above, the total weighted
+        value is 19,358 while the total number of students is 215. Therefore,
+        19,358 ÷ 215 = 90.04.
+    </div>
+
+    <div>
+        <table id="table">
+            <thead>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <th></th>
+                    <th>SET Rating</th>
+                    <th>*SEF Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr></tr>
+                    <td style="text-align: left; font-weight: bold;">OVERALL RATING</td>
+                    <td style="text-align: center">{{ number_format($overallSetRating, 2) }}</td>
+                    <td style="text-align: center">{{ number_format($overallSefRating, 2) }}</td>
                 </tr>
             </tbody>
         </table>

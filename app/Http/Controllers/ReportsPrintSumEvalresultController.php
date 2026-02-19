@@ -102,15 +102,55 @@ class ReportsPrintSumEvalresultController extends Controller
             ->where('schlyear', $schlyear)
             ->where('semester', $semester)
             ->where('qcefacID', $faclty)
-            ->get(); 
+            ->get();
 
         $facRanck = DB::connection('schedule')->table('faculty')
             ->where('faculty.id', $faclty)
             ->get();
 
+        $facrated = QCEfevalrate::where('campus', $campus)
+            ->where('schlyear', $schlyear)
+            ->where('semester', $semester)
+            ->where('qcefacID', $faclty)
+            ->where('qceevaluator', '=', 'Student')
+            ->select(
+                'subjidrate',
+                DB::raw('COUNT(DISTINCT studidno) as noofstudents'),
+                DB::raw('AVG(question_rate) as avgsetrating')
+            )
+            ->groupBy('subjidrate')
+            ->get(); 
+        
+        foreach ($facrated as $row) {
+            $row->weightedsetscore =
+                $row->noofstudents * $row->avgsetrating;
+        }
+
+        $subjectIds = $facrated->pluck('subjidrate')->filter();
+
+        $subjects = DB::connection('schedule')
+            ->table('sub_offered')
+            ->join('subjects', 'sub_offered.subCode', '=', 'subjects.sub_code')
+            ->whereIn('sub_offered.id', $subjectIds)
+            ->select(
+                'sub_offered.id',
+                'subjects.sub_name',
+                'sub_offered.subSec'
+            )
+            ->get()
+            ->keyBy('id');
+
+        foreach ($facrated as $row) {
+            $subject = $subjects->get($row->subjidrate);
+
+            $row->sub_name = $subject->sub_name ?? 'N/A';
+            $row->subSec   = $subject->subSec ?? 'N/A';
+        }
+
         
         $data = [
             'fcs' => $fcs,
+            'facrated' => $facrated,
             'facRanck' => $facRanck,
             'rating_period' => $rating_period,
         ];

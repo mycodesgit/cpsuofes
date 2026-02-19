@@ -16,23 +16,23 @@
                             <div class="card-body">
                                 <ul class="nav nav-pills mb-3 bg-light p-2 rounded-2 d-inline-flex" id="pills-tab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="pills-summaryevaluation-tab" data-bs-toggle="pill"
-                                            data-bs-target="#pills-summaryevaluation" type="button" role="tab"
-                                            aria-controls="pills-summaryevaluation" aria-selected="true">
-                                            Summary of Evaluation
+                                        <button class="nav-link active" id="pills-annexc-tab" data-bs-toggle="pill"
+                                            data-bs-target="#pills-annexc" type="button" role="tab"
+                                            aria-controls="pills-annexc" aria-selected="true">
+                                            ANNEX C - Individual Faculty Evaluation Report
                                         </button>
                                     </li>
                                     &nbsp;
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="pills-monitoringevaluation-tab" data-bs-toggle="pill"
-                                            data-bs-target="#pills-monitoringevaluation" type="button" role="tab"
-                                            aria-controls="pills-monitoringevaluation" aria-selected="false" tabindex="-1">
-                                            Monitoring and Evaluation
+                                        <button class="nav-link" id="pills-annexd-tab" data-bs-toggle="pill"
+                                            data-bs-target="#pills-annexd" type="button" role="tab"
+                                            aria-controls="pills-annexd" aria-selected="false" tabindex="-1">
+                                            ANNEX D - Faculty Evaluation and Development Acknowledgement Form
                                         </button>
                                     </li>
                                 </ul>
                                 <div class="tab-content mt-3" id="pills-tabContent">
-                                    <div class="tab-pane fade show active" id="pills-summaryevaluation" role="tabpanel" aria-labelledby="pills-summaryevaluation-tab" tabindex="0">
+                                    <div class="tab-pane fade show active" id="pills-annexc" role="tabpanel" aria-labelledby="pills-annexc-tab" tabindex="0">
                                         <div class="bg-light p-2 rounded-2">
                                             <iframe id="pdfIframe" src="{{ route('individualresultEvalPDF', ['campus' => request('campus'), 'ratingfrom' => request('ratingfrom'), 'ratingto' => request('ratingto'), 'schlyear' => request('schlyear'), 'semester' => request('semester'), 'faclty' => request('faclty')]) }}"
                                                     style="width: 100%; height: 580px;" 
@@ -41,7 +41,7 @@
                                             </iframe>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="pills-monitoringevaluation" role="tabpanel" aria-labelledby="pills-monitoringevaluation-tab" tabindex="0">
+                                    <div class="tab-pane fade" id="pills-annexd" role="tabpanel" aria-labelledby="pills-annexd-tab" tabindex="0">
                                         <div class="bg-light p-2 rounded-2">
                                             s
                                         </div>
