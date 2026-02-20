@@ -177,7 +177,7 @@
         </div>
     </div>
 
-    <div style="margin-top: 20px">
+    <div style="margin-top: 20px; margin-left: -9px;">
         <table id="table">
             <thead>
                 <tr>
@@ -226,7 +226,7 @@
         {{ number_format($facrated->sum('weightedsetscore'), 2) ?? 0 }} ÷ {{ $facrated->sum('noofstudents') ?? 0 }} = {{ number_format($overallSetRating ?? 0, 2) }}.
     </div>
 
-    <div>
+    <div style="margin-left: -9px; margin-left: -9px;">
         <table id="table">
             <thead>
                 <tr>
@@ -250,7 +250,7 @@
 		<p>D. Summary of Qualitative Comments and Suggestions</p>
 	</div>
 
-	<div style="margin-top: -30px;">
+	<div style="margin-top: -30px; margin-left: -9px;">
 		<table id="table">
             <thead>
                 <tr>
@@ -269,7 +269,7 @@
         </table>
 	</div>
 
-	<div style="margin-top: -5px;">
+	<div style="margin-top: -5px; margin-left: -9px;">
 		<table id="table">
             <thead>
                 <tr>

@@ -19,7 +19,7 @@
                                         <button class="nav-link active" id="pills-annexc-tab" data-bs-toggle="pill"
                                             data-bs-target="#pills-annexc" type="button" role="tab"
                                             aria-controls="pills-annexc" aria-selected="true">
-                                            ANNEX C - Individual Faculty Evaluation Report
+                                            ANNEX C - Individual FER
                                         </button>
                                     </li>
                                     &nbsp;
@@ -27,7 +27,7 @@
                                         <button class="nav-link" id="pills-annexd-tab" data-bs-toggle="pill"
                                             data-bs-target="#pills-annexd" type="button" role="tab"
                                             aria-controls="pills-annexd" aria-selected="false" tabindex="-1">
-                                            ANNEX D - Faculty Evaluation and Development Acknowledgement Form
+                                            ANNEX D - Faculty EDA Form
                                         </button>
                                     </li>
                                 </ul>
@@ -43,7 +43,11 @@
                                     </div>
                                     <div class="tab-pane fade" id="pills-annexd" role="tabpanel" aria-labelledby="pills-annexd-tab" tabindex="0">
                                         <div class="bg-light p-2 rounded-2">
-                                            s
+                                            <iframe id="pdfIframe" src="{{ route('facultyEvalDevAckPDF', ['campus' => request('campus'), 'ratingfrom' => request('ratingfrom'), 'ratingto' => request('ratingto'), 'schlyear' => request('schlyear'), 'semester' => request('semester'), 'faclty' => request('faclty')]) }}"
+                                                    style="width: 100%; height: 580px;" 
+                                                    frameborder="0" 
+                                                    class="mt-3">
+                                            </iframe>
                                         </div>
                                     </div>
                                 </div>

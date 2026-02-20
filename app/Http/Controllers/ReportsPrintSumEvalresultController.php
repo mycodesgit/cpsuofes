@@ -232,7 +232,155 @@ class ReportsPrintSumEvalresultController extends Controller
             'overallSefRating'  => $overallSefRating,
         ];
 
-        $pdf = PDF::loadView('reports.prntsummaryevalresult.individualfacultyreportpdf', $data)->setPaper('Legal', 'portrait');
+        $pdf = PDF::loadView('reports.prntsummaryevalresult.annexcindividualfacultyreportpdf', $data)->setPaper('Legal', 'portrait');
+        return $pdf->stream();
+    }
+
+    public function facultyEvalDevAckPDF(Request $request)
+    {
+        $campus = $request->query('campus');
+        $schlyear = $request->query('schlyear');
+        $semester = $request->query('semester');
+        $faclty = $request->query('faclty');
+        $ratingFrom = $request->query('ratingfrom');
+        $ratingTo   = $request->query('ratingto');
+        $rating_period = $ratingFrom . ' - ' . $ratingTo;
+
+        $fcs = QCEfevalrate::where('campus', $campus)
+            ->where('schlyear', $schlyear)
+            ->where('semester', $semester)
+            ->where('qcefacID', $faclty)
+            ->get();
+
+        $facRanck = DB::connection('schedule')->table('faculty')
+            ->where('faculty.id', $faclty)
+            ->get();
+        
+        $evaluationsStudent = QCEfevalrate::where('campus', $campus)
+            ->where('schlyear', $schlyear)
+            ->where('semester', $semester)
+            ->where('qcefacID', $faclty)
+            ->where('qceevaluator', 'Student')
+            ->get();
+
+        $evaluationsStudComp = $evaluationsStudent->map(function ($row) {
+            $answers = json_decode($row->question_rate, true);
+            $totalScore = is_array($answers)
+                ? array_sum($answers)
+                : 0;
+            $row->set_rating = ($totalScore / 75) * 100;
+                return $row;
+        });
+
+        $facrated = $evaluationsStudComp
+            ->groupBy('subjidrate')
+            ->map(function ($rows) {
+
+                $students = $rows->pluck('studidno')
+                    ->unique()
+                    ->count();
+
+                $avgRating = $rows->avg('set_rating');
+
+                return (object)[
+                    'subjidrate'      => $rows->first()->subjidrate,
+                    'noofstudents'    => $students,
+                    'avgsetrating'    => $avgRating,
+                    'weightedsetscore'=> $students * $avgRating,
+                ];
+            })
+            ->values(); 
+        
+        foreach ($facrated as $row) {
+            $row->weightedsetscore =
+                $row->noofstudents * $row->avgsetrating;
+        }
+
+        $subjectIds = $facrated->pluck('subjidrate')->filter();
+
+        $subjects = DB::connection('schedule')
+            ->table('sub_offered')
+            ->join('subjects', 'sub_offered.subCode', '=', 'subjects.sub_code')
+            ->whereIn('sub_offered.id', $subjectIds)
+            ->select(
+                'sub_offered.id',
+                'subjects.sub_name',
+                'sub_offered.subSec'
+            )
+            ->get()
+            ->keyBy('id');
+
+        foreach ($facrated as $row) {
+            $subject = $subjects->get($row->subjidrate);
+
+            $row->sub_name = $subject->sub_name ?? 'N/A';
+            $row->subSec   = $subject->subSec ?? 'N/A';
+        }
+
+        //$overallSefRating = 0; 
+        $totalStudents = $facrated->sum('noofstudents');
+        $totalWeightedScore = $facrated->sum('weightedsetscore');
+
+        $overallSetRating = $totalStudents > 0
+            ? $totalWeightedScore / $totalStudents
+            : 0;
+
+        $evaluationsSupervisor = QCEfevalrate::where('campus', $campus)
+            ->where('schlyear', $schlyear)
+            ->where('semester', $semester)
+            ->where('qcefacID', $faclty)
+            ->where('qceevaluator', 'Supervisor')
+            ->get();
+
+        $evaluationsSupervisorComp = $evaluationsSupervisor->map(function ($row) {
+            $answers = json_decode($row->question_rate, true);
+
+            $totalScore = is_array($answers)
+                ? array_sum($answers)
+                : 0;
+
+            $row->sef_rating = ($totalScore / 75) * 100;
+
+            return $row;
+        });
+
+        $facratedSupervisor = $evaluationsSupervisorComp
+            ->groupBy('subjidrate')
+            ->map(function ($rows) {
+
+                $supervisors = $rows->count();
+                $avgRating = $rows->avg('sef_rating');
+
+                return (object)[
+                    'subjidrate'       => $rows->first()->subjidrate,
+                    'noofsupervisor'   => $supervisors,
+                    'avgsefrating'     => $avgRating,
+                    'weightedsefscore' => $supervisors * $avgRating,
+                ];
+            })
+            ->values();
+
+        $totalSupervisor = $facratedSupervisor->sum('noofsupervisor');
+        $totalSupervisorWeighted = $facratedSupervisor->sum('weightedsefscore');
+
+        $overallSefRating = $totalSupervisor > 0
+            ? $totalSupervisorWeighted / $totalSupervisor
+            : 0;
+
+        
+        $data = [
+            'fcs' => $fcs,
+            'facrated' => $facrated,
+            'evaluationsStudent' => $evaluationsStudent,
+            'facratedSupervisor' => $facratedSupervisor,
+            'evaluationsSupervisor' => $evaluationsSupervisor,
+            'facRanck' => $facRanck,
+            'rating_period' => $rating_period,
+            'overallSetRating'  => $overallSetRating,
+            'overallSefRating'  => $overallSefRating,
+        ];
+
+        $pdf = PDF::loadView('reports.prntsummaryevalresult.annexdindividualfacultyreportpdf', $data)->setPaper('Legal', 'portrait');
         return $pdf->stream();
     }
 
