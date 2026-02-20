@@ -76,7 +76,7 @@
     </li>
     <li>
         <a class="nav-link {{ request()->is('studaccount*') ? 'active' : '' }}" href="{{ route('studaccount.index') }}">
-            <i class="ti ti-user-circle"></i> <span class="nav-text">Student Account</span>
+            <i class="ti ti-user-circle"></i> <span class="nav-text">Students</span>
         </a>
     </li>
     <li>

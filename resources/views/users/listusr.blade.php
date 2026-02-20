@@ -10,7 +10,7 @@
                         <div class="card">
                             <div class="card-header pt-3">
                                 <h6 class="card-title">
-                                    <i class="fas fa-list"></i> List
+                                    <i class="fas fa-users"></i> List ofUsers
                                 </h6>
                             </div>
                             <div class="card-body">

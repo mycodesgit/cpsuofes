@@ -14,7 +14,7 @@
                                 </h5>
                             </div>
                             <div class="card-body">
-                                <button type="button" class="btn btn-success btn-sm mb-4" data-bs-toggle="modal" data-target="#modal-kioskuser">
+                                <button type="button" class="btn btn-outline-success mb-4" data-bs-toggle="modal" data-bs-target="#addStudentAccntModal">
                                     <i class="fas fa-user-plus"></i> Add New
                                 </button>
                                 <table id="kioskuser" class="table table-striped">
@@ -37,6 +37,57 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addStudentAccntModal" tabindex="-1" role="dialog" aria-labelledby="addStudentAccntModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="addStudentAccntModalLabel">Add New</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <form class="form-horizontal" action="" method="post" id="adKioskuser">  
+                    @csrf
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <label><span class="badge badge-secondary">Student ID No.:</span></label>
+                                    <input type="text" name="studid" class="form-control" oninput="formatInput(this); this.value = this.value.toUpperCase(); fetchStudentName(this.value);" autofocus>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <label><span class="badge badge-secondary">Name:</span></label>
+                                    <input type="text" id="studentName" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <label><span class="badge badge-secondary">Password:</span></label>
+                                    <input type="text" name="password" id="passwordInput" oninput="this.value = this.value.toUpperCase()" placeholder="Enter Password" class="form-control" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" id="generatePassword" class="btn btn-success">
+                            <i class="fas fa-key"></i> Generate Pass
+                        </button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
