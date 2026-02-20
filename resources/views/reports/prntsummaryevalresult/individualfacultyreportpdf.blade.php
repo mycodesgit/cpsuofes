@@ -191,11 +191,17 @@
                         <td style="text-align: center">{{ $loop->iteration }}</td>
                         <td style="text-align: left">{{ $facrateditem->sub_name ?? 'N/A' }}</td>
                         <td style="text-align: center">{{ $facrateditem->subSec ?? 'N/A' }}</td>
-                        <td style="text-align: center">{{ $facrateditem->noofstudents ?? 0 }}</td>
+                        <td style="text-align: center">{{ $facrateditem->noofstudents ?? 0, 2 }}</td>
                         <td style="text-align: center">{{ number_format($facrateditem->avgsetrating, 2) ?? 0 }}</td>
                         <td style="text-align: center">{{ number_format($facrateditem->weightedsetscore, 2) ?? 0 }}</td>
                     </tr>
                 @endforeach
+				<tr>
+					<td colspan="3" style="text-align: right; font-weight: bold;">TOTAL</td>
+					<td style="text-align: center">{{ $facrated->sum('noofstudents') ?? 0 }}</td>
+					<td style="text-align: center; font-weight: bold;">TOTAL</td>
+					<td style="text-align: center">{{ number_format($facrated->sum('weightedsetscore'), 2) ?? 0 }}</td>
+				</tr>
             </tbody>
         </table>
     </div>
@@ -212,8 +218,8 @@
         <span style="font-weight:bold;">Computation:</span>
         Calculate the Overall SET Rating by dividing the total Weighted SET Score
         by the total number of students. In the example above, the total weighted
-        value is 19,358 while the total number of students is 215. Therefore,
-        19,358 ÷ 215 = 90.04.
+        value is {{ number_format($facrated->sum('weightedsetscore'), 2) ?? 0 }} while the total number of students is {{ $facrated->sum('noofstudents') ?? 0 }}. Therefore,
+        {{ number_format($facrated->sum('weightedsetscore'), 2) ?? 0 }} ÷ {{ $facrated->sum('noofstudents') ?? 0 }} = {{ number_format($overallSetRating ?? 0, 2) }}.
     </div>
 
     <div>
@@ -226,10 +232,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr></tr>
+                <tr>
                     <td style="text-align: left; font-weight: bold;">OVERALL RATING</td>
-                    <td style="text-align: center">{{ number_format($overallSetRating, 2) }}</td>
-                    <td style="text-align: center">{{ number_format($overallSefRating, 2) }}</td>
+                    <td style="text-align: center">{{ number_format($overallSetRating ?? 0, 2) }}</td>
+                    <td style="text-align: center">{{ number_format($overallSefRating ?? 0, 2) }}</td>
                 </tr>
             </tbody>
         </table>

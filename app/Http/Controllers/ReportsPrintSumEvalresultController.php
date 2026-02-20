@@ -107,19 +107,42 @@ class ReportsPrintSumEvalresultController extends Controller
         $facRanck = DB::connection('schedule')->table('faculty')
             ->where('faculty.id', $faclty)
             ->get();
-
-        $facrated = QCEfevalrate::where('campus', $campus)
+        
+        $evaluations = QCEfevalrate::where('campus', $campus)
             ->where('schlyear', $schlyear)
             ->where('semester', $semester)
             ->where('qcefacID', $faclty)
-            ->where('qceevaluator', '=', 'Student')
-            ->select(
-                'subjidrate',
-                DB::raw('COUNT(DISTINCT studidno) as noofstudents'),
-                DB::raw('AVG(question_rate) as avgsetrating')
-            )
+            ->where('qceevaluator', 'Student')
+            ->get();
+
+        $evaluations = $evaluations->map(function ($row) {
+            $answers = json_decode($row->question_rate, true);
+            $totalScore = is_array($answers)
+                ? array_sum($answers)
+                : 0;
+            $row->set_rating = ($totalScore / 75) * 100;
+                return $row;
+        });
+
+        $facrated = $evaluations
             ->groupBy('subjidrate')
-            ->get(); 
+            ->map(function ($rows) {
+
+                $students = $rows->pluck('studidno')
+                    ->unique()
+                    ->count();
+
+                // average SET rating
+                $avgRating = $rows->avg('set_rating');
+
+                return (object)[
+                    'subjidrate'      => $rows->first()->subjidrate,
+                    'noofstudents'    => $students,
+                    'avgsetrating'    => $avgRating,
+                    'weightedsetscore'=> $students * $avgRating,
+                ];
+            })
+            ->values(); 
         
         foreach ($facrated as $row) {
             $row->weightedsetscore =
@@ -147,12 +170,23 @@ class ReportsPrintSumEvalresultController extends Controller
             $row->subSec   = $subject->subSec ?? 'N/A';
         }
 
+        $overallSefRating = 0; // replace later with real computation
+        $totalStudents = $facrated->sum('noofstudents');
+        $totalWeightedScore = $facrated->sum('weightedsetscore');
+
+        // avoid division by zero
+        $overallSetRating = $totalStudents > 0
+            ? $totalWeightedScore / $totalStudents
+            : 0;
+
         
         $data = [
             'fcs' => $fcs,
             'facrated' => $facrated,
             'facRanck' => $facRanck,
             'rating_period' => $rating_period,
+            'overallSetRating'  => $overallSetRating,
+            'overallSefRating'  => $overallSefRating,
         ];
 
         $pdf = PDF::loadView('reports.prntsummaryevalresult.individualfacultyreportpdf', $data)->setPaper('Legal', 'portrait');

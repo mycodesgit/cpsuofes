@@ -339,5 +339,20 @@
 	<div style="margin-top: 10px; font-size: 11pt">
 		<span style="font-weight: bold; text-align: justify;">Note:</span> <span style="font-style: italic">Your feedback is important in enhancing the educational programs of State Universities and Colleges (SUCs). Please be informed that any information provided in this instrument will be treated as strictly confidential.</span>
 	</div>
+
+	<div style="font-weight: bold; text-decoration: underline; margin-top: 30px">
+		<p>SET RATING Computaion</p>
+	</div>
+	
+	<div>Total Score: <span style="text-decoration: underline">{{ $totalScore }}</span></div>
+
+	<div>
+		<p style="font-weight: bold;">Formula:</p>
+		<p style="margin-top: -15px">Rating = (Total Score / 75) x 100</p>
+	</div>
+
+	<div style="margin-top: 10px; font-weight: bold;">
+		<p>COMPUTED RATING: <span style="text-decoration: underline">{{ number_format(($totalScore / 75) * 100, 2) }}</span> </p>
+	</div>
 </body>
 </html>

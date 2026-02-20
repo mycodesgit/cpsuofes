@@ -6,7 +6,7 @@
             <div class="mb-6">
                 <h1 class="fs-3 mb-4">Dashboard</h1>
 
-                <div class="card mb-3">
+                <div class="card bg-success bg-opacity-10 border border-success border-opacity-25 rounded-2 mb-3">
                     <div class="card-body">
                         <div class="d-flex align-items-center gap-3">
                             <div class="icon-shape icon-md bg-success text-white rounded-2">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
 
-                <div class="card p-4 border border-secondary border-opacity-25 rounded-2 mb-3" style="background-color: #2eac8f !important">
+                <div class="card p-4 bg-secondary bg-opacity-10 border border-secondary border-opacity-25 rounded-2 mb-3">
                     <form>
                         <div class="row">
                             <div class="col-md-6">
