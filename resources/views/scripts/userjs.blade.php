@@ -18,7 +18,7 @@
                         toastr.success(response.message);
                         console.log(response);
                         $(document).trigger('userAdded');
-                        $('#modal-user').modal('hide');
+                        $('#addUserModal').modal('hide');
                     } else {
                         toastr.error(response.message);
                         console.log(response);

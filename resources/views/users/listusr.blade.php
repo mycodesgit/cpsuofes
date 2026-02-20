@@ -14,6 +14,9 @@
                                 </h6>
                             </div>
                             <div class="card-body">
+                                <button type="button" class="btn btn-outline-success mb-3" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                                    <i class="fas fa-user-plus"></i> Add New
+                                </button>
                                 <table id="userlistTable" class="table table-hover">
                                     <thead>
                                         <tr>
@@ -34,6 +37,127 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="addUserModalLabel">Add New User</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="form-horizontal p-3" action="{{ route('user.create') }}" method="post" id="addUser">  
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>First Name: <span class="text-danger">*</span></label>
+                                    <input type="text" name="fname" oninput="var words = this.value.split(' '); for(var i = 0; i < words.length; i++){ words[i] = words[i].substr(0,1).toUpperCase() + words[i].substr(1); } this.value = words.join(' ');" placeholder="Enter First Name" class="form-control">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Middle Name: <span class="text-danger">*</span></label>
+                                    <input type="text" name="mname" oninput="var words = this.value.split(' '); for(var i = 0; i < words.length; i++){ words[i] = words[i].substr(0,1).toUpperCase() + words[i].substr(1); } this.value = words.join(' ');" placeholder="Enter Middle Name" class="form-control">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Last Name: <span class="text-danger">*</span></label>
+                                    <input type="text" name="lname" oninput="var words = this.value.split(' '); for(var i = 0; i < words.length; i++){ words[i] = words[i].substr(0,1).toUpperCase() + words[i].substr(1); } this.value = words.join(' ');" placeholder="Enter Last Name" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Ext.: <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="ext">
+                                        <option disabled selected> --Select-- </option>
+                                        <option value="">N/A</option>
+                                        <option value="Jr.">Jr.</option>
+                                        <option value="Sr.">Sr.</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <label>Email <span class="text-danger">*</span></label>
+                                    <input type="email" name="email" placeholder="Enter Email" class="form-control">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Password: <span class="text-danger">*</span></label>
+                                    <input type="password" name="password" placeholder="Enter Password" value="p455word123" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3"> 
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Campus <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="campus" required="">
+                                        <option disabled selected> --Select Campus-- </option>
+                                        <option value="MC">Main</option>
+                                        <option value="VC">Victorias</option>
+                                        <option value="SCC">San Carlos</option>
+                                        <option value="HC">Hinigaran</option>
+                                        <option value="MP">Moises Padilla</option>
+                                        <option value="IC">Ilog</option>
+                                        <option value="CA">Candoni</option>
+                                        <option value="CC">Cauayan</option>
+                                        <option value="SC">Sipalay</option>
+                                        <option value="HinC">Hinobaan</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Department <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="dept">
+                                        <option disabled selected> --Select Dept-- </option>
+                                        <option value="CAS">College of Arts and Sciences</option>
+                                        <option value="CCS">College of Computer Studies</option>
+                                        <option value="COTED">College of Teacher Education</option>
+                                        <option value="CCJE">College of Criminal Justice Education</option>
+                                        <option value="COE">College of Engineering</option>
+                                        <option value="CAF">College of Agriculture and Forestry</option>
+                                        <option value="CBM">College of Business Management</option>
+                                        <option value="Guidance Office">Guidance Office</option>
+                                        <option value="Registrar Office">Registrar Office</option>
+                                        <option value="Assessment Office">Assessment Office</option>
+                                        <option value="Scholarship Office">Scholarship Office</option>
+                                        <option value="Cashier Office">Cashier Office</option>
+                                        <option value="Graduate School Registar">Graduate School Registar</option>
+                                        <option value="MIS Office">MIS Office</option>
+                                        <option value="OSSA"f>OSSA</option>
+                                        <option value="QA">QA</option>
+                                        <option value="TS">Training Services</option>
+                                    </select>
+                                </div>
+
+                                 <div class="col-md-4">
+                                    <label>User Role <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="role" >
+                                        <option disabled selected> --Select Level-- </option>
+                                        <option value="1">Administrator</option>
+                                        <option value="1">Administer QA</option>
+                                        <option value="2">Administer QA Staff</option>
+                                        <option value="3">Administer Result</option>
+                                        <option value="4">Administer Result Staff</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-success">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
