@@ -239,6 +239,7 @@
                 </tr>
             </tbody>
         </table>
+		<p style="font-style: italic; font-size: 9pt; margin-left: 10px; margin-top: -5px !important">Note: rating given by the supervisor using the SEF instrument</p>
     </div>
 	
 </body>
