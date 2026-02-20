@@ -108,14 +108,14 @@ class ReportsPrintSumEvalresultController extends Controller
             ->where('faculty.id', $faclty)
             ->get();
         
-        $evaluations = QCEfevalrate::where('campus', $campus)
+        $evaluationsStudent = QCEfevalrate::where('campus', $campus)
             ->where('schlyear', $schlyear)
             ->where('semester', $semester)
             ->where('qcefacID', $faclty)
             ->where('qceevaluator', 'Student')
             ->get();
 
-        $evaluations = $evaluations->map(function ($row) {
+        $evaluationsStudComp = $evaluationsStudent->map(function ($row) {
             $answers = json_decode($row->question_rate, true);
             $totalScore = is_array($answers)
                 ? array_sum($answers)
@@ -124,7 +124,7 @@ class ReportsPrintSumEvalresultController extends Controller
                 return $row;
         });
 
-        $facrated = $evaluations
+        $facrated = $evaluationsStudComp
             ->groupBy('subjidrate')
             ->map(function ($rows) {
 
@@ -132,7 +132,6 @@ class ReportsPrintSumEvalresultController extends Controller
                     ->unique()
                     ->count();
 
-                // average SET rating
                 $avgRating = $rows->avg('set_rating');
 
                 return (object)[
@@ -170,19 +169,63 @@ class ReportsPrintSumEvalresultController extends Controller
             $row->subSec   = $subject->subSec ?? 'N/A';
         }
 
-        $overallSefRating = 0; // replace later with real computation
+        //$overallSefRating = 0; 
         $totalStudents = $facrated->sum('noofstudents');
         $totalWeightedScore = $facrated->sum('weightedsetscore');
 
-        // avoid division by zero
         $overallSetRating = $totalStudents > 0
             ? $totalWeightedScore / $totalStudents
+            : 0;
+
+        $evaluationsSupervisor = QCEfevalrate::where('campus', $campus)
+            ->where('schlyear', $schlyear)
+            ->where('semester', $semester)
+            ->where('qcefacID', $faclty)
+            ->where('qceevaluator', 'Supervisor')
+            ->get();
+
+        $evaluationsSupervisorComp = $evaluationsSupervisor->map(function ($row) {
+            $answers = json_decode($row->question_rate, true);
+
+            $totalScore = is_array($answers)
+                ? array_sum($answers)
+                : 0;
+
+            $row->sef_rating = ($totalScore / 75) * 100;
+
+            return $row;
+        });
+
+        $facratedSupervisor = $evaluationsSupervisorComp
+            ->groupBy('subjidrate')
+            ->map(function ($rows) {
+
+                $supervisors = $rows->count();
+                $avgRating = $rows->avg('sef_rating');
+
+                return (object)[
+                    'subjidrate'       => $rows->first()->subjidrate,
+                    'noofsupervisor'   => $supervisors,
+                    'avgsefrating'     => $avgRating,
+                    'weightedsefscore' => $supervisors * $avgRating,
+                ];
+            })
+            ->values();
+
+        $totalSupervisor = $facratedSupervisor->sum('noofsupervisor');
+        $totalSupervisorWeighted = $facratedSupervisor->sum('weightedsefscore');
+
+        $overallSefRating = $totalSupervisor > 0
+            ? $totalSupervisorWeighted / $totalSupervisor
             : 0;
 
         
         $data = [
             'fcs' => $fcs,
             'facrated' => $facrated,
+            'evaluationsStudent' => $evaluationsStudent,
+            'facratedSupervisor' => $facratedSupervisor,
+            'evaluationsSupervisor' => $evaluationsSupervisor,
             'facRanck' => $facRanck,
             'rating_period' => $rating_period,
             'overallSetRating'  => $overallSetRating,

@@ -92,7 +92,11 @@
 		    line-height: 20px;
 		    padding-left: 5px;
 		}
-
+		.details {			
+			margin-left: 20px;
+			text-align: left;
+			font-size: 11pt;
+		}
 	</style>
 </head>
 <body>
@@ -242,5 +246,91 @@
 		<p style="font-style: italic; font-size: 9pt; margin-left: 10px; margin-top: -5px !important">Note: rating given by the supervisor using the SEF instrument</p>
     </div>
 	
+	<div style="margin-top: 30px; font-weight: bold">
+		<p>D. Summary of Qualitative Comments and Suggestions</p>
+	</div>
+
+	<div style="margin-top: -30px;">
+		<table id="table">
+            <thead>
+                <tr>
+                    <th>Seq</th>
+                    <th>Comments and Suggestions from the Students</th>
+                </tr>
+            </thead>
+            <tbody>
+				@foreach ($evaluationsStudent as $evaluationsStudentitem)
+					<tr>
+						<td style="text-align: center;">{{ $evaluationsStudentitem->ratecount }}</td>
+						<td style="text-align: center">{{ $evaluationsStudentitem->qcecomments ?? '' }}</td>
+					</tr>
+				@endforeach
+            </tbody>
+        </table>
+	</div>
+
+	<div style="margin-top: -5px;">
+		<table id="table">
+            <thead>
+                <tr>
+                    <th>Seq</th>
+                    <th>Comments and Suggestions from the Supervisor</th>
+                </tr>
+            </thead>
+            <tbody>
+				@foreach ($evaluationsSupervisor as $evaluationsSupervisoritem)
+					<tr>
+						<td style="text-align: center;">{{ $loop->iteration }}</td>
+						<td style="text-align: center">{{ $evaluationsSupervisoritem->qcecomments ?? '' }}</td>
+					</tr>
+				@endforeach
+            </tbody>
+        </table>
+	</div>
+
+	<div  style="margin-top: 10px">
+		<p>Prepared by:</p>
+	</div>
+	<div class="details" style="margin-top: 10px; margin-left: 25px;">
+        <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Signature of Staff</span>
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+            :
+        </div>
+    </div>
+	<div class="details" style="margin-top: 30px; margin-left: 25px;">
+        <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Name of Staff</span>
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+            :
+        </div>
+    </div>
+	<div class="details" style="margin-top: 30px; margin-left: 25px;">
+        <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Date</span>
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+            : {{ date('F d, Y') }}
+        </div>
+    </div>
+
+	<div  style="margin-top: 10px">
+		<p>Reviewed by:</p>
+	</div>
+	<div class="details" style="margin-top: 10px; margin-left: 25px;">
+        <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Signature of Authorized Official</span>
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+            :
+        </div>
+    </div>
+	<div class="details" style="margin-top: 30px; margin-left: 25px;">
+        <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Name of Authorized Official</span>
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+            :
+        </div>
+    </div>
+	<div class="details" style="margin-top: 30px; margin-left: 25px;">
+        <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Date</span>
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+            : {{ date('F d, Y') }}
+        </div>
+    </div>
+
 </body>
 </html>
