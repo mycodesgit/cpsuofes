@@ -179,8 +179,8 @@
             </thead>
             <tbody>
 					<tr>
-						<td style="text-align: center;"></td>
-						<td style="text-align: center"></td>
+						<td style="text-align: center;">{{ number_format($overallSetRating ?? 0, 2) }}</td>
+						<td style="text-align: center">{{ number_format($overallSefRating ?? 0, 2) }}</td>
 					</tr>
             </tbody>
         </table>

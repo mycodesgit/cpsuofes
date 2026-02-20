@@ -288,7 +288,7 @@
         </table>
 	</div>
 
-	<div  style="margin-top: 10px">
+	<div  style="margin-top: 30px">
 		<p>Prepared by:</p>
 	</div>
 	<div class="details" style="margin-top: 10px; margin-left: 25px;">
