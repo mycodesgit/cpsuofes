@@ -98,7 +98,7 @@
         </a>
     </li>
     <li>
-        <a class="nav-link" href="#">
+        <a class="nav-link {{ request()->is('reports/collegefacview*') ? 'active' : '' }}" href="{{ route('conducted.index') }}">
             <i class="ti ti-report-analytics"></i> <span class="nav-text">Conducted Eval.</span>
         </a>
     </li>

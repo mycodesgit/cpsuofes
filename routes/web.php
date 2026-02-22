@@ -18,6 +18,7 @@ use App\Http\Controllers\StudentAccountController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportsPrintEvalController;
 use App\Http\Controllers\ReportsPrintSumEvalresultController;
+use App\Http\Controllers\ReportFacConductedController;
 use App\Http\Controllers\ReportOldprintsumEvalresultController;
 
 /*
@@ -137,6 +138,9 @@ Route::group(['middleware'=>['login_empauth']],function(){
         Route::get('/eval/new/result/srch/summary/individual/faculty/evaluation/report/pdfeval', [ReportsPrintSumEvalresultController::class, 'individualresultEvalPDF'])->name('individualresultEvalPDF');
         Route::get('/eval/new/result/srch/summary/faculty/evaluation/development/ack/pdfeval', [ReportsPrintSumEvalresultController::class, 'facultyEvalDevAckPDF'])->name('facultyEvalDevAckPDF');
 
+        Route::get('/collegefacview/search', [ReportFacConductedController::class, 'index'])->name('conducted.index');
+        Route::get('/collegefacview/search/result', [ReportFacConductedController::class, 'show'])->name('conducted.show');
+        Route::get('/collegefacview/search/result/pdf', [ReportFacConductedController::class, 'facultySearchFilterPDF'])->name('facultySearchFilterPDF');
         
         Route::get('/effect/old/srch/summary', [ReportOldprintsumEvalresultController::class, 'summaryEvalStore'])->name('summaryEvalStore');
         Route::get('/effect/old/srch/summary/resultlist', [ReportOldprintsumEvalresultController::class, 'summaryEvalFilter'])->name('summaryEvalFilter');
