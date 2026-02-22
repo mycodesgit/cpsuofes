@@ -4,7 +4,7 @@
     <div class="row ">
         <div class="col-md-12">
             <div class="mb-6">
-                <h1 class="fs-3 mb-4">Evaluation Result</h1>
+                <h1 class="fs-3 mb-4">Old Evaluation Result</h1>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -14,9 +14,9 @@
                                 </h6>
                             </div>
                             <div class="card-body">
-                                <form method="GET" action="{{ route('summaryevalresult.show') }}" id="enrollStud">
+                                <form method="GET" action="{{ route('summaryEvalFilter') }}" id="enrollStud">
                                     @csrf
-
+                                    
                                         <div class="row">
                                             <div class="col-md-3 mb-3">
                                                 <label>Campus<span class="text-danger">*</span></label>

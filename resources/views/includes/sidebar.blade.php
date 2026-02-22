@@ -102,4 +102,9 @@
             <i class="ti ti-report-analytics"></i> <span class="nav-text">Conducted Eval.</span>
         </a>
     </li>
+    <li>
+        <a class="nav-link {{ request()->is('reports/effect*') ? 'active' : '' }}" href="{{ route('summaryEvalStore') }}">
+            <i class="ti ti-files"></i> <span class="nav-text">Old Evaluations</span>
+        </a>
+    </li>
 </ul>

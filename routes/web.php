@@ -18,6 +18,7 @@ use App\Http\Controllers\StudentAccountController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportsPrintEvalController;
 use App\Http\Controllers\ReportsPrintSumEvalresultController;
+use App\Http\Controllers\ReportOldprintsumEvalresultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,16 +131,19 @@ Route::group(['middleware'=>['login_empauth']],function(){
         Route::get('/info/getevalpdf/print/evaluation/supervisor', [ReportsPrintEvalController::class, 'exportPrintSupervisorEvalPDF'])->name('exportPrintSupervisorEvalPDF');
         Route::post('/info/getevalpdf/print/evaluation/update-statprint', [ReportsPrintEvalController::class, 'updateStatprint'])->name('updateStatprint');
 
-        Route::get('/eval/result/summary', [ReportsPrintSumEvalresultController::class, 'index'])->name('summaryevalresult.index');
-        Route::get('/eval/result/srch/summary/resultlist', [ReportsPrintSumEvalresultController::class, 'summaryEvalFilter'])->name('summaryEvalFilter');
-        Route::get('/eval/result/srch/getfaclty/ajax', [ReportsPrintSumEvalresultController::class, 'getFacultycamp'])->name('getFacultycamp');
-        Route::get('/eval/result/srch/summary/individual/faculty/evaluation/report/pdfeval', [ReportsPrintSumEvalresultController::class, 'individualresultEvalPDF'])->name('individualresultEvalPDF');
-        Route::get('/eval/result/srch/summary/faculty/evaluation/development/ack/pdfeval', [ReportsPrintSumEvalresultController::class, 'facultyEvalDevAckPDF'])->name('facultyEvalDevAckPDF');
+        Route::get('/eval/new/result/summary', [ReportsPrintSumEvalresultController::class, 'index'])->name('summaryevalresult.index');
+        Route::get('/eval/new/result/srch/summary/resultlist', [ReportsPrintSumEvalresultController::class, 'show'])->name('summaryevalresult.show');
+        Route::get('/eval/new/result/srch/getfaclty/ajax', [ReportsPrintSumEvalresultController::class, 'getFacultycamp'])->name('getFacultycamp');
+        Route::get('/eval/new/result/srch/summary/individual/faculty/evaluation/report/pdfeval', [ReportsPrintSumEvalresultController::class, 'individualresultEvalPDF'])->name('individualresultEvalPDF');
+        Route::get('/eval/new/result/srch/summary/faculty/evaluation/development/ack/pdfeval', [ReportsPrintSumEvalresultController::class, 'facultyEvalDevAckPDF'])->name('facultyEvalDevAckPDF');
 
         
-        Route::get('/eval/result/srch/summary/resultlist/view/Comments/pdfeval', [ReportsPrintSumEvalresultController::class, 'gencommentsevalPDF'])->name('gencommentsevalPDF');
-        Route::get('/eval/result/srch/summary/resultlist/view/Points/pdfeval', [ReportsPrintSumEvalresultController::class, 'genpointsevalPDF'])->name('genpointsevalPDF');
-        Route::get('/eval/result/srch/summary/resultlist/view/Sheet/pdfeval', [ReportsPrintSumEvalresultController::class, 'gensumsheetevalPDF'])->name('gensumsheetevalPDF');
-        Route::get('/eval/result/srch/summary/resultlist/view/Sheet/pdfevaldecimal', [ReportsPrintSumEvalresultController::class, 'gensumsheetevalPDFdecimal'])->name('gensumsheetevalPDFdecimal');
+        Route::get('/effect/old/srch/summary', [ReportOldprintsumEvalresultController::class, 'summaryEvalStore'])->name('summaryEvalStore');
+        Route::get('/effect/old/srch/summary/resultlist', [ReportOldprintsumEvalresultController::class, 'summaryEvalFilter'])->name('summaryEvalFilter');
+        Route::get('/effect/old/srch/summary/resultlist/view/Summary/pdfeval', [ReportOldprintsumEvalresultController::class, 'gensummaryevalPDF'])->name('gensummaryevalPDF');
+        Route::get('/effect/old/result/srch/summary/resultlist/view/Comments/pdfeval', [ReportOldprintsumEvalresultController::class, 'gencommentsevalPDF'])->name('gencommentsevalPDF');
+        Route::get('/effect/old/result/srch/summary/resultlist/view/Points/pdfeval', [ReportOldprintsumEvalresultController::class, 'genpointsevalPDF'])->name('genpointsevalPDF');
+        Route::get('/effect/old/result/srch/summary/resultlist/view/Sheet/pdfeval', [ReportOldprintsumEvalresultController::class, 'gensumsheetevalPDF'])->name('gensumsheetevalPDF');
+        Route::get('/effect/old/result/srch/summary/resultlist/view/Sheet/pdfevaldecimal', [ReportOldprintsumEvalresultController::class, 'gensumsheetevalPDFdecimal'])->name('gensumsheetevalPDFdecimal');
     });
 });

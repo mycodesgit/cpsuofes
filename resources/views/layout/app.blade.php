@@ -305,6 +305,11 @@
         @include('scripts.getfacultyjs')
         @include('scripts.validations.evaluationresultvalidation')
     @endif
+
+    @if (request()->routeIs('summaryEvalStore'))
+        @include('scripts.getfacultyjs')
+        @include('scripts.validations.evaluationresultvalidation')
+    @endif
 </body>
 
 </html>
