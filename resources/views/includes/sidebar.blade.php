@@ -104,7 +104,7 @@
         </li>
     @else
         <li>
-            <a class="nav-link  text-muted disabled" href="#">
+            <a class="nav-link text-muted disabled" href="#">
                 <i class="ti ti-receipt"></i> <span class="nav-text">Print Evaluation</span>
             </a>
         </li>
@@ -118,7 +118,7 @@
         </li>
     @else
         <li>
-            <a class="nav-link  text-muted disabled" href="#">
+            <a class="nav-link text-muted disabled" href="#">
                 <i class="ti ti-files"></i> <span class="nav-text">Evaluation Result</span>
             </a>
         </li>
