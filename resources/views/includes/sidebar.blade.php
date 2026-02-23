@@ -110,7 +110,7 @@
         </li>
     @endif
 
-    @if(in_array(Auth::guard('web')->user()->role, [0,3,4]))
+    @if(in_array(Auth::guard('web')->user()->role, [0,1,3,4]))
         <li>
             <a class="nav-link {{ request()->is('reports/eval*') ? 'active' : '' }}" href="{{ route('summaryevalresult.index') }}">
                 <i class="ti ti-files"></i> <span class="nav-text">Evaluation Result</span>
