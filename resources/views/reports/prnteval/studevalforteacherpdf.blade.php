@@ -239,7 +239,14 @@
 		                    }
 					    @endphp
 					    <tr>
-					        <td style="padding: 5px">{{ $no++ }}. {{ $dataquest->questiontext }}</td>
+					        <td style="padding:5px;">
+								<span style="display:inline-block; width:18px; vertical-align:top;">
+									{{ $no++ }}.
+								</span>
+								<span style="display:inline-block; width:calc(100% - 30px); vertical-align:top;">
+									{{ $dataquest->questiontext }}
+								</span>
+							</td>
 					        @for ($i = 5; $i >= 1; $i--) 
 					            <td style="text-align: center; width: 40px; margin-right: 2px; padding-top: 5px; padding-bottom: 5px; vertical-align: middle;">
 					                @if ($savedRating == $i)
