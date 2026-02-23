@@ -91,7 +91,9 @@
         $(document).on('questionAdded', function() {
             dataTable.ajax.reload();
         });
+    });
 
+    $(document).ready(function() {
         var dataTable = $('#questTableSupervisor').DataTable({
             "ajax": {
                 "url": questionFetchRoute,
