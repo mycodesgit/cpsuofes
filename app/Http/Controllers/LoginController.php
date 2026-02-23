@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+use App\Models\EvaluationDB\User;
+
 class LoginController extends Controller
 {
     public function login()
@@ -22,9 +24,16 @@ class LoginController extends Controller
             'password' => 'required|min:5|max:20',
         ]);
 
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && $user->ustatus == 2) {
+            return redirect()->back()->with('error', 'Account is disabled');
+        }
+
         $validatedUser = auth()->guard('web')->attempt([
             'email' => $request->email,
             'password' => $request->password,
+            'ustatus' => 1,
         ]);
 
         if ($validatedUser) {
