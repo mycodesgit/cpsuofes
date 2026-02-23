@@ -40,13 +40,13 @@ class ReportsPrintEvalController extends Controller
 {
     public function index()
     {
-        //$currsem = QCEsemester::all();
         $currsem = QCEsemester::select('id', 'qceschlyear')
             ->whereIn('id', function($query) {
                 $query->select(DB::raw('MAX(id)'))
                     ->from('qceschlyearsem')
                     ->groupBy('qceschlyear');
             })
+            ->where('id', '>=', 5)
             ->orderBy('id', 'DESC')
             ->get();
 
