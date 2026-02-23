@@ -149,9 +149,6 @@
                 $(row).attr('id', 'tr-' + data.id); 
             }
         });
-        $(document).on('questionAdded', function() {
-            dataTable.ajax.reload();
-        });
     });
 
     $(document).on('click', '.btn-questedit', function() {
