@@ -109,11 +109,21 @@
             </a>
         </li>
     @endif
-    <li>
-        <a class="nav-link {{ request()->is('reports/eval*') ? 'active' : '' }}" href="{{ route('summaryevalresult.index') }}">
-            <i class="ti ti-files"></i> <span class="nav-text">Evaluation Result</span>
-        </a>
-    </li>
+
+    @if(in_array(Auth::guard('web')->user()->role, [0,3,4]))
+        <li>
+            <a class="nav-link {{ request()->is('reports/eval*') ? 'active' : '' }}" href="{{ route('summaryevalresult.index') }}">
+                <i class="ti ti-files"></i> <span class="nav-text">Evaluation Result</span>
+            </a>
+        </li>
+    @else
+        <li>
+            <a class="nav-link  text-muted disabled" href="#">
+                <i class="ti ti-files"></i> <span class="nav-text">Evaluation Result</span>
+            </a>
+        </li>
+    @endif
+
     <li>
         <a class="nav-link {{ request()->is('reports/collegefacview*') ? 'active' : '' }}" href="{{ route('conducted.index') }}">
             <i class="ti ti-report-analytics"></i> <span class="nav-text">Conducted Eval.</span>
