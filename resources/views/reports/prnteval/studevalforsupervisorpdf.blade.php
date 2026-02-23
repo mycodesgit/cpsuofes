@@ -250,7 +250,14 @@
 		                    }
 					    @endphp
 					    <tr>
-					        <td style="padding: 5px; width: 30px;">{{ $no++ }}. {{ $dataquest->questiontext }}</td>
+							<td style="padding:5px; width: 30px;">
+								<span style="display:inline-block; width:18px; vertical-align:top;">
+									{{ $no++ }}.
+								</span>
+								<span style="display:inline-block; width:calc(100% - 30px); vertical-align:top;">
+									{{ $dataquest->questiontext }}
+								</span>
+							</td>
 							<td style="text-align: left; width: 50px;">
 								{!! collect(explode('•', $dataquest->subquestionstext))
 									->filter()
