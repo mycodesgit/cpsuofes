@@ -308,6 +308,7 @@
 
     @if (request()->routeIs('conducted.index'))
         @include('scripts.getfacultyjs')
+        @include('scripts.validations.evaluationresultvalidation')
     @endif
 
     @if (request()->routeIs('summaryEvalStore'))
