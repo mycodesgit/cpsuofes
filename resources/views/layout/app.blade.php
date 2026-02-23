@@ -252,9 +252,22 @@
     <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     <!-- Toastr -->
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
     <!-- Validation JS -->
     <script src="{{ asset('assets/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/jquery-validation/additional-methods.min.js') }}"></script>
+
+    <script>
+        $(function () {
+            $('.select2').select2();
+
+            $('.select2bs4').select2({
+                theme: 'bootstrap4',
+                //height: '150'
+            })
+        });
+    </script>
     
     @if (request()->routeIs('index.calendar'))
         @include('scripts.calendarjs')

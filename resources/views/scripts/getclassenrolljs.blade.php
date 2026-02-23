@@ -15,7 +15,7 @@
                     },
                     success: function(data) {
                         $('#progCod').empty();
-                        $('#progCod').append('<option disabled selected>Select a course</option>');
+                        $('#progCod').append('<option disabled selected> --Select-- </option>');
                         $.each(data, function(key, value) {
                             $('#progCod').append('<option value="' + value.progCode + ' ' + value.classSection + '">' + value.progAcronym + ' ' + value.classSection + '</option>');
                         });

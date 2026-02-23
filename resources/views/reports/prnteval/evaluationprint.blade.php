@@ -72,8 +72,8 @@
 
                                                     <div class="col-md-3 mt-2">
                                                         <label class="mb-1">Course <span class="text-danger">*</span></label>
-                                                        <select class="form-control form-control-sm select2bs4" name="progCod" id="progCod">
-                                                            <option disabled selected> --Select a course-- </option>
+                                                        <select class="form-control form-control-sm select2" name="progCod" id="progCod">
+                                                            <option disabled selected> --Select-- </option>
                                                         </select>
                                                     </div>
 
@@ -112,6 +112,7 @@
                                                         <div class="col-md-3 mb-3">
                                                             <label>School Year<span class="text-danger">*</span></label>
                                                             <select class="form-control form-control-sm" name="schlyear" id="schlyearprint">
+                                                                <option disabled selected> --Select-- </option>
                                                                 @foreach($currsemfac as $datacurrsemfac)
                                                                     <option 
                                                                         value="{{ $datacurrsemfac->qceschlyear }}"
@@ -129,10 +130,10 @@
                                                         <div class="col-md-3 mb-3">
                                                             <label>Semester<span class="text-danger">*</span></label>
                                                             <select class="form-control form-control-sm" name="semester" id="semesterprint">
-                                                                <option disabled selected>Select</option>
-                                                                <option value="1" @if (old('type') == 1) {{ 'selected' }} @endif>First Semester</option>
-                                                                <option value="2" @if (old('type') == 2) {{ 'selected' }} @endif>Second Semester</option>
-                                                                <option value="3" @if (old('type') == 3) {{ 'selected' }} @endif>Summer</option>
+                                                                <option disabled selected> --Select-- </option>
+                                                                <option value="1">First Semester</option>
+                                                                <option value="2">Second Semester</option>
+                                                                <option value="3">Summer</option>
                                                             </select>
                                                         </div>
 
@@ -148,8 +149,8 @@
 
                                                         <div class="col-md-12 mb-3">
                                                             <label>Faculty<span class="text-danger">*</span></label>
-                                                            <select class="form-control form-control-sm select2bs4" name="faclty" id="faclty">
-                                                                <option disabled selected>Select a Faculty</option>
+                                                            <select class="form-control form-control-sm select2" name="faclty" id="faclty">
+                                                                <option disabled selected> --Select-- </option>
                                                             </select>
                                                         </div>
 

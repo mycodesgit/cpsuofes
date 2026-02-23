@@ -96,7 +96,7 @@
                     },
                     success: function (data) {
                         $('#faclty').empty();
-                        $('#faclty').append('<option disabled selected>Select a Faculty</option>');
+                        $('#faclty').append('<option disabled selected> --Select-- </option>');
                         $.each(data, function (key, value) {
                             $('#faclty').append('<option value="' + value.fctyid + '">' + value.lname + ', ' + value.fname + '</option>');
                         });
