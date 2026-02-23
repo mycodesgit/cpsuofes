@@ -293,19 +293,19 @@
 	</div>
 	<div class="details" style="margin-top: 10px; margin-left: 25px;">
         <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Signature of Staff</span>
-        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 250px;">
             :
         </div>
     </div>
 	<div class="details" style="margin-top: 30px; margin-left: 25px;">
         <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Name of Staff</span>
-        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 250px;">
             : Mary Grace Noreen P. Leduna
         </div>
     </div>
 	<div class="details" style="margin-top: 30px; margin-left: 25px;">
         <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Date</span>
-        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 250px;">
             : {{ date('F d, Y') }}
         </div>
     </div>
@@ -315,19 +315,19 @@
 	</div>
 	<div class="details" style="margin-top: 10px; margin-left: 25px;">
         <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Signature of Authorized Official</span>
-        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 250px;">
             : Rose Ann S. Jocson
         </div>
     </div>
 	<div class="details" style="margin-top: 30px; margin-left: 25px;">
         <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Name of Authorized Official</span>
-        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 250px;">
             :
         </div>
     </div>
 	<div class="details" style="margin-top: 30px; margin-left: 25px;">
         <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Date</span>
-        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 250px;">
+        <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 250px;">
             : {{ date('F d, Y') }}
         </div>
     </div>
