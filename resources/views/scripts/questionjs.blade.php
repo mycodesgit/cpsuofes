@@ -88,6 +88,9 @@
                 $(row).attr('id', 'tr-' + data.id); 
             }
         });
+        $(document).on('questionAdded', function() {
+            dataTable.ajax.reload();
+        });
 
         var dataTable = $('#questTableSupervisor').DataTable({
             "ajax": {
