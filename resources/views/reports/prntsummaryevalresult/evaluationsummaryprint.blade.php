@@ -57,7 +57,7 @@
                                             <div class="col-md-3 mb-3">
                                                 <label>Semester<span class="text-danger">*</span></label>
                                                 <select class="form-control form-control-sm" name="semester" id="semester">
-                                                    <option disabled selected>Select</option>
+                                                    <option disabled selected> --Select-- </option>
                                                     <option value="1" id="sem1">First Semester</option>
                                                     <option value="2" id="sem2">Second Semester</option>
                                                     <option value="3" id="sem3">Summer</option>
@@ -67,7 +67,7 @@
                                             <div class="col-md-3 mb-3">
                                                 <label>College<span class="text-danger">*</span></label>
                                                 <select class="form-control form-control-sm" name="dept" id="dept">
-                                                    <option disabled selected> ---Select---</option>
+                                                    <option disabled selected> --Select-- </option>
                                                     @foreach($collegelist as $datacollegelist)
                                                         <option value="{{ $datacollegelist->college_abbr }}">{{ $datacollegelist->college_name }}</option>
                                                     @endforeach
@@ -76,8 +76,8 @@
 
                                             <div class="col-md-12 mb-3">
                                                 <label>Faculty<span class="text-danger">*</span></label>
-                                                <select class="form-control form-control-sm select2bs4" name="faclty" id="faclty">
-                                                    <option disabled selected>Select a Faculty</option>
+                                                <select class="form-control form-control-sm select2" name="faclty" id="faclty">
+                                                    <option disabled selected> --Select-- </option>
                                                 </select>
                                             </div>
 
