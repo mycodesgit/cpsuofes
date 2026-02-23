@@ -156,15 +156,26 @@
                 <!-- Dropdown -->
                 <li class="ms-3 dropdown">
                     <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('assets/images/user.png') }}" alt="" class="avatar avatar-sm rounded-circle" /> Admin Level
+                        <img src="{{ asset('assets/images/user.png') }}" alt="" class="avatar avatar-sm rounded-circle" /> {{ Auth::guard('web')->user()->fname }} {{ Auth::guard('web')->user()->lname }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-end p-0" style="min-width: 200px;">
                         <div>
                             <div class="d-flex gap-3 align-items-center border-dashed border-bottom px-3 py-3">
                                 <img src="{{ asset('assets/images/user.png') }}" alt="" class="avatar avatar-md rounded-circle" />
                                 <div>
-                                    <h4 class="mb-0 small">Admin Level</h4>
-                                    <p class="mb-0 small">@cpsu.edu.ph</p>
+                                    <h5 class="mb-0 small">{{ Auth::guard('web')->user()->email }}</h5>
+                                    @php
+                                        $roles = [
+                                            0 => 'Administrator',
+                                            1 => 'Administer QA',
+                                            2 => 'Administer QA Staff',
+                                            3 => 'Administer Result',
+                                            4 => 'Administer Result Staff',
+                                        ];
+
+                                        $userRole = Auth::guard('web')->user()->role;
+                                    @endphp
+                                    <p class="mb-0 small text-warning">{{ $roles[$userRole] ?? 'Unknown Role' }}</p>
                                 </div>
                             </div>
                             <div class="p-3 d-flex flex-column gap-1 medium lh-lg">
