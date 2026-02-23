@@ -80,7 +80,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-12">
+                                            <div class="col-md-2">
                                                 <label>&nbsp;</label>
                                                 <button type="submit" class="form-control form-control-sm btn btn-success btn-sm">Search</button>
                                             </div>
