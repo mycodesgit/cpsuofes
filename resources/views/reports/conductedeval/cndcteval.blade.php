@@ -70,7 +70,7 @@
 
                                             <div class="col-md-12 mb-3">
                                                 <label>Faculty<span class="text-danger">*</span></label>
-                                                <select class="form-control form-control-sm select2" name="faclty" id="faclty">
+                                                <select class="form-control form-control-sm select2bs4" name="faclty" id="faclty">
                                                     <option disabled selected> --Select-- </option>
                                                 </select>
                                             </div>
