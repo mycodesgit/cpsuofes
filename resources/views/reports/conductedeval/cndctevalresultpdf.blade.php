@@ -49,7 +49,7 @@
 </head>
 <body>
 	<div align="center" style="margin-top: -30px">
-        <img src="{{ public_path('template/img/allformheader/header-qa.png') }}" width="80%">
+        <img src="{{ public_path('assets/images/allformheader/header-qa.png') }}" width="80%">
     </div>
 
     <div align="center" style="margin-top: 10px">
