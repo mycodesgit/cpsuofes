@@ -11,6 +11,21 @@
 			padding-left: 40px !important;
 			padding-right: 40px !important;
 		}
+		.annexheader {
+			position: fixed;
+			top: -80px;
+			left: 0;
+			right: 35;
+			height: 10px; 
+			font-size: 10pt;
+			text-align: right   
+		}
+		@page {
+			margin-top: 100px;
+			margin-bottom: 100px;
+			margin-left: 30px;
+			margin-right: 30px;
+		}
 		.label {
 			display: inline-block;
 			width: 290px; /* Adjust width as needed */
@@ -38,7 +53,7 @@
         	vertical-align: center !important;
     		text-align: left;
             border: 1px solid #000;
-            font-size: 11pt;
+            font-size: 12pt;
 			padding: 5px;
 			font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial,
         	sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
@@ -134,13 +149,9 @@
 
 		$mysign = $esig->first()->studesig ?? null;
 	@endphp
-	<div>
-		<div style="margin-top: -30px; text-align: right; color: rgb(185, 185, 185); z-index: -9999">
-			<p>{{ $facrated->first()->ratecount }}</p>
-		</div>
-	</div>
-	<div style="margin-top: -30px; text-align: right; font-size: 10pt">
-		<p>ANNEX B - Supervisor's Evaluation of Faculty</p>
+	<div class="annexheader">
+		<p style="color: rgb(185, 185, 185);">{{ $facrated->first()->ratecount }}</p>
+		<p style="margin: -10px"><span style="font-weight: bold">ANNEX B</span> - Supervisor's Evaluation of Faculty</p>
 	</div>
 
 	<div style="margin-top: 20px; text-align: center; font-weight: bold">
@@ -151,7 +162,7 @@
 	</div>
 
 
-	<div style="margin-top: 30px; font-weight: bold">
+	<div style="margin-top: 20px; font-weight: bold">
 		<p>A. Faculty Information (to be accomplished by the Designated Office)</p>
 	</div>
 
@@ -182,7 +193,7 @@
 		</p>
 	</div>
 
-	<div style="margin-top: 30px; font-weight: bold">
+	<div style="margin-top: 20px; font-weight: bold">
 		<p>B. Rating Scale</p>
 	</div>
 	<div style="margin-top: -20px">
@@ -198,7 +209,7 @@
 				@foreach($ratingscale as $dataratingscale)
 					<tr>
 						<td class="ratingscaletd" style="text-align: center; font-weight: bold">{{ $dataratingscale->inst_scale }}</td>
-						<td class="ratingscaletd" style="text-align: center; font-weight: normal">{{ $dataratingscale->inst_descRating }}</td>
+						<td class="ratingscaletd" style="text-align: center; font-weight: normal">{!! $dataratingscale->inst_descRating !!}</td>
 						<td class="ratingscaletd">{{ $dataratingscale->inst_qualDescription }}</td>
 					</tr>
 				@endforeach
@@ -206,7 +217,7 @@
 		</table>
 	</div>
 
-	<div style="margin-top: 30px;">
+	<div style="margin-top: 20px;">
 		<p><span style="font-weight: bold">C. Instruction:</span> {{ $instrctn->instruction }}</p>
 
 		@php 
@@ -216,40 +227,34 @@
 		    $grandTotal = 0; // Initialize grand total outside the loop
 		@endphp
 
-		<table id="table" border="1" style="border-collapse: collapse; width: 100%;">
+		<table id="table" border="1" style="border-collapse: collapse; width: 100%; margin-top: -1px">
 			<thead>
 				<tr>
-					<th style="font-weight: bold !important; text-align: center; font-size: 11pt; background-color:#e4f0f5">Benchmark Statements</th>
-					<th style="font-weight: bold !important; text-align: center; font-size: 11pt; background-color:#e4f0f5">Suggested Means for Verification</th>
-					<th style="font-weight: bold !important; text-align: center; background-color:#e4f0f5; width: 33%">Rating</th>
+					<th style="font-weight: bold !important; text-align: center; font-size: 11pt; background-color:#e4f0f5; width: 230px">Benchmark Statements</th>
+					<th style="font-weight: bold !important; text-align: center; font-size: 11pt; background-color:#e4f0f5;">Suggested Means for <br> Verification</th>
+					<th colspan="5" style="font-weight: bold !important; text-align: center; background-color:#e4f0f5; ">Rating</th>
 				</tr>
 			</thead>
-		</table>
-
-		@foreach ($quest->groupBy('catName') as $catName => $questions)
-		    @php  
-		    	$sectionTotal = 0;
-				$catDesc = $questions->first()->catDesc;
-		    @endphp 
-
-		    <table id="table" border="1" style="border-collapse: collapse; width: 100%; margin-top: -1px">
-		        <thead>
-		            <tr>
-		                <th style="font-weight: bold !important; text-align: left; color: #fff; background-color:#303030" colspan="7">{{ $catName }}</th>
-		            </tr>
-		        </thead>
-		        <tbody>
+			<tbody>
+				@foreach ($quest->groupBy('catName') as $catName => $questions)
+					@php  
+						$sectionTotal = 0;
+						$catDesc = $questions->first()->catDesc;
+					@endphp 
+					<tr>
+						<th style="font-weight: bold !important; text-align: left; color: #fff; background-color:#303030" colspan="7">{{ $catName }}</th>
+					</tr>
 					@foreach($questions as $dataquest)
-					    @php
-					        $savedRatings = json_decode($facrated->first()->question_rate ?? '{}', true);
-					        $savedRating = $savedRatings[$dataquest->id] ?? null;
+						@php
+							$savedRatings = json_decode($facrated->first()->question_rate ?? '{}', true);
+							$savedRating = $savedRatings[$dataquest->id] ?? null;
 
-					        // Total score for the current question
-					        if ($savedRating) {
-		                        $sectionTotal += $savedRating;
-		                    }
-					    @endphp
-					    <tr>
+							// Total score for the current question
+							if ($savedRating) {
+								$sectionTotal += $savedRating;
+							}
+						@endphp
+						<tr>
 							<td style="padding:5px; width: 30px;">
 								<span style="display:inline-block; width:18px; vertical-align:top;">
 									{{ $no++ }}.
@@ -258,29 +263,35 @@
 									{{ $dataquest->questiontext }}
 								</span>
 							</td>
-							<td style="text-align: left; width: 50px;">
+							<td style="text-align: left; vertical-align: top;">
 								{!! collect(explode('•', $dataquest->subquestionstext))
 									->filter()
-									->map(fn($item) => '•' . trim($item))
-									->implode('<br>') !!}
+									->map(function($item) {
+										$trimmed = trim($item);
+										return $trimmed ? '
+											<div style="text-indent: -18px; padding-left: 28px; margin-bottom: 2px; line-height: 1.4;">
+												• ' . $trimmed . '
+											</div>' : '';
+									})
+									->implode('') !!}
 							</td>
-					        @for ($i = 5; $i >= 1; $i--) 
-					            <td style="text-align: center; width: 10px; margin-right: 2px; padding-top: 5px; padding-bottom: 5px; vertical-align: middle;">
-					                @if ($savedRating == $i)
-					                    <img src="{{ public_path('assets/images/rate/' . $i . '.png') }}" alt="{{ $i }}" width="20">
-					                @else
-					                    {{ $i }}
-					                @endif
-					            </td>
-					        @endfor
-					    </tr>
+							@for ($i = 5; $i >= 1; $i--) 
+								<td style="text-align: center; width: 10px; margin-right: 2px; padding-top: 5px; padding-bottom: 5px; vertical-align: middle;">
+									@if ($savedRating == $i)
+										<img src="{{ public_path('assets/images/rate/' . $i . '.png') }}" alt="{{ $i }}" width="20">
+									@else
+										{{ $i }}
+									@endif
+								</td>
+							@endfor
+						</tr>
 					@endforeach
-		        </tbody>
-		    </table>
-			@php
-				$totalScore += $sectionTotal;
-			@endphp
-		@endforeach
+				@endforeach
+			</tbody>
+		</table>
+		@php
+			$totalScore += $sectionTotal;
+		@endphp
 		<table id="table" border="1" style="border-collapse: collapse; margin-top: -1px">
 			<tbody>
 				<tr>

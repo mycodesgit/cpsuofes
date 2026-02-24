@@ -11,7 +11,21 @@
 			margin-left:40px !important;
 			margin-right:40px !important;
 		}
-		
+		.annexheader {
+			position: fixed;
+			top: -80px;
+			left: 0;
+			right: 35;
+			height: 10px; 
+			font-size: 10pt;
+			text-align: right   
+		}
+		@page {
+			margin-top: 100px;
+			margin-bottom: 100px;
+			margin-left: 30px;
+			margin-right: 30px;
+		}
 		.label {
 			display: inline-block;
 			width: 290px; /* Adjust width as needed */
@@ -124,16 +138,13 @@
 		$underlineFaculty = str_pad($facultyName, $underlineLengthName, '_', STR_PAD_BOTH);
 		$underlineRank = str_pad($academicRank, $underlineLengthRank, '_', STR_PAD_BOTH);
 	@endphp
-	<div>
-		<div style="margin-top: -30px; text-align: right; color: rgb(185, 185, 185); z-index: -9999">
-			<p>{{ $facrated->first()->ratecount }}</p>
-		</div>
-	</div>
-	<div style="margin-top: -30px; text-align: right; font-size: 10pt">
-		<p>ANNEX A - Student Evaluation of Teachers</p>
+
+	<div class="annexheader">
+		<p style="color: rgb(185, 185, 185);">{{ $facrated->first()->ratecount }}</p>
+		<p style="margin: -10px"><span style="font-weight: bold">ANNEX A</span> - Student Evaluation of Teachers</p>
 	</div>
 
-	<div style="margin-top: 20px; text-align: center; font-weight: bold">
+	<div style="margin-top: 30px; text-align: center; font-weight: bold">
 		<p>
 			EVALUATION INSTRUMENT<br>
 			STUDENT EVALUATION OF TEACHERS (SET)
@@ -272,7 +283,7 @@
 			</tbody>
 		</table>
 	</div>
-
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<div style="margin-top: 30px">
 		<div>
 		    <label style="font-weight: bold;">Other comments and suggestions (Optional):</label>
