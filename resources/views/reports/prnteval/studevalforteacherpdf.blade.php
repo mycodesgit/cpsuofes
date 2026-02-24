@@ -8,9 +8,10 @@
 			font-size: 12pt;
 			font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial,
         		sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-			padding-left: 40px !important;
-			padding-right: 40px !important;
+			margin-left:40px !important;
+			margin-right:40px !important;
 		}
+		
 		.label {
 			display: inline-block;
 			width: 290px; /* Adjust width as needed */
@@ -38,7 +39,7 @@
         	vertical-align: center !important;
     		text-align: left;
             border: 1px solid #000;
-            font-size: 11pt;
+            font-size: 12pt;
 			font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial,
         	sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
         } 
@@ -183,7 +184,7 @@
 				@foreach($ratingscale as $dataratingscale)
 					<tr>
 						<td class="ratingscaletd" style="text-align: center; font-weight: bold">{{ $dataratingscale->inst_scale }}</td>
-						<td class="ratingscaletd" style="text-align: center; font-weight: normal">{{ $dataratingscale->inst_descRating }}</td>
+						<td class="ratingscaletd" style="text-align: center; font-weight: normal; width: 188px">{!! $dataratingscale->inst_descRating !!}</td>
 						<td class="ratingscaletd">{{ $dataratingscale->inst_qualDescription }}</td>
 					</tr>
 				@endforeach
@@ -201,74 +202,72 @@
 		    $grandTotal = 0; // Initialize grand total outside the loop
 		@endphp
 
-		<table id="table" border="1" style="border-collapse: collapse; width: 100%;">
+		
+
+		<table id="table" border="1" style="border-collapse: collapse; width: 100%; margin-top: -1px">
 			<thead>
 				<tr>
-					<th style="font-weight: bold !important; text-align: center; font-size: 11pt; background-color:#e4f0f5">Benchmark Statements for Faculty Teaching<br> Effectiveness</th>
-					<th style="font-weight: bold !important; text-align: center; background-color:#e4f0f5; width: 33%">Rating</th>
+					<th colspan="1" style="font-weight: bold !important; text-align: center; font-size: 12pt; background-color:#e4f0f5">Benchmark Statements for Faculty Teaching<br> Effectiveness</th>
+					<th colspan="5" style="font-weight: bold !important; text-align: center; background-color:#e4f0f5; width: 205px">Rating</th>
 				</tr>
 			</thead>
-		</table>
-
-		@foreach ($quest->groupBy('catName') as $catName => $questions)
-		    @php  
-		    	$sectionTotal = 0;
-				$catDesc = $questions->first()->catDesc;
-		    @endphp 
-
-		    <table id="table" border="1" style="border-collapse: collapse; width: 100%; margin-top: -1px">
-		        <thead>
-		            <tr>
-		                <th style="font-weight: bold !important; text-align: left; color: #fff; background-color:#303030" colspan="6">{{ $catName }}</th>
-		            </tr>
-		        </thead>
-		        <thead>
-		            <tr>
-		                <th style="font-weight: normal !important; text-align: left; font-size: 10pt; font-style: italic" colspan="6">{{ $catDesc }}</th>
-		            </tr>
-		        </thead>
-		        <tbody>
+			<tbody>
+				@foreach ($quest->groupBy('catName') as $catName => $questions)
+					@php  
+						$sectionTotal = 0;
+						$catDesc = $questions->first()->catDesc;
+					@endphp 
+					<tr>
+						<td style="font-weight: bold !important; text-align: left; color: #fff; background-color:#303030" colspan="6">{{ $catName }}</td>
+					</tr>
+					<tr>
+						<td style="font-weight: normal !important; justify-content: center; font-size: 11pt; font-style: italic; padding: 5px;" colspan="6">{{ $catDesc }}</td>
+					</tr>
+				
 					@foreach($questions as $dataquest)
-					    @php
-					        $savedRatings = json_decode($facrated->first()->question_rate ?? '{}', true);
-					        $savedRating = $savedRatings[$dataquest->id] ?? null;
+						@php
+							$savedRatings = json_decode($facrated->first()->question_rate ?? '{}', true);
+							$savedRating = $savedRatings[$dataquest->id] ?? null;
 
-					        // Total score for the current question
-					        if ($savedRating) {
-		                        $sectionTotal += $savedRating;
-		                    }
-					    @endphp
-					    <tr>
-					        <td style="padding:5px;">
-								<span style="display:inline-block; width:18px; vertical-align:top;">
+							$sectionTotal += $savedRating;  // accumulate section total
+                    		$totalScore += $savedRating;
+
+							if ($savedRating) {
+								$sectionTotal += $savedRating;
+							}
+						@endphp
+						<tr>
+							<td style="padding:5px;">
+								<span style="display:inline-block; width:18px; vertical-align:top; padding-top: 1px;">
 									{{ $no++ }}.
 								</span>
-								<span style="display:inline-block; width:calc(100% - 30px); vertical-align:top;">
+								<span style="display:inline-block; width:calc(100% - 30px); vertical-align:middle; margin-top: 5px;">
 									{{ $dataquest->questiontext }}
 								</span>
 							</td>
-					        @for ($i = 5; $i >= 1; $i--) 
-					            <td style="text-align: center; width: 40px; margin-right: 2px; padding-top: 5px; padding-bottom: 5px; vertical-align: middle;">
-					                @if ($savedRating == $i)
-					                    <img src="{{ public_path('assets/images/rate/' . $i . '.png') }}" alt="{{ $i }}" width="20">
-					                @else
-					                    {{ $i }}
-					                @endif
-					            </td>
-					        @endfor
-					    </tr>
-					@endforeach
-		        </tbody>
-		    </table>
-			@php
-				$totalScore += $sectionTotal;
-			@endphp
-		@endforeach
+							@for ($i = 5; $i >= 1; $i--) 
+								<td style="text-align: center; width: 40px; margin-right: 2px; padding-top: 12px; padding-bottom: 5px; vertical-align: middle;">
+									@if ($savedRating == $i)
+										<span style="text-align:center; vertical-align:middle; margin-top: 10px;">
+											<img src="{{ public_path('assets/images/rate/' . $i . '.png') }}" alt="{{ $i }}" width="20" style="padding-top: 5px">
+										</span>
+									@else
+										<span style="text-align:center; vertical-align:middle;">
+											{{ $i }}
+										</span>
+									@endif
+								</td>
+							@endfor
+						</tr>
+					@endforeach		
+				@endforeach
+			</tbody>
+		</table>
 		<table id="table" border="1" style="border-collapse: collapse; margin-top: -1px">
 			<tbody>
 				<tr>
 					<td style="text-align: right; font-weight: bold; padding: 5px; width: 60%">TOTAL SCORE:</td>
-					<td style="text-align: left; font-weight: bold; padding: 5px; width: 30%">{{ $totalScore }}</td>
+					<td style="text-align: left; font-weight: bold; padding: 5px; width: 204px">{{ $totalScore }}</td>
 				</tr>
 			</tbody>
 		</table>
