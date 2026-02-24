@@ -366,6 +366,21 @@
 				<span style="font-weight: normal">{{ $qcedatesubmit }}</span>
 			</div>
 		</div>
-		
+	</div>
+
+	<div style="font-weight: bold; text-decoration: underline; margin-top: 60px">
+		<p>SET RATING Computaion</p>
+	</div>
+	
+	<div>Total Score: <span style="text-decoration: underline">{{ $totalScore }}</span></div>
+
+	<div>
+		<p style="font-weight: bold;">Formula:</p>
+		<p style="margin-top: -15px">Rating = (Total Score / 75) x 100</p>
+	</div>
+
+	<div style="margin-top: 10px; font-weight: bold;">
+		<p>COMPUTED RATING: <span style="text-decoration: underline">{{ number_format(($totalScore / 75) * 100, 2) }}</span> </p>
+	</div>
 </body>
 </html>

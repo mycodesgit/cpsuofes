@@ -8,8 +8,14 @@
 			font-size: 12pt;
 			font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial,
         		sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-			padding-left: 40px !important;
-			padding-right: 40px !important;
+			margin-left:40px !important;
+			margin-right:40px !important;
+		}
+		@page {
+			margin-top: 100px;
+			margin-bottom: 100px;
+			margin-left: 30px;
+			margin-right: 30px;
 		}
 		.label {
 			display: inline-block;
@@ -141,7 +147,7 @@
 	</div>
 
 
-	<div style="margin-top: 30px; font-weight: bold">
+	<div style="margin-top: 20px; font-weight: bold">
 		<p>A. FACULTY MEMBER INFORMATION</p>
 	</div>
 	<div style="font-weight: normal; padding-left: 20px; margin-top: -20px;">
@@ -163,7 +169,7 @@
 		</p>
 	</div>
 
-	<div style="margin-top: 30px; font-weight: bold">
+	<div style="margin-top: 20px; font-weight: bold">
 		<p>B. FACULTY EVALUATION SUMMARY</p>
 	</div>
 	<div style="margin-top: -30px; margin-left: -10px;">
@@ -179,14 +185,14 @@
             </thead>
             <tbody>
 					<tr>
-						<td style="text-align: center;">{{ number_format($overallSetRating ?? 0, 2) }}</td>
-						<td style="text-align: center">{{ number_format($overallSefRating ?? 0, 2) }}</td>
+						<td style="text-align: center; font-weight: bold">{{ number_format($overallSetRating ?? 0, 2) }}</td>
+						<td style="text-align: center; font-weight: bold">{{ number_format($overallSefRating ?? 0, 2) }}</td>
 					</tr>
             </tbody>
         </table>
 	</div>
 
-	<div style="margin-top: 30px; font-weight: bold">
+	<div style="margin-top: 20px; font-weight: bold">
 		<p>C. Development Plan (to be jointly accomplished by the Supervisor and Faculty)</p>
 	</div>
 	<div style="margin-top: -30px; margin-left: -10px;">

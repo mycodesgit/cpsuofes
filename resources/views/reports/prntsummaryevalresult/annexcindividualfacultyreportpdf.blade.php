@@ -8,8 +8,23 @@
 			font-size: 12pt;
 			font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial,
         		sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-			padding-left: 40px !important;
-			padding-right: 40px !important;
+			margin-left:40px !important;
+			margin-right:40px !important;
+		}
+		.annexheader {
+			position: fixed;
+			top: -50px;
+			left: 0;
+			right: 35;
+			height: 10px; 
+			font-size: 10pt;
+			text-align: right   
+		}
+		@page {
+			margin-top: 100px;
+			margin-bottom: 100px;
+			margin-left: 30px;
+			margin-right: 30px;
 		}
 		.label {
 			display: inline-block;
@@ -130,18 +145,18 @@
 		$underlineRank = str_pad($academicRank, $underlineLengthRank, '_', STR_PAD_BOTH);
 	@endphp
 
-	<div style="margin-top: -30px; text-align: right; font-size: 10pt">
-		<p>ANNEX C - Individual Faculty Evaluation Report</p>
+	<div class="annexheader">
+		<p style="margin: -10px"><span style="font-weight: bold">ANNEX C</span> - Individual Faculty Evaluation Report</p>
 	</div>
 
-	<div style="margin-top: 20px; text-align: center; font-weight: bold">
+	<div style="margin-top: 5px; text-align: center; font-weight: bold">
 		<p>
 			INDIVIDUAL FACULTY EVALUATION REPORT
 		</p>
 	</div>
 
 
-	<div style="margin-top: 30px; font-weight: bold">
+	<div style="margin-top: 20px; font-weight: bold">
 		<p>A. Faculty Information</p>
 	</div>
 
@@ -164,7 +179,7 @@
 		</p>
 	</div>
 
-	<div style="margin-top: 30px; font-weight: bold">
+	<div style="margin-top: 20px; font-weight: bold">
 		<p>B. Summary of Average SET Rating</p>
 	</div>
 
@@ -210,7 +225,7 @@
         </table>
     </div>
 
-    <div style="margin-top: 30px; font-weight: bold">
+    <div style="margin-top: 20px; font-weight: bold">
 		<p>C. SET and SEF Ratings</p>
 	</div>
     <div style="
@@ -262,7 +277,7 @@
 				@foreach ($evaluationsStudent as $evaluationsStudentitem)
 					<tr>
 						<td style="text-align: center;">{{ $evaluationsStudentitem->ratecount }}</td>
-						<td style="text-align: center">{{ $evaluationsStudentitem->qcecomments ?? '' }}</td>
+						<td style="text-align: left">{{ $evaluationsStudentitem->qcecomments ?? '' }}</td>
 					</tr>
 				@endforeach
             </tbody>
@@ -281,7 +296,7 @@
 				@foreach ($evaluationsSupervisor as $evaluationsSupervisoritem)
 					<tr>
 						<td style="text-align: center;">{{ $loop->iteration }}</td>
-						<td style="text-align: center">{{ $evaluationsSupervisoritem->qcecomments ?? '' }}</td>
+						<td style="text-align: left">{{ $evaluationsSupervisoritem->qcecomments ?? '' }}</td>
 					</tr>
 				@endforeach
             </tbody>
