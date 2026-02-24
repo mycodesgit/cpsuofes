@@ -14,7 +14,7 @@
                                         <button class="nav-link active" id="pills-studeval-tab" data-bs-toggle="pill"
                                             data-bs-target="#pills-studeval" type="button" role="tab"
                                             aria-controls="pills-studeval" aria-selected="true">
-                                            Student Evaluation of Teachers
+                                            ANNEX A - SET Rating
                                         </button>
                                     </li>
                                     &nbsp;
@@ -22,7 +22,7 @@
                                         <button class="nav-link" id="pills-supeval-tab" data-bs-toggle="pill"
                                             data-bs-target="#pills-supeval" type="button" role="tab"
                                             aria-controls="pills-supeval" aria-selected="false" tabindex="-1">
-                                            Supervisor'S Evaluation of Faculty
+                                            ANNEX B - SEF Rating
                                         </button>
                                     </li>
                                 </ul>
