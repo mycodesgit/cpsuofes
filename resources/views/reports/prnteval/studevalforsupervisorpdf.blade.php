@@ -249,7 +249,9 @@
 							$savedRatings = json_decode($facrated->first()->question_rate ?? '{}', true);
 							$savedRating = $savedRatings[$dataquest->id] ?? null;
 
-							// Total score for the current question
+							$sectionTotal += $savedRating;  // accumulate section total
+                    		$totalScore += $savedRating;
+
 							if ($savedRating) {
 								$sectionTotal += $savedRating;
 							}
@@ -289,19 +291,17 @@
 				@endforeach
 			</tbody>
 		</table>
-		@php
-			$totalScore += $sectionTotal;
-		@endphp
 		<table id="table" border="1" style="border-collapse: collapse; margin-top: -1px">
 			<tbody>
 				<tr>
 					<td style="text-align: right; font-weight: bold; padding: 5px; width: 60%">TOTAL SCORE:</td>
-					<td style="text-align: left; font-weight: bold; padding: 5px; width: 30%">{{ $totalScore }}</td>
+					<td style="text-align: left; font-weight: bold; padding: 5px; width: 115px">{{ $totalScore }}</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 
+	<br><br><br><br>
 	<div style="margin-top: 30px">
 		<div>
 		    <label style="font-weight: bold;">Other comments and suggestions (Optional):</label>
