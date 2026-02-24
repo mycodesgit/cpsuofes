@@ -45,7 +45,7 @@
         	vertical-align: center !important;
     		text-align: left;
             border: 1px solid #000;
-            font-size: 11pt;
+            font-size: 12pt;
 			padding: 5px;
 			font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial,
         	sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"

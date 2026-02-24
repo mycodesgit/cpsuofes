@@ -21,7 +21,7 @@
                                                 <button class="nav-link active" id="pills-annexc-tab" data-bs-toggle="pill"
                                                     data-bs-target="#pills-annexc" type="button" role="tab"
                                                     aria-controls="pills-annexc" aria-selected="true">
-                                                    ANNEX C - Individual FER
+                                                    ANNEX C - IFER
                                                 </button>
                                             </li>
                                             &nbsp;
@@ -29,7 +29,7 @@
                                                 <button class="nav-link" id="pills-annexd-tab" data-bs-toggle="pill"
                                                     data-bs-target="#pills-annexd" type="button" role="tab"
                                                     aria-controls="pills-annexd" aria-selected="false" tabindex="-1">
-                                                    ANNEX D - Faculty EDA Form
+                                                    ANNEX D - FEDAF
                                                 </button>
                                             </li>
                                         </ul>
