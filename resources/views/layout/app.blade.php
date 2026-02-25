@@ -337,7 +337,12 @@
 
     @if (request()->routeIs('summaryEvalStore'))
         @include('scripts.getfacultyjs')
+        @include('scripts.getclassenrolljs')
         @include('scripts.validations.evaluationresultvalidation')
+    @endif
+
+    @if (request()->routeIs('subprint_searchresultStore'))
+        @include('scripts.evaloldsubmissionprintjs')
     @endif
 </body>
 

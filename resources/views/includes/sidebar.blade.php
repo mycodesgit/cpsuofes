@@ -98,7 +98,7 @@
     <li class="px-4 pt-4 pb-2"><small class="nav-text text-muted">Reports</small></li>
     @if(in_array(Auth::guard('web')->user()->role, [0,1,2]))
         <li>
-            <a class="nav-link {{ request()->is('reports/view*') ? 'active' : '' }}" href="{{ route('printeval.index') }}">
+            <a class="nav-link {{ request()->is('reports/print*') ? 'active' : '' }}" href="{{ route('printeval.index') }}">
                 <i class="ti ti-receipt"></i> <span class="nav-text">Print Evaluation</span>
             </a>
         </li>

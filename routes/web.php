@@ -20,6 +20,7 @@ use App\Http\Controllers\ReportsPrintEvalController;
 use App\Http\Controllers\ReportsPrintSumEvalresultController;
 use App\Http\Controllers\ReportFacConductedController;
 use App\Http\Controllers\ReportOldprintsumEvalresultController;
+use App\Http\Controllers\ReportOldprintEvalSubmissionController ;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,11 +123,11 @@ Route::group(['middleware'=>['login_empauth']],function(){
     });
 
     Route::prefix('/reports')->group(function () {
-        Route::get('/view/qce/printsearch', [ReportsPrintEvalController::class, 'index'])->name('printeval.index');
-        Route::get('/view/search/result/student', [ReportsPrintEvalController::class, 'subprintstudent_searchresultStore'])->name('subprintstudent_searchresultStore');
-        Route::get('/view/search/result/supervisor', [ReportsPrintEvalController::class, 'subprintsupervisor_searchresultStore'])->name('subprintsupervisor_searchresultStore');
-        Route::get('/view/search/result/eval/submission/ajax', [ReportsPrintEvalController::class, 'getevalsubratelistRead'])->name('getevalsubratelistRead');
-        Route::get('/view/search/result/eval/submission/printedajax', [ReportsPrintEvalController::class, 'getevalsubrateprintedlistRead'])->name('getevalsubrateprintedlistRead');
+        Route::get('/print/new/qce/printsearch', [ReportsPrintEvalController::class, 'index'])->name('printeval.index');
+        Route::get('/print/new/search/result/student', [ReportsPrintEvalController::class, 'subprintstudent_searchresultStore'])->name('subprintstudent_searchresultStore');
+        Route::get('/print/new/search/result/supervisor', [ReportsPrintEvalController::class, 'subprintsupervisor_searchresultStore'])->name('subprintsupervisor_searchresultStore');
+        Route::get('/print/new/search/result/eval/submission/ajax', [ReportsPrintEvalController::class, 'getevalsubratelistRead'])->name('getevalsubratelistRead');
+        Route::get('/print/new/search/result/eval/submission/printedajax', [ReportsPrintEvalController::class, 'getevalsubrateprintedlistRead'])->name('getevalsubrateprintedlistRead');
         Route::get('/info/getcourseyrsec/ajax', [ReportsPrintEvalController::class, 'getCoursesyearsec'])->name('getCoursesyearsec');
         Route::get('/info/getevalpdf/print/evaluation/student', [ReportsPrintEvalController::class, 'exportPrintStudentEvalPDF'])->name('exportPrintStudentEvalPDF');
         Route::get('/info/getevalpdf/print/evaluation/supervisor', [ReportsPrintEvalController::class, 'exportPrintSupervisorEvalPDF'])->name('exportPrintSupervisorEvalPDF');
@@ -149,5 +150,10 @@ Route::group(['middleware'=>['login_empauth']],function(){
         Route::get('/effect/old/result/srch/summary/resultlist/view/Points/pdfeval', [ReportOldprintsumEvalresultController::class, 'genpointsevalPDF'])->name('genpointsevalPDF');
         Route::get('/effect/old/result/srch/summary/resultlist/view/Sheet/pdfeval', [ReportOldprintsumEvalresultController::class, 'gensumsheetevalPDF'])->name('gensumsheetevalPDF');
         Route::get('/effect/old/result/srch/summary/resultlist/view/Sheet/pdfevaldecimal', [ReportOldprintsumEvalresultController::class, 'gensumsheetevalPDFdecimal'])->name('gensumsheetevalPDFdecimal');
+
+        Route::get('/effect/view/search/result', [ReportOldprintEvalSubmissionController::class, 'subprint_searchresultStore'])->name('subprint_searchresultStore');
+        Route::get('/effect/view/search/result/eval/submission/ajax', [ReportOldprintEvalSubmissionController::class, 'getoldevalsubratelistRead'])->name('getoldevalsubratelistRead');
+        Route::get('/effect/view/search/result/eval/submission/printedajax', [ReportOldprintEvalSubmissionController::class, 'getoldevalsubrateprintedlistRead'])->name('getoldevalsubrateprintedlistRead');
+        Route::get('/effect/info/getevalpdf/print/evaluation/student', [ReportOldprintEvalSubmissionController::class, 'exportPrintEvalPDF'])->name('exportPrintEvalPDF');
     });
 });
