@@ -274,12 +274,17 @@
                 </tr>
             </thead>
             <tbody>
-				@foreach ($evaluationsStudent as $evaluationsStudentitem)
+				@forelse ($evaluationsStudent as $evaluationsStudentitem)
 					<tr>
 						<td style="text-align: center;">{{ $evaluationsStudentitem->ratecount }}</td>
 						<td style="text-align: left">{{ $evaluationsStudentitem->qcecomments ?? '' }}</td>
 					</tr>
-				@endforeach
+				@empty
+					<tr>
+						<td style="text-align: center;">.</td>
+						<td style="text-align: left;">.</td>
+					</tr>
+				@endforelse
             </tbody>
         </table>
 	</div>
@@ -293,12 +298,17 @@
                 </tr>
             </thead>
             <tbody>
-				@foreach ($evaluationsSupervisor as $evaluationsSupervisoritem)
+				@forelse ($evaluationsSupervisor as $evaluationsSupervisoritem)
 					<tr>
 						<td style="text-align: center;">{{ $loop->iteration }}</td>
 						<td style="text-align: left">{{ $evaluationsSupervisoritem->qcecomments ?? '' }}</td>
 					</tr>
-				@endforeach
+				@empty
+					<tr>
+						<td style="text-align: center;">.</td>
+						<td style="text-align: left;">.</td>
+					</tr>
+				@endforelse
             </tbody>
         </table>
 	</div>
