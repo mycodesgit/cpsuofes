@@ -86,11 +86,11 @@
 <body>
 	@if(empty($facsum))
 		<div class="header">
-			<center><img src="{{ asset('assets/images/allformheader/header-me.png') }}" width="95%"></center>
+			<center><img src="{{ public_path('assets/images/allformheader/header-me.png') }}" width="95%"></center>
 		</div>
 
 		<div class="footer">
-			<center><img src="{{ asset('assets/images/allformheader/footer.png') }}" width="95%"></center>
+			<center><img src="{{ public_path('assets/images/allformheader/footer.png') }}" width="95%"></center>
 		</div>
 		
 		<div class="title">
@@ -106,11 +106,11 @@
 		</div>
 	@else
 		<div class="header">
-			<center><img src="{{ asset('template/img/allformheader/header-me.png') }}" width="95%"></center>
+			<center><img src="{{ public_path('assets/images/allformheader/header-me.png') }}" width="95%"></center>
 		</div>
 
 		<div class="footer">
-			<center><img src="{{ asset('template/img/allformheader/footer.png') }}" width="95%"></center>
+			<center><img src="{{ public_path('assets/images/allformheader/footer.png') }}" width="95%"></center>
 		</div>
 
 		<div class="details">

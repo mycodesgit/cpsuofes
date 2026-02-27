@@ -84,11 +84,11 @@
 		</div>
 
 		<div class="footer">
-			<center><img src="{{ public_path('template/img/allformheader/footer.png') }}" width="95%" style="text-align: center !important;"></center>
+			<center><img src="{{ public_path('assets/images/allformheader/footer.png') }}" width="95%" style="text-align: center !important;"></center>
 		</div>
 	@else
 		<div class="header" style="margin-top: -3px;">
-			<center><img src="{{ public_path('template/img/allformheader/header-qa.png') }}" width="96%" style="text-align: center !important;"></center>
+			<center><img src="{{ public_path('assets/images/allformheader/header-qa.png') }}" width="96%" style="text-align: center !important;"></center>
 		</div>
 		
 		<div class="title">
@@ -173,7 +173,7 @@
 		</div>
 		
 		<div class="footer">
-			<center><img src="{{ public_path('template/img/allformheader/footer.png') }}" width="95%" style="text-align: center !important;"></center>
+			<center><img src="{{ public_path('assets/images/allformheader/footer.png') }}" width="95%" style="text-align: center !important;"></center>
 			{{-- <div style="text-align: center !important; font-size: 8pt; margin-top: 10px; display: flex; justify-content: space-between; width: 100%;">
 			<span>Doc Control Code: CPSU-F-QA-20</span>
 			<span style="margin-left: 40px;">Effective Date: 09/12/2018</span>
