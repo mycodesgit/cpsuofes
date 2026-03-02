@@ -316,7 +316,7 @@
 			<span style="display: inline-block; width: 270px; vertical-align: top; font-weight: bold">Signature of Evaluator</span>:
 			<div style="display: inline-block; margin-left: -10px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 370px;">
 				@if($mysign)
-					&nbsp; <img img id="signature-img" src="{{ public_path('storage/' . $mysign) }}" alt="Signature" style="width: 350px; height: auto; display: flex; justify-content: center; align-items: center; position: absolute; margin-top: -30px">
+					&nbsp; <img img id="signature-img" src="{{ public_path('storage/' . $mysign) }}" alt="Signature" style="width: 350px; height: auto; display: flex; justify-content: center; align-items: center; position: absolute; margin-top: -40px">
 				@else
 					<span style="font-weight: normal;">&nbsp;</span>
 				@endif
