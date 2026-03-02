@@ -237,7 +237,7 @@
     </div>
 	
     <div class="footer">
-        <center><img src="{{ public_path('template/img/allformheader/footer.png') }}" width="55%" style="text-align: center !important;"></center>
+        <center><img src="{{ public_path('assets/images/allformheader/footer.png') }}" width="55%" style="text-align: center !important;"></center>
     </div>
 </body>
 </html>
