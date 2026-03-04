@@ -77,10 +77,10 @@ class ReportsPrintSumEvalresultController extends Controller
         $dept = $request->dept;
 
         $faclty = Faculty::join('addressee', 'faculty.adrID', '=', 'addressee.id')
-            ->join('college', 'faculty.dept', '=', 'college.college_abbr')
+            ->join('college', 'faculty.faccollege', '=', 'college.college_abbr')
             ->where('faculty.campus', $campus)
             ->when($dept, function ($query, $dept) {
-                return $query->where('faculty.dept', $dept);
+                return $query->where('faculty.faccollege', $dept);
             })
             ->select('faculty.*', 'faculty.id as fctyid', 'faculty.campus as fcamp', 'college.*', 'addressee.*', 'addressee.id as adrid')
             ->orderBy('faculty.lname')

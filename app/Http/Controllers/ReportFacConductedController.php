@@ -95,7 +95,7 @@ class ReportFacConductedController extends Controller
                         'faculty.lname', 
                         'faculty.fname', 
                         'faculty.mname', 
-                        'faculty.dept',
+                        'faculty.faccollege',
                         'rooms.room_name',
                         DB::raw('COUNT(DISTINCT coasv2_db_enrollment.studgrades.studID) as studentCount'))
                 ->groupBy(
@@ -151,7 +151,7 @@ class ReportFacConductedController extends Controller
                         'faculty.lname', 
                         'faculty.fname', 
                         'faculty.mname', 
-                        'faculty.dept', 
+                        'faculty.faccollege', 
                         'rooms.room_name',
                         DB::raw('COUNT(DISTINCT coasv2_db_enrollment.studgrades.studID) as studentCount'))
                 ->groupBy(

@@ -81,7 +81,7 @@
                                                                 $totalOverAllEvalPercentCount = $totalStudentEvalCount / $totalStudentCount * 100;
                                                             @endphp
                                                             <tr>
-                                                                <td>{{ $datafacloadsched->dept }}</td>
+                                                                <td>{{ $datafacloadsched->faccollege }}</td>
                                                                 <td>{{ $datafacloadsched->sub_name }} - {{ $datafacloadsched->sub_title }}</td>
                                                                 <td>{{ $datafacloadsched->lname }}, {{ $datafacloadsched->fname }} {{ substr($datafacloadsched->mname, 0, 2) }}</td>
                                                                 <td>{{ $datafacloadsched->subSec }}</td>

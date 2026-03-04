@@ -75,7 +75,7 @@
 
 	<div class="studinfolabel">
 	    <div class="info-row">
-	        <span class="info-data">College: {{ $facloadsched->first()->dept }}</span>
+	        <span class="info-data">College: {{ $facloadsched->first()->faccollege }}</span>
 	    </div>
 	</div>
 
