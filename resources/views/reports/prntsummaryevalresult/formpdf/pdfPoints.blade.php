@@ -31,7 +31,7 @@
             $campus = 'CPSU HINOBAAN CAMPUS';
         }
         
-        $dept          = $facId->dept;
+        $dept          = $facId->facCollege;
         $rate_period   = $rating_period;
         $semester = request('semester');  // this gets 1, 2, or 3
 
