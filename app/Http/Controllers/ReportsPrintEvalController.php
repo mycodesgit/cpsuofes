@@ -327,7 +327,7 @@ class ReportsPrintEvalController extends Controller
             ->get();
 
         $facRanck = DB::connection('schedule')->table('faculty')
-            ->where('faculty.id', $facrated->first()->qcefacID)
+            ->where('faculty.id', $faclty)
             ->get();
 
         $ratingscale = QCEratingscale::orderBy('inst_scale', 'DESC')->where('instratingscalestat', 1)->get();
