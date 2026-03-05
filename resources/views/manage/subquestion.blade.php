@@ -24,7 +24,7 @@
                                                 <select name="questionID" id="question_id" class="form-control">
                                                     <option value=""> --Select Question-- </option>
                                                     @foreach($questions as $question)
-                                                        <option value="{{ $question->id }}">{{ $question->questiontext }}</option>
+                                                        <option value="{{ $question->id }}">{{ $question->id }} {{ $question->questiontext }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
