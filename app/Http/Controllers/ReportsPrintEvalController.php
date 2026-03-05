@@ -341,7 +341,7 @@ class ReportsPrintEvalController extends Controller
             ->get();
         
         $esig = StudeSig::leftJoin('qceformevalrate', 'studsignature.studIDno', '=', 'qceformevalrate.studidno')
-            ->where('qceformevalrate.studidno', $facrated->first()->qcefacID)
+            ->where('qceformevalrate.studidno', $faclty)
             ->select('studsignature.studesig')
             ->get();
 
