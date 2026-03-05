@@ -302,15 +302,15 @@ class ReportOldprintsumEvalresultController extends Controller
             ->first();
         
         $facDesignateId = DB::connection('schedule')->table('fac_designation')
-            ->join('college', 'fac_designation.facdept', '=', 'college.college_abbr')
+            ->join('college', 'fac_designation.facCollege', '=', 'college.college_abbr')
             ->join('faculty', 'fac_designation.fac_id', '=', 'faculty.id')
             ->where('fac_designation.schlyear', $schlyear)
             ->where('fac_designation.semester', $semester)
-            ->where('fac_designation.facdept', $facDean->prog)
+            ->where('fac_designation.facCollege', $facDean->prog)
             ->first();
 
         $facDesignateIdCampusAd = DB::connection('schedule')->table('fac_designation')
-            ->join('college', 'fac_designation.facdept', '=', 'college.college_abbr')
+            ->join('college', 'fac_designation.facCollege', '=', 'college.college_abbr')
             ->join('faculty', 'fac_designation.fac_id', '=', 'faculty.id')
             ->where('fac_designation.schlyear', $schlyear)
             ->where('fac_designation.semester', $semester)
@@ -476,15 +476,15 @@ class ReportOldprintsumEvalresultController extends Controller
         ->first();
         
         $facDesignateId = DB::connection('schedule')->table('fac_designation')
-            ->join('college', 'fac_designation.facdept', '=', 'college.college_abbr')
+            ->join('college', 'fac_designation.facCollege', '=', 'college.college_abbr')
             ->join('faculty', 'fac_designation.fac_id', '=', 'faculty.id')
             ->where('fac_designation.schlyear', $schlyear)
             ->where('fac_designation.semester', $semester)
-            ->where('fac_designation.facdept', $facDean->prog)
+            ->where('fac_designation.facCollege', $facDean->prog)
             ->first();
 
         $facDesignateIdCampusAd = DB::connection('schedule')->table('fac_designation')
-            ->join('college', 'fac_designation.facdept', '=', 'college.college_abbr')
+            ->join('college', 'fac_designation.facCollege', '=', 'college.college_abbr')
             ->join('faculty', 'fac_designation.fac_id', '=', 'faculty.id')
             ->where('fac_designation.schlyear', $schlyear)
             ->where('fac_designation.semester', $semester)
@@ -622,15 +622,15 @@ class ReportOldprintsumEvalresultController extends Controller
         ->first();
         
         $facDesignateId = DB::connection('schedule')->table('fac_designation')
-            ->join('college', 'fac_designation.facdept', '=', 'college.college_abbr')
+            ->join('college', 'fac_designation.facCollege', '=', 'college.college_abbr')
             ->join('faculty', 'fac_designation.fac_id', '=', 'faculty.id')
             ->where('fac_designation.schlyear', $schlyear)
             ->where('fac_designation.semester', $semester)
-            ->where('fac_designation.facdept', $facDean->prog)
+            ->where('fac_designation.facCollege', $facDean->prog)
             ->first();
 
         $facDesignateIdCampusAd = DB::connection('schedule')->table('fac_designation')
-            ->join('college', 'fac_designation.facdept', '=', 'college.college_abbr')
+            ->join('college', 'fac_designation.facCollege', '=', 'college.college_abbr')
             ->join('faculty', 'fac_designation.fac_id', '=', 'faculty.id')
             ->where('fac_designation.schlyear', $schlyear)
             ->where('fac_designation.semester', $semester)
