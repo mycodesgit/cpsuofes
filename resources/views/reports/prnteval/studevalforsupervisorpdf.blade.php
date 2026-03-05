@@ -150,7 +150,7 @@
 		$mysign = $esig->first()->studesig ?? null;
 	@endphp
 	<div class="annexheader">
-		<p style="color: rgb(185, 185, 185);">{{ $facrated->first()->ratecount }}</p>
+		<p style="color: rgb(185, 185, 185);">{{ $facrated->first()->ratecount ?? '' }}</p>
 		<p style="margin: -10px"><span style="font-weight: bold">ANNEX B</span> - Supervisor's Evaluation of Faculty</p>
 	</div>
 
