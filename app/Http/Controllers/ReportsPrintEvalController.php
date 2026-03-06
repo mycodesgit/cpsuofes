@@ -322,7 +322,7 @@ class ReportsPrintEvalController extends Controller
             ->where('schlyear', $schlyear)
             ->where('semester', $semester)
             ->where('qcefacID', $faclty)
-            ->where('qceevaluator', '=', 'Supervisor')
+            ->where('qceevaluator', '!=', 'Student')
             ->select('qceformevalrate.*')
             ->get();
 
