@@ -113,7 +113,7 @@ class ReportsPrintSumEvalresultController extends Controller
             ->where('schlyear', $schlyear)
             ->where('semester', $semester)
             ->where('qcefacID', $faclty)
-            ->where('qceevaluator', 'Student')
+            ->where('qceevaluator', '=', 'Student')
             ->get();
 
         $evaluationsStudComp = $evaluationsStudent->map(function ($row) {
@@ -182,7 +182,7 @@ class ReportsPrintSumEvalresultController extends Controller
             ->where('schlyear', $schlyear)
             ->where('semester', $semester)
             ->where('qcefacID', $faclty)
-            ->where('qceevaluator', 'Supervisor')
+            ->where('qceevaluator', '!=', 'Student')
             ->get();
 
         $evaluationsSupervisorComp = $evaluationsSupervisor->map(function ($row) {
@@ -261,7 +261,7 @@ class ReportsPrintSumEvalresultController extends Controller
             ->where('schlyear', $schlyear)
             ->where('semester', $semester)
             ->where('qcefacID', $faclty)
-            ->where('qceevaluator', 'Student')
+            ->where('qceevaluator', '=', 'Student')
             ->get();
 
         $evaluationsStudComp = $evaluationsStudent->map(function ($row) {
@@ -330,7 +330,7 @@ class ReportsPrintSumEvalresultController extends Controller
             ->where('schlyear', $schlyear)
             ->where('semester', $semester)
             ->where('qcefacID', $faclty)
-            ->where('qceevaluator', 'Supervisor')
+            ->where('qceevaluator', '!=', 'Student')
             ->get();
 
         $evaluationsSupervisorComp = $evaluationsSupervisor->map(function ($row) {
