@@ -83,7 +83,7 @@
                                             data-fmname="${row.mname}" 
                                             data-fxname="${row.ext}" 
                                             data-adrname="${row.adrID}" 
-                                            data-deptname="${row.dept}" 
+                                            data-deptname="${row.faccollege}" 
                                             data-email="${row.email}">
                                             <i class="fas fa-upload"></i> Upload Photo
                                         </a>
@@ -104,7 +104,7 @@
                                             data-fmname="${row.mname}" 
                                             data-fxname="${row.ext}" 
                                             data-adrname="${row.adrID}" 
-                                            data-deptname="${row.dept}" 
+                                            data-deptname="${row.faccollege}" 
                                             data-email="${row.email}">
                                             <i class="fas fa-edit"></i> Update Photo
                                         </a>
@@ -116,7 +116,7 @@
                                             data-femname="${row.mname}" 
                                             data-fexname="${row.ext}" 
                                             data-adrname="${row.adrID}" 
-                                            data-deptname="${row.dept}" 
+                                            data-deptname="${row.faccollege}" 
                                             data-email="${row.email}">
                                             <i class="fas fa-pen"></i> Academinc Rank
                                         </a>
