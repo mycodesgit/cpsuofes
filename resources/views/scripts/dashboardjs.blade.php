@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             datasets: [{
                 label: 'Colleges',
                 data: @json($data),
-                backgroundColor: @json($colors),
+                backgroundColor: @json($collegecolors),
                 borderRadius: 5,
                 barThickness: 30
             }]
