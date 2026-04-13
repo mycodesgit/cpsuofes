@@ -75,23 +75,14 @@
                         <div class="card card-animate">
                             <div class="card-header d-flex justify-content-between align-items-center bg-transparent px-4 py-3">
                                 <h3 class="h5 mb-0">
-                                    <i class="ti ti-chart-pie"></i> Performance Distribution
-                                    <span style="font-size: 12pt" class="text-warning">Faculty by Rating Category</span>
+                                    <i class="ti ti-chart-pie"></i> Number of Students
+                                    <span style="font-size: 12pt" class="text-warning">Per Colleges</span>
                                 </h3>
                             </div>
                             <div class="card-body">
-                                @php
-                                    $ratings = [
-                                    5 => 50,
-                                    4 => 25,
-                                    3 => 13,
-                                    2 => 8,
-                                    1 => 4
-                                ];
-                                @endphp
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <canvas id="performancePieChart" style="height: 250px;"></canvas>
+                                        <canvas id="collegesPieChart" style="height: 250px;"></canvas>
                                     </div>
                                     <div class="col-md-6">
                                         @php
@@ -171,9 +162,6 @@
         </div>
     </div>
 
-    <script>
-        const ratingData = @json(array_values($ratings));
-    </script>
     <script>
         const deptLabels = @json($labels);
         const deptData = @json($data);

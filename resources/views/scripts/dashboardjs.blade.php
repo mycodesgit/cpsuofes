@@ -1,51 +1,46 @@
-{{-- Performance Distribution --}}
+{{-- Number of Student per colleges --}}
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const ctx = document.getElementById('performancePieChart').getContext('2d');
+document.addEventListener("DOMContentLoaded", function () {
 
-        const performancePieChart = new Chart(ctx, {
-            type: 'doughnut', // use 'pie' if you want full pie
-            data: {
-                // labels: [
-                //     'Always manifested (5)',
-                //     'Often manifested (4)',
-                //     'Sometimes manifested (3)',
-                //     'Seldom manifested (2)',
-                //     'Never/Rarely manifested (1)'
-                // ],
-                datasets: [{
-                    data: [50, 25, 13, 8, 4], // replace with dynamic data
-                    backgroundColor: [
-                        '#28a745', // green
-                        '#6ab04c',
-                        '#f6c23e',
-                        '#f39c12',
-                        '#e74c3c'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '60%', // makes it donut style
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'right',   // ✅ move to right
-                        align: 'center',     // center vertically
-                        labels: {
-                            boxWidth: 12,
-                            padding: 15,
-                            font: {
-                                size: 12
-                            }
+    const ctx = document.getElementById('collegesPieChart').getContext('2d');
+
+    const chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: @json($collegelabels),
+            datasets: [{
+                data: @json($collegedata),
+                backgroundColor: @json($collegecolors),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '60%',
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        boxWidth: 12,
+                        padding: 15
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            let value = context.raw;
+                            let percent = ((value / total) * 100).toFixed(1);
+                            return context.label + ': ' + value + ' (' + percent + '%)';
                         }
                     }
                 }
             }
-        });
+        }
     });
+
+});
 </script>
 
 {{-- Department Summary --}}
