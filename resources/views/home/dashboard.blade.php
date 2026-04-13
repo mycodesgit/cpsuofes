@@ -133,10 +133,10 @@
                             <div class="card-header d-flex justify-content-between align-items-center bg-transparent px-4 py-3">
                                 <h3 class="h5 mb-0"><i class="ti ti-chart-area"></i> Colleges per year level response overview</h3>
                             </div>
-                            <div class="card-body p-6">
+                            <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col-md-12">
-                                        <div class="table-responsive">
+                                        <div class="table-responsive mt-2 p-2">
                                             <table id="evalresponseTable" class="table table-striped" style="width: 100%">
                                                 <thead>
                                                     <tr>
