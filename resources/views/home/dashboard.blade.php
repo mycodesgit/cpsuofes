@@ -87,18 +87,22 @@
                                     <div class="col-md-6">
                                         @php
                                             $colors = [
-                                                5 => 'text-success',   
-                                                4 => 'text-success',   
-                                                3 => 'text-warning',   
-                                                2 => 'text-orange',    
-                                                1 => 'text-danger'    
+                                                'CAF' => '#108d6d',   
+                                                'CAS' => '#ed2e40',   
+                                                'CBM' => '#e83e8c',   
+                                                'CCS' => '#6610f2',    
+                                                'CJE' => '#6c757d',    
+                                                'COE' => '#fd7e14',    
+                                                'CTE' => '#007bff',    
                                             ];
                                         @endphp
+
                                         <ul class="chart-legend clearfix mt-6" style="list-style: none;">
                                             <h5 class="mb-3">Colleges:</h5>
                                             @foreach ($ratecollege as $ratecolleges)
                                                 <li>
-                                                    <i class="fas fa-circle {{ $ratecolleges->colcolors ?? 'text-secondary' }}"></i>
+                                                    <i class="fas fa-circle"
+                                                    style="color: {{ $colors[$ratecolleges->college_abbr] ?? '#6c757d' }}"></i>
                                                     {{ $ratecolleges->college_name }}
                                                 </li>
                                             @endforeach

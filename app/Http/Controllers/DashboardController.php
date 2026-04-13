@@ -48,7 +48,7 @@ class DashboardController extends Controller
 
         $ratescale = QCEratingscale::where('instratingscalestat', '=', '1')->get();
 
-        $ratecollege = College::whereIn('id', [2, 3, 4, 5, 6, 7, 8])->orderBy('college_name', 'ASC')->get();
+        $ratecollege = College::whereIn('id', [2, 3, 4, 5, 6, 7, 8])->orderBy('college_name', 'ASC')->get()->keyBy('college_abbr');
 
         $schlyearactive = $currsem->first()->qceschlyear ?? null;
         $semesteractive = $currsem->first()->qcesemester ?? null;
