@@ -317,13 +317,13 @@
 		<p>Prepared by:</p>
 	</div>
 	<div class="details" style="margin-top: 10px; margin-left: 25px;">
-        <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Signature of Staff</span>
+        <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Signature of Training and Services Director</span>
         <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 250px;">
             :
         </div>
     </div>
 	<div class="details" style="margin-top: 30px; margin-left: 25px;">
-        <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Name of Staff</span>
+        <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Name of Training and Services Director</span>
         <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 250px;">
             : Mary Grace Noreen P. Leduna
         </div>
@@ -341,7 +341,7 @@
 	<div class="details" style="margin-top: 10px; margin-left: 25px;">
         <span style="display: inline-block; width: 230px; vertical-align: top; font-weight: bold;">Signature of Authorized Official</span>
         <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 250px;">
-            : Rose Ann S. Jocson
+            : Rose Ann G. Jocson
         </div>
     </div>
 	<div class="details" style="margin-top: 30px; margin-left: 25px;">
