@@ -284,6 +284,7 @@
 
     @if (request()->routeIs('index.dashboard'))
         @include('scripts.dashboardjs')
+        @include('scripts.dashboardevalresponsejs')
     @endif
     @if (request()->routeIs('index.calendar'))
         @include('scripts.calendarjs')

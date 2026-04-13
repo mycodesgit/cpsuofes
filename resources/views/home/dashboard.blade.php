@@ -137,7 +137,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-12">
                                         <div class="table-responsive">
-                                            <table class="table table-striped">
+                                            <table id="evalresponseTable" class="table table-striped" style="width: 100%">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -147,17 +147,17 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @php
+                                                    {{-- @php
                                                         $no = 1;
                                                     @endphp
                                                     @foreach ($grouped as $row)
-                                                    <tr>
-                                                        <td>{{ $no ++ }}</td>
-                                                        <td>{{ $row['progCod'] }}</td>
-                                                        <td>{{ $row['program'] }}</td>
-                                                        <td>{{ $row['count'] }}</td>
-                                                    </tr>
-                                                @endforeach
+                                                        <tr>
+                                                            <td>{{ $no ++ }}</td>
+                                                            <td>{{ $row['progCod'] }}</td>
+                                                            <td>{{ $row['program'] }}</td>
+                                                            <td>{{ $row['count'] }}</td>
+                                                        </tr>
+                                                    @endforeach --}}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -175,5 +175,7 @@
         const deptLabels = @json($labels);
         const deptData = @json($data);
         const deptColors  = @json($colors);
+
+        var dashevalresponseReadRoute = "{{ route('getevalresponse') }}";
     </script>
 @endsection

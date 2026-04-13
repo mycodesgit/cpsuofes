@@ -109,6 +109,32 @@ class DashboardController extends Controller
             ->where('campus', '=', 'MC')
             ->count();
         
+        
+            
+        return view('home.dashboard', compact(
+                            'currsem',
+                            'currenrolled', 
+                            'currfacultySched', 
+                            'currevalstat',
+                            'ratescale', 
+                            'ratecollege', 
+                            'collegelabels', 
+                            'collegedata', 
+                            'collegecolors', 
+                            'labels',  
+                            'data', 
+                            'colors', 
+                            'currresponses', 
+                        ));
+    }
+
+    public function getevalresponse() 
+    {
+        $currsem = QCEsemester::select('id', 'qceschlyear', 'qcesemester', 'qceratingfrom', 'qceratingto')
+            ->where('qcesemstat', '2')
+            ->orderBy('id', 'DESC')
+            ->get();
+
         $currcollegesresponses = QCEfevalrate::where('semester', $currsem->first()->qcesemester)
             ->where('schlyear', $currsem->first()->qceschlyear)
             ->where('campus', '=', 'MC')
@@ -137,31 +163,15 @@ class DashboardController extends Controller
             return $item;
         });
 
-        $grouped = $merged->groupBy('program')->map(function ($group) {
+        $data = $merged->groupBy('program')->map(function ($group) {
             return [
                 'progCod' => $group->first()->progCod,
                 'program' => $group->first()->program,
                 'count'   => $group->count(),
             ];
         })->values();
-            
-        return view('home.dashboard', compact(
-                            'currsem',
-                            'currenrolled', 
-                            'currfacultySched', 
-                            'currevalstat',
-                            'ratescale', 
-                            'ratecollege', 
-                            'collegelabels', 
-                            'collegedata', 
-                            'collegecolors', 
-                            'labels',  
-                            'data', 
-                            'colors', 
-                            'currresponses', 
-                            'currcollegesresponses',
-                            'grouped'
-                        ));
+
+        return response()->json(['data' => $data]);
     }
 
     public function logout()
