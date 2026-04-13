@@ -102,12 +102,10 @@ class DashboardController extends Controller
             $colors[] = $college->colcolor ?? '#4e73df';
         }
 
-        $currresponses = Cache::remember($cacheKeyPrefix . 'currresponses', 1000, function () use ($currsem) {
-            return QCEfevalrate::where('semester', $currsem->first()->qcesemester)
+        $currresponses = QCEfevalrate::where('semester', $currsem->first()->qcesemester)
             ->where('schlyear', $currsem->first()->qceschlyear)
             ->where('campus', '=', 'MC')
             ->count();
-        });
 
         $currevalstat = QCEsetting::first();
             
