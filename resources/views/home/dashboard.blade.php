@@ -143,7 +143,7 @@
                                                         <th>No</th>
                                                         <th>Colleges</th>
                                                         <th>Program</th>
-                                                        <th>Response</th>
+                                                        <th>Responses</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
             data: {
                 labels: deptLabels,
                 datasets: [{
-                    label: 'Total Classes',
+                    label: 'Colleges',
                     data: deptData,
                     backgroundColor: [
                         '#108d6d', // green
