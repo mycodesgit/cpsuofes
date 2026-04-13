@@ -86,29 +86,21 @@ class DashboardController extends Controller
         $collegedata = $collegesFirstSemester->pluck('college_count');
         $collegecolors = $collegesFirstSemester->pluck('colcolor');
 
-        
-        $labels = Cache::remember($cacheKeyPrefix . 'ratecollegelabels', 1000, function () use ($ratecollege) {
-            return $ratecollege->pluck('college_abbr')->toArray();
-        });
+        $labels = [];
+        $data = [];
+        $colors = [];
+        foreach ($ratecollege as $college) {
+            $labels[] = $college->college_abbr;
 
-        $data = Cache::remember($cacheKeyPrefix . 'ratecollegedata', 1000, function () use ($ratecollege) {
-            $counts = [];
-            foreach ($ratecollege as $college) {
             $count = QCEfevalrate::where('prog', $college->college_abbr)
                 ->where('semester', '2')
                 ->where('schlyear', '2025-2026')
                 ->where('campus', 'MC')
                 ->count();
-            $counts[] = $count;
-            }
-            return $counts;
-        });
 
-        $colors = Cache::remember($cacheKeyPrefix . 'ratecollegecolors', 1000, function () use ($ratecollege) {
-            return $ratecollege->pluck('colcolor')->map(function ($color) {
-            return $color ?? '#4e73df';
-            })->toArray();
-        });
+            $data[] = $count;
+            $colors[] = $college->colcolor ?? '#4e73df';
+        }
 
         $currresponses = Cache::remember($cacheKeyPrefix . 'currresponses', 1000, function () use ($currsem) {
             return QCEfevalrate::where('semester', $currsem->first()->qcesemester)
