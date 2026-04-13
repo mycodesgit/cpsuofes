@@ -38,6 +38,7 @@ class DashboardController extends Controller
             ->where('semester', $currsem->first()->qcesemester)
             ->where('schlyear', $currsem->first()->qceschlyear)
             ->where('campus', '=', 'MC')
+            ->where('studentID', 'NOT LIKE', '%-G%')
             ->count();
 
         $currfacultySched = SetClassSchedule::where('semester', '2')
