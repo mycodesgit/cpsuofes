@@ -118,7 +118,8 @@ class DashboardController extends Controller
         
         
             
-        return view('home.dashboard', compact(
+        return view('home.dashboard', 
+                        compact(
                             'campuses',
                             'currsem',
                             'currenrolled', 
@@ -240,36 +241,44 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function getevalresponse() 
+    public function getevalresponse(Request $request) 
     {
-        $currsem = QCEsemester::select('id', 'qceschlyear', 'qcesemester', 'qceratingfrom', 'qceratingto')
-            ->where('qcesemstat', '2')
-            ->orderBy('id', 'DESC')
+        $campus = $request->campus;
+        $ratingperiod = $request->ratingperiod;
+
+        $currsem = QCEsemester::find($ratingperiod);
+
+        if (!$currsem) {
+            return response()->json(['data' => []]);
+        }
+
+        $semester = $currsem->qcesemester;
+        $schlyear = $currsem->qceschlyear;
+
+        $currcollegesresponses = QCEfevalrate::where('semester', $semester)
+            ->where('schlyear', $schlyear)
+            ->where('campus', $campus)
             ->get();
 
-        $currcollegesresponses = QCEfevalrate::where('semester', $currsem->first()->qcesemester)
-            ->where('schlyear', $currsem->first()->qceschlyear)
-            ->where('campus', '=', 'MC')
-            ->get();
-        
         $studentIds = $currcollegesresponses->pluck('studidno')->unique();
 
         $enrolments = StudEnrolmentHistory::whereIn('studentID', $studentIds)
             ->whereIn('status', ['2', '3'])
-            ->where('semester', $currsem->first()->qcesemester)
-            ->where('schlyear', $currsem->first()->qceschlyear)
-            ->where('campus', 'MC')
+            ->where('semester', $semester)
+            ->where('schlyear', $schlyear)
+            ->where('campus', $campus)
             ->get()
             ->keyBy('studentID');
 
         $merged = $currcollegesresponses->map(function ($item) use ($enrolments) {
             $enrol = $enrolments->get($item->studidno);
+
             if ($enrol) {
-                $item->progCod = $enrol->progCod; 
                 $item->progCod = explode('-', $enrol->progCod)[0];
-                $item->program = $enrol->course; 
+                $item->program = $enrol->course;
             } else {
                 $item->program = 'UNKNOWN';
+                $item->progCod = 'N/A';
             }
 
             return $item;

@@ -4,13 +4,16 @@
 ========================= */
 let barChart;
 let pieChart;
+let dataTable;
 
 /* =========================
-   INITIALIZE CHARTS
+   INIT EVERYTHING
 ========================= */
-document.addEventListener("DOMContentLoaded", function () {
+$(document).ready(function() {
 
-    /* ===== PIE CHART ===== */
+    /* =========================
+       INIT PIE CHART
+    ========================= */
     const pieCtx = document.getElementById('collegesPieChart').getContext('2d');
 
     pieChart = new Chart(pieCtx, {
@@ -30,7 +33,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    /* ===== BAR CHART ===== */
+    /* =========================
+       INIT BAR CHART
+    ========================= */
     const barCtx = document.getElementById('departmentBarChart').getContext('2d');
 
     barChart = new Chart(barCtx, {
@@ -40,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
             datasets: [{
                 label: 'Colleges',
                 data: @json($data),
-                backgroundColor: @json($collegecolors),
+                backgroundColor: @json($colors),
                 borderRadius: 5,
                 barThickness: 30
             }]
@@ -51,11 +56,38 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    /* =========================
+       INIT DATATABLE
+    ========================= */
+    dataTable = $('#evalresponseTable').DataTable({
+        ajax: {
+            url: dashevalresponseReadRoute,
+            type: "GET",
+            data: function(d) {
+                d.campus = $('#campus').val();
+                d.ratingperiod = $('#ratingperiod').val();
+            }
+        },
+        destroy: true,
+        info: true,
+        responsive: true,
+        lengthChange: true,
+        searching: true,
+        paging: true,
+        order: [[1, "asc"]],
+        columns: [
+            {data: null, render: function(data, type, row, meta) { return meta.row + 1; }},
+            {data: 'progCod'},
+            {data: 'program'},
+            {data: 'count'},
+        ]
+    });
+
 });
 
 
 /* =========================
-   AJAX FILTER (SEARCH)
+   AJAX SEARCH FILTER
 ========================= */
 $('#filterForm').on('submit', function(e) {
     e.preventDefault();
@@ -77,7 +109,6 @@ $('#filterForm').on('submit', function(e) {
         },
 
         beforeSend: function() {
-            // Optional loading
             $('#facultyCount').text('...');
             $('#studentCount').text('...');
             $('#responseCount').text('...');
@@ -97,11 +128,9 @@ $('#filterForm').on('submit', function(e) {
                 barChart.update();
             }
 
-            /* ===== UPDATE PIE CHART (if included in response) ===== */
-            if (pieChart && res.collegelabels) {
-                pieChart.data.labels = res.collegelabels;
-                pieChart.data.datasets[0].data = res.collegedata;
-                pieChart.update();
+            /* ===== RELOAD DATATABLE ===== */
+            if (dataTable) {
+                dataTable.ajax.reload();
             }
 
         },

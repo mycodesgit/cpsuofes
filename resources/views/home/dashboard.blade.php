@@ -181,17 +181,6 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {{-- @php
-                                                        $no = 1;
-                                                    @endphp
-                                                    @foreach ($grouped as $row)
-                                                        <tr>
-                                                            <td>{{ $no ++ }}</td>
-                                                            <td>{{ $row['progCod'] }}</td>
-                                                            <td>{{ $row['program'] }}</td>
-                                                            <td>{{ $row['count'] }}</td>
-                                                        </tr>
-                                                    @endforeach --}}
                                                 </tbody>
                                             </table>
                                         </div>

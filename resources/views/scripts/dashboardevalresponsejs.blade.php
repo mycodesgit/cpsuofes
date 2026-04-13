@@ -1,9 +1,14 @@
 <script>
+    let dataTable;
     $(document).ready(function() {
         var dataTable = $('#evalresponseTable').DataTable({
             "ajax": {
                 "url": dashevalresponseReadRoute,
                 "type": "GET",
+                data: function(d) {
+                    d.campus = $('#campus').val();
+                    d.ratingperiod = $('#ratingperiod').val();
+                }
             },
             destroy: true,
             info: true,
