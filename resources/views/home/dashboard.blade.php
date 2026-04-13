@@ -6,105 +6,162 @@
             <div class="mb-6">
                 <h1 class="fs-3 mb-4">Dashboard</h1>
 
-                <div class="card bg-success bg-opacity-10 border border-success border-opacity-25 rounded-2 mb-3">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="icon-shape icon-md bg-success text-white rounded-2">
-                                <i class="ti ti-user fs-4"></i>
-                            </div>
-                            <div>
-                                <h1 class="mb-0 fs-2">Welcome back, {{ auth()->user()->fname }}!</h1>
-                                <p class="text-secondary mb-0 small">Here's what's happening with your account today.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card p-4 bg-secondary bg-opacity-10 border border-secondary border-opacity-25 rounded-2 mb-3">
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <select name="" id="" class="form-control" placeholder="Search Campus">
-                                    <option value=""> --Select Campus-- </option>
-                                    <option value="MC">Main</option>
-                                    <option value="VC">Victorias</option>
-                                    <option value="SCC">San Carlos</option>
-                                    <option value="HC">Hinigaran</option>
-                                    <option value="MP">Moises Padilla</option>
-                                    <option value="IC">Ilog</option>
-                                    <option value="CA">Candoni</option>
-                                    <option value="CC">Cauayan</option>
-                                    <option value="SC">Sipalay</option>
-                                    <option value="HinC">Hinobaan</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <select name="" id="" class="form-control" placeholder="Search Campus">
-                                    <option value=""> --Select Rating Period-- </option>
-                                    @foreach($currsem as $datacurrsem)
-                                        <option value="{{ $datacurrsem->qceschlyear }}" data-from="{{ $datacurrsem->qceratingfrom }}" data-to="{{ $datacurrsem->qceratingto }}">
-                                            {{ $datacurrsem->qceschlyear }} ({{ $datacurrsem->qceratingfrom }} - {{ $datacurrsem->qceratingto }})
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>   
-                    </form>
-                </div>
-
                 <div class="row g-4 mb-5">
                     <div class="col-lg-3 col-12">
-                        <div class="card p-4 bg-secondary bg-opacity-10 border border-secondary border-opacity-25 rounded-2">
-                            <div class="d-flex gap-3 ">
-                                <div class="icon-shape icon-md bg-secondary text-white rounded-2">
-                                    <i class="ti ti-report-analytics fs-4"></i>
-                                </div>
-                                <div>
-                                    <h1 class="mb-3 fs-2">Grand Total</h1>
-                                    <h1 class="fw-bold mb-0">68</h1>
-                                    <p class="text-secondary mb-0 small">+5% since last month</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-12">
-                        <div class="card p-4  bg-secondary bg-opacity-10 border border-secondary border-opacity-25 rounded-2">
-                            <div class="d-flex gap-3 ">
-                                <div class="icon-shape icon-md bg-secondary text-white rounded-2">
-                                    <i class="ti ti-report-analytics fs-4"></i>
-                                </div>
-                                <div>
-                                    <h1 class="mb-3 fs-2">Institutional</h1>
-                                    <h1 class="fw-bold mb-0">68</h1>
-                                    <p class="text-secondary mb-0 small">+5% since last month</p>
+                        <div class="card card-animate">
+                            <div class="card-body p-6">
+                                <div class="d-flex justify-content-between pb-2">
+                                    <div>
+                                        <h3 class="fw-bold h1">{{ $currfacultySched }}</h3>
+                                        <span>Total Faculty</span>
+                                    </div>
+                                    <div>
+                                        <i class="ti ti-user-code fs-1 text-success"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-12">
-                        <div class="card p-4  bg-secondary bg-opacity-10 border border-secondary border-opacity-25 rounded-2">
-                            <div class="d-flex gap-3 ">
-                                <div class="icon-shape icon-md bg-secondary text-white rounded-2">
-                                    <i class="ti ti-report-analytics fs-4"></i>
-                                </div>
-                                <div>
-                                    <h1 class="mb-3 fs-2">Total Faculty</h1>
-                                    <h1 class="fw-bold mb-0">68</h1>
-                                    <p class="text-secondary mb-0 small">+5% since last month</p>
+                        <div class="card card-animate">
+                            <div class="card-body p-6">
+                                <div class="d-flex justify-content-between pb-2">
+                                    <div>
+                                        <h3 class="fw-bold h1">{{ $currenrolled }}</h3>
+                                        <span>Total Students</span>
+                                    </div>
+                                    <div>
+                                        <i class="ti ti-user-bolt fs-1 text-success"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-12">
-                        <div class="card p-4  bg-secondary bg-opacity-10 border border-secondary border-opacity-25 rounded-2">
-                            <div class="d-flex gap-3 ">
-                                <div class="icon-shape icon-md bg-secondary text-white rounded-2">
-                                    <i class="ti ti-report-analytics fs-4"></i>
+                        <div class="card card-animate">
+                            <div class="card-body p-6">
+                                <div class="d-flex justify-content-between pb-2">
+                                    <div>
+                                        <h3 class="fw-bold h1">{{ $currresponses }}</h3>
+                                        <span>Total Responses</span>
+                                    </div>
+                                    <div>
+                                        <i class="ti ti-user-check fs-1 text-success"></i>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h1 class="mb-3 fs-2">Total Responses</h1>
-                                    <h1 class="fw-bold mb-0">68</h1>
-                                    <p class="text-secondary mb-0 small">+5% since last month</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-12">
+                        <div class="card card-animate">
+                            <div class="card-body p-6">
+                                <div class="d-flex justify-content-between pb-2">
+                                    <div>
+                                        <h3 class="fw-bold h1">{{ $currevalstat->statuseval }}</h3>
+                                        <span>Evaluation Status</span>
+                                    </div>
+                                    <div>
+                                        <i class="ti ti-square-toggle fs-1 text-success"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-animate">
+                            <div class="card-header d-flex justify-content-between align-items-center bg-transparent px-4 py-3">
+                                <h3 class="h5 mb-0">
+                                    <i class="ti ti-chart-pie"></i> Performance Distribution
+                                    <span style="font-size: 12pt" class="text-warning">Faculty by Rating Category</span>
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                @php
+                                    $ratings = [
+                                    5 => 50,
+                                    4 => 25,
+                                    3 => 13,
+                                    2 => 8,
+                                    1 => 4
+                                ];
+                                @endphp
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <canvas id="performancePieChart" style="height: 250px;"></canvas>
+                                    </div>
+                                    <div class="col-md-6">
+                                        @php
+                                            $colors = [
+                                                5 => 'text-success',   
+                                                4 => 'text-success',   
+                                                3 => 'text-warning',   
+                                                2 => 'text-orange',    
+                                                1 => 'text-danger'    
+                                            ];
+                                        @endphp
+                                        <ul class="chart-legend clearfix mt-6" style="list-style: none;">
+                                            <h5 class="mb-3">Qualitative Description:</h5>
+                                            @foreach ($ratescale as $ratescaling)
+                                                <li>
+                                                    <i class="fas fa-circle {{ $colors[$ratescaling->inst_scale] ?? 'text-secondary' }}"></i>
+                                                    {{ $ratescaling->inst_descRating }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-animate">
+                            <div class="card-header d-flex justify-content-between align-items-center bg-transparent px-4 py-3">
+                                <h3 class="h5 mb-0">
+                                    <i class="ti ti-chart-bar"></i> Colleges Summary
+                                    <span style="font-size: 12pt" class="text-warning">Faculty by Rating Category</span>
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="departmentBarChart" style="height: 250px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-12">
+                        <div class="card card-animate">
+                            <div class="card-header d-flex justify-content-between align-items-center bg-transparent px-4 py-3">
+                                <h3 class="h5 mb-0"><i class="ti ti-chart-area"></i> Department Performance Overview</h3>
+                            </div>
+                            <div class="card-body p-6">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Rank</th>
+                                                        <th>Department</th>
+                                                        <th>Avg Grand Total</th>
+                                                        <th>Avg Rating</th>
+                                                        <th>Area A</th>
+                                                        <th>Area B</th>
+                                                        <th>Area C</th>
+                                                        <th>Area D</th>
+                                                        <th>Responses</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -113,4 +170,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const ratingData = @json(array_values($ratings));
+    </script>
+    <script>
+        const deptLabels = @json($labels);
+        const deptData = @json($data);
+        const deptColors  = @json($colors);
+    </script>
 @endsection
