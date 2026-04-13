@@ -131,7 +131,7 @@
                     <div class="col-12 col-lg-12">
                         <div class="card card-animate">
                             <div class="card-header d-flex justify-content-between align-items-center bg-transparent px-4 py-3">
-                                <h3 class="h5 mb-0"><i class="ti ti-chart-area"></i> Department Performance Overview</h3>
+                                <h3 class="h5 mb-0"><i class="ti ti-chart-area"></i> Colleges per year level response overview</h3>
                             </div>
                             <div class="card-body p-6">
                                 <div class="row align-items-center">
@@ -140,19 +140,23 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Rank</th>
-                                                        <th>Department</th>
-                                                        <th>Avg Grand Total</th>
-                                                        <th>Avg Rating</th>
-                                                        <th>Area A</th>
-                                                        <th>Area B</th>
-                                                        <th>Area C</th>
-                                                        <th>Area D</th>
-                                                        <th>Responses</th>
+                                                        <th>No</th>
+                                                        <th>Colleges</th>
+                                                        <th>Program</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    @php
+                                                        $no = 1;
+                                                    @endphp
+                                                    @foreach ($grouped as $row)
+                                                    <tr>
+                                                        <td>{{ $no ++ }}</td>
+                                                        <td>{{ $row['progCod'] }}</td>
+                                                        <td>{{ $row['program'] }}</td>
+                                                        <td>{{ $row['count'] }}</td>
+                                                    </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

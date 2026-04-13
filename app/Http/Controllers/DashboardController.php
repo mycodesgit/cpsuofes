@@ -46,6 +46,8 @@ class DashboardController extends Controller
             ->distinct('faculty_id')
             ->count('faculty_id');
 
+        $currevalstat = QCEsetting::first();
+
         $ratescale = QCEratingscale::where('instratingscalestat', '=', '1')->get();
 
         $ratecollege = College::whereIn('id', [2, 3, 4, 5, 6, 7, 8])->orderBy('college_name', 'ASC')->get()->keyBy('college_abbr');
@@ -106,10 +108,60 @@ class DashboardController extends Controller
             ->where('schlyear', $currsem->first()->qceschlyear)
             ->where('campus', '=', 'MC')
             ->count();
+        
+        $currcollegesresponses = QCEfevalrate::where('semester', $currsem->first()->qcesemester)
+            ->where('schlyear', $currsem->first()->qceschlyear)
+            ->where('campus', '=', 'MC')
+            ->get();
+        
+        $studentIds = $currcollegesresponses->pluck('studidno')->unique();
 
-        $currevalstat = QCEsetting::first();
+        $enrolments = StudEnrolmentHistory::whereIn('studentID', $studentIds)
+            ->whereIn('status', ['2', '3'])
+            ->where('semester', $currsem->first()->qcesemester)
+            ->where('schlyear', $currsem->first()->qceschlyear)
+            ->where('campus', 'MC')
+            ->get()
+            ->keyBy('studentID');
+
+        $merged = $currcollegesresponses->map(function ($item) use ($enrolments) {
+            $enrol = $enrolments->get($item->studidno);
+            if ($enrol) {
+                $item->progCod = $enrol->progCod; 
+                $item->progCod = explode('-', $enrol->progCod)[0];
+                $item->program = $enrol->course; 
+            } else {
+                $item->program = 'UNKNOWN';
+            }
+
+            return $item;
+        });
+
+        $grouped = $merged->groupBy('program')->map(function ($group) {
+            return [
+                'progCod' => $group->first()->progCod,
+                'program' => $group->first()->program,
+                'count'   => $group->count(),
+            ];
+        })->values();
             
-        return view('home.dashboard', compact('currsem', 'currenrolled', 'currfacultySched', 'ratescale', 'ratecollege', 'collegelabels', 'collegedata', 'collegecolors', 'labels',  'data', 'colors', 'currresponses', 'currevalstat'));
+        return view('home.dashboard', compact(
+                            'currsem',
+                            'currenrolled', 
+                            'currfacultySched', 
+                            'currevalstat',
+                            'ratescale', 
+                            'ratecollege', 
+                            'collegelabels', 
+                            'collegedata', 
+                            'collegecolors', 
+                            'labels',  
+                            'data', 
+                            'colors', 
+                            'currresponses', 
+                            'currcollegesresponses',
+                            'grouped'
+                        ));
     }
 
     public function logout()
