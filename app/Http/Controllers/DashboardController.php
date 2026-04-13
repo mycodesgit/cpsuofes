@@ -41,7 +41,7 @@ class DashboardController extends Controller
 
         $cacheKeyPrefix = "dashboard_{$userCampus}_{$schlyearactive}_{$semesteractive}_";
 
-        $currenrolled = Cache::remember($cacheKeyPrefix . 'currfacultysched', 1000, function () use ($currsem) {
+        $currenrolled = Cache::remember($cacheKeyPrefix . 'currstudentsched', 1000, function () use ($currsem) {
             return StudEnrolmentHistory::whereIn('status', ['2', '3'])
             ->where('semester', $currsem->first()->qcesemester)
             ->where('schlyear', $currsem->first()->qceschlyear)
