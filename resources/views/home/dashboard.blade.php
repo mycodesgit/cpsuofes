@@ -95,11 +95,11 @@
                                             ];
                                         @endphp
                                         <ul class="chart-legend clearfix mt-6" style="list-style: none;">
-                                            <h5 class="mb-3">Qualitative Description:</h5>
-                                            @foreach ($ratescale as $ratescaling)
+                                            <h5 class="mb-3">Colleges:</h5>
+                                            @foreach ($ratecollege as $ratecolleges)
                                                 <li>
-                                                    <i class="fas fa-circle {{ $colors[$ratescaling->inst_scale] ?? 'text-secondary' }}"></i>
-                                                    {{ $ratescaling->inst_descRating }}
+                                                    <i class="fas fa-circle {{ $ratecolleges->colcolors ?? 'text-secondary' }}"></i>
+                                                    {{ $ratecolleges->college_name }}
                                                 </li>
                                             @endforeach
                                         </ul>
