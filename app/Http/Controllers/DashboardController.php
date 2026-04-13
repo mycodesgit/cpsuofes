@@ -33,29 +33,33 @@ class DashboardController extends Controller
             ->where('qcesemstat', '2')
             ->orderBy('id', 'DESC')
             ->get();
-
-        $currenrolled = StudEnrolmentHistory::whereIn('status', ['2', '3'])
-            ->where('semester', $currsem->first()->qcesemester)
-            ->where('schlyear', $currsem->first()->qceschlyear)
-            ->where('campus', '=', 'MC')
-            ->count();
-
-        $currfacultySched = SetClassSchedule::where('semester', '2')
-            ->where('schlyear', '2025-2026')
-            ->where('campus', 'MC')
-            ->distinct('faculty_id')
-            ->count('faculty_id');
-
-        $ratescale = QCEratingscale::where('instratingscalestat', '=', '1')->get();
-
-        $ratecollege = College::whereIn('id', [2, 3, 4, 5, 6, 7, 8])->orderBy('college_name', 'ASC')->get()->keyBy('college_abbr');
-
+        
         $schlyearactive = $currsem->first()->qceschlyear ?? null;
         $semesteractive = $currsem->first()->qcesemester ?? null;
 
         $userCampus = Auth::guard('web')->user()->campus;
 
         $cacheKeyPrefix = "dashboard_{$userCampus}_{$schlyearactive}_{$semesteractive}_";
+
+        $currenrolled = Cache::remember($cacheKeyPrefix . 'currfacultysched', 1000, function () use ($currsem) {
+            return StudEnrolmentHistory::whereIn('status', ['2', '3'])
+            ->where('semester', $currsem->first()->qcesemester)
+            ->where('schlyear', $currsem->first()->qceschlyear)
+            ->where('campus', '=', 'MC')
+            ->count();
+        });
+
+        $currfacultySched = Cache::remember($cacheKeyPrefix . 'currfacultysched', 1000, function () use ($currsem) {
+            return SetClassSchedule::where('semester', $currsem->first()->qcesemester)
+            ->where('schlyear', $currsem->first()->qceschlyear)
+            ->where('campus', 'MC')
+            ->distinct('faculty_id')
+            ->count('faculty_id');
+        });
+
+        $ratescale = QCEratingscale::where('instratingscalestat', '=', '1')->get();
+
+        $ratecollege = College::whereIn('id', [2, 3, 4, 5, 6, 7, 8])->orderBy('college_name', 'ASC')->get()->keyBy('college_abbr');
 
         $collegesFirstSemester = Cache::remember($cacheKeyPrefix . 'currentcolleges', 1000, function () use ($userCampus, $schlyearactive, $semesteractive) {
             return College::join('coasv2_db_enrollment.program_en_history', function ($join) {
@@ -86,26 +90,36 @@ class DashboardController extends Controller
         $collegedata = $collegesFirstSemester->pluck('college_count');
         $collegecolors = $collegesFirstSemester->pluck('colcolor');
 
-        $labels = [];
-        $data = [];
-        $colors = [];
-        foreach ($ratecollege as $college) {
-            $labels[] = $college->college_abbr;
 
+        $labels = Cache::remember($cacheKeyPrefix . 'ratecollegelabels', 1000, function () use ($ratecollege) {
+            return $ratecollege->pluck('college_abbr')->toArray();
+        });
+
+        $data = Cache::remember($cacheKeyPrefix . 'ratecollegedata', 1000, function () use ($ratecollege) {
+            $counts = [];
+            foreach ($ratecollege as $college) {
             $count = QCEfevalrate::where('prog', $college->college_abbr)
                 ->where('semester', '2')
                 ->where('schlyear', '2025-2026')
                 ->where('campus', 'MC')
                 ->count();
+            $counts[] = $count;
+            }
+            return $counts;
+        });
 
-            $data[] = $count;
-            $colors[] = $college->colcolor ?? '#4e73df';
-        }
+        $colors = Cache::remember($cacheKeyPrefix . 'ratecollegecolors', 1000, function () use ($ratecollege) {
+            return $ratecollege->pluck('colcolor')->map(function ($color) {
+            return $color ?? '#4e73df';
+            })->toArray();
+        });
 
-        $currresponses = QCEfevalrate::where('semester', $currsem->first()->qcesemester)
-                ->where('schlyear', $currsem->first()->qceschlyear)
-                ->where('campus', '=', 'MC')
-                ->count();
+        $currresponses = Cache::remember($cacheKeyPrefix . 'currresponses', 1000, function () use ($currsem) {
+            return QCEfevalrate::where('semester', $currsem->first()->qcesemester)
+            ->where('schlyear', $currsem->first()->qceschlyear)
+            ->where('campus', '=', 'MC')
+            ->count();
+        });
 
         $currevalstat = QCEsetting::first();
             
