@@ -7,13 +7,11 @@ let pieChart;
 let dataTable;
 
 /* =========================
-   INIT EVERYTHING
+   INITIALIZE CHARTS
 ========================= */
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function () {
 
-    /* =========================
-       INIT PIE CHART
-    ========================= */
+    /* ===== PIE CHART ===== */
     const pieCtx = document.getElementById('collegesPieChart').getContext('2d');
 
     pieChart = new Chart(pieCtx, {
@@ -33,9 +31,7 @@ $(document).ready(function() {
         }
     });
 
-    /* =========================
-       INIT BAR CHART
-    ========================= */
+    /* ===== BAR CHART ===== */
     const barCtx = document.getElementById('departmentBarChart').getContext('2d');
 
     barChart = new Chart(barCtx, {
@@ -45,7 +41,7 @@ $(document).ready(function() {
             datasets: [{
                 label: 'Colleges',
                 data: @json($data),
-                backgroundColor: @json($colors),
+                backgroundColor: @json($collegecolors),
                 borderRadius: 5,
                 barThickness: 30
             }]
@@ -56,9 +52,9 @@ $(document).ready(function() {
         }
     });
 
-    /* =========================
-       INIT DATATABLE
-    ========================= */
+});
+
+$(document).ready(function() {
     dataTable = $('#evalresponseTable').DataTable({
         ajax: {
             url: dashevalresponseReadRoute,
@@ -87,7 +83,7 @@ $(document).ready(function() {
 
 
 /* =========================
-   AJAX SEARCH FILTER
+   AJAX FILTER (SEARCH)
 ========================= */
 $('#filterForm').on('submit', function(e) {
     e.preventDefault();
@@ -109,6 +105,7 @@ $('#filterForm').on('submit', function(e) {
         },
 
         beforeSend: function() {
+            // Optional loading
             $('#facultyCount').text('...');
             $('#studentCount').text('...');
             $('#responseCount').text('...');
@@ -126,6 +123,13 @@ $('#filterForm').on('submit', function(e) {
                 barChart.data.labels = res.labels;
                 barChart.data.datasets[0].data = res.data;
                 barChart.update();
+            }
+
+            /* ===== UPDATE PIE CHART (if included in response) ===== */
+            if (pieChart && res.collegelabels) {
+                pieChart.data.labels = res.collegelabels;
+                pieChart.data.datasets[0].data = res.collegedata;
+                pieChart.update();
             }
 
             /* ===== RELOAD DATATABLE ===== */
