@@ -12,3 +12,8 @@
 .text-orange {
     color: #f39c12;
 }
+
+.btn-block {
+    display: block;
+    width: 100%;
+}

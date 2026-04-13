@@ -44,6 +44,7 @@ Route::group(['middleware'=>['guest']],function(){
 
 Route::group(['middleware'=>['login_empauth']],function(){
     Route::get('/dashboard', [DashboardController::class,'index'])->name('index.dashboard');
+    Route::get('/dashboard/filter', [DashboardController::class, 'filter'])->name('dashboard.filter');
     Route::get('/dashboard/fetch/response', [DashboardController::class,'getevalresponse'])->name('getevalresponse');
     Route::get('/logout', [DashboardController::class, 'logout'])->name('logout');
 

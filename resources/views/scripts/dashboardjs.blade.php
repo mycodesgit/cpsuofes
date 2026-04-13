@@ -1,10 +1,19 @@
-{{-- Number of Student per colleges --}}
 <script>
+/* =========================
+   GLOBAL VARIABLES
+========================= */
+let barChart;
+let pieChart;
+
+/* =========================
+   INITIALIZE CHARTS
+========================= */
 document.addEventListener("DOMContentLoaded", function () {
 
-    const ctx = document.getElementById('collegesPieChart').getContext('2d');
+    /* ===== PIE CHART ===== */
+    const pieCtx = document.getElementById('collegesPieChart').getContext('2d');
 
-    const chart = new Chart(ctx, {
+    pieChart = new Chart(pieCtx, {
         type: 'doughnut',
         data: {
             labels: @json($collegelabels),
@@ -17,79 +26,98 @@ document.addEventListener("DOMContentLoaded", function () {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '60%',
-            plugins: {
-                legend: {
-                    position: 'right',
-                    labels: {
-                        boxWidth: 12,
-                        padding: 15
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let total = context.dataset.data.reduce((a, b) => a + b, 0);
-                            let value = context.raw;
-                            let percent = ((value / total) * 100).toFixed(1);
-                            return context.label + ': ' + value + ' (' + percent + '%)';
-                        }
-                    }
-                }
-            }
+            cutout: '60%'
+        }
+    });
+
+    /* ===== BAR CHART ===== */
+    const barCtx = document.getElementById('departmentBarChart').getContext('2d');
+
+    barChart = new Chart(barCtx, {
+        type: 'bar',
+        data: {
+            labels: @json($labels),
+            datasets: [{
+                label: 'Colleges',
+                data: @json($data),
+                backgroundColor: @json($colors),
+                borderRadius: 5,
+                barThickness: 30
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
         }
     });
 
 });
-</script>
 
-{{-- Department Summary --}}
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const ctx = document.getElementById('departmentBarChart').getContext('2d');
 
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: deptLabels,
-                datasets: [{
-                    label: 'Colleges',
-                    data: deptData,
-                    backgroundColor: [
-                        '#108d6d', // green
-                        '#ed2e40',
-                        '#e83e8c',
-                        '#6610f2',
-                        '#6c757d',
-                        '#fd7e14',
-                        '#007bff'
-                    ],
-                    borderRadius: 5,
-                    barThickness: 30
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 5
-                        }
-                    }
-                }
+/* =========================
+   AJAX FILTER (SEARCH)
+========================= */
+$('#filterForm').on('submit', function(e) {
+    e.preventDefault();
+
+    let campus = $('#campus').val();
+    let ratingperiod = $('#ratingperiod').val();
+
+    if (!campus || !ratingperiod) {
+        alert('Please select Campus and Rating Period');
+        return;
+    }
+
+    $.ajax({
+        url: "{{ route('dashboard.filter') }}",
+        type: "GET",
+        data: {
+            campus: campus,
+            ratingperiod: ratingperiod
+        },
+
+        beforeSend: function() {
+            // Optional loading
+            $('#facultyCount').text('...');
+            $('#studentCount').text('...');
+            $('#responseCount').text('...');
+        },
+
+        success: function(res) {
+
+            /* ===== UPDATE CARDS ===== */
+            $('#facultyCount').text(res.currfacultySched);
+            $('#studentCount').text(res.currenrolled);
+            $('#responseCount').text(res.currresponses);
+
+            /* ===== UPDATE BAR CHART ===== */
+            if (barChart) {
+                barChart.data.labels = res.labels;
+                barChart.data.datasets[0].data = res.data;
+                barChart.update();
             }
-        });
+
+            /* ===== UPDATE PIE CHART (if included in response) ===== */
+            if (pieChart && res.collegelabels) {
+                pieChart.data.labels = res.collegelabels;
+                pieChart.data.datasets[0].data = res.collegedata;
+                pieChart.update();
+            }
+
+        },
+
+        error: function(err) {
+            console.log(err);
+            alert('Something went wrong');
+        }
     });
+});
+
+
+/* =========================
+   AUTO SEARCH (OPTIONAL)
+========================= */
+// $('#campus, #ratingperiod').change(function() {
+//     $('#filterForm').submit();
+// });
 </script>

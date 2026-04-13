@@ -5,14 +5,48 @@
         <div class="col-12">
             <div class="mb-6">
                 <h1 class="fs-3 mb-4">Dashboard</h1>
-
                 <div class="row g-4 mb-5">
+                    <div class="col-lg-12">
+                        <div class="card card-animate bg-light">
+                            <div class="card-body">
+                                <form id="filterForm">
+                                    <div class="form-group mb-3">
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <label>Campus: <span class="text-danger">*</span></label>
+                                                <select name="campus" id="campus" class="form-control form-control-sm">
+                                                    <option value=""> --Select-- </option>
+                                                    @foreach ($campuses as $campus)
+                                                        <option value="{{ $campus->code }}">{{ $campus->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Rating Period: <span class="text-danger">*</span></label>
+                                                <select name="ratingperiod" id="ratingperiod" class="form-control form-control-sm">
+                                                    <option value=""> --Select-- </option>
+                                                    @foreach ($currsem as $currsemesterschlyear)
+                                                        <option value="{{ $currsemesterschlyear->id }}">{{ $currsemesterschlyear->qceratingfrom }} - {{ $currsemesterschlyear->qceratingto }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>&nbsp;</label>
+                                                <button type="submit" class="btn btn-success btn-block btn-sm">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-lg-3 col-12">
                         <div class="card card-animate">
                             <div class="card-body p-6">
                                 <div class="d-flex justify-content-between pb-2">
                                     <div>
-                                        <h3 class="fw-bold h1">{{ $currfacultySched }}</h3>
+                                        <h3 id="facultyCount" class="fw-bold h1">{{ $currfacultySched }}</h3>
                                         <span>Total Faculty</span>
                                     </div>
                                     <div>
@@ -28,7 +62,7 @@
                             <div class="card-body p-6">
                                 <div class="d-flex justify-content-between pb-2">
                                     <div>
-                                        <h3 class="fw-bold h1">{{ $currenrolled }}</h3>
+                                        <h3 id="studentCount" class="fw-bold h1">{{ $currenrolled }}</h3>
                                         <span>Total Students</span>
                                     </div>
                                     <div>
@@ -44,7 +78,7 @@
                             <div class="card-body p-6">
                                 <div class="d-flex justify-content-between pb-2">
                                     <div>
-                                        <h3 class="fw-bold h1">{{ $currresponses }}</h3>
+                                        <h3 id="responseCount" class="fw-bold h1">{{ $currresponses }}</h3>
                                         <span>Total Responses</span>
                                     </div>
                                     <div>
@@ -178,4 +212,6 @@
 
         var dashevalresponseReadRoute = "{{ route('getevalresponse') }}";
     </script>
+
+    
 @endsection

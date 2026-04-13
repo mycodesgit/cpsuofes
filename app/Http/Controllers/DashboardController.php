@@ -25,10 +25,18 @@ use App\Models\ScheduleDB\Faculty;
 use App\Models\ScheduleDB\SetClassSchedule;
 use App\Models\ScheduleDB\College;
 
+use App\Models\SettingDB\Campus;
+
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $campus = $request->query('campus');
+        $ratingperiod = $request->query('ratingperiod');
+        $userCampus = Auth::guard('web')->user()->campus;
+
+        $campuses = Campus::all();
+
         $currsem = QCEsemester::select('id', 'qceschlyear', 'qcesemester', 'qceratingfrom', 'qceratingto')
             ->where('qcesemstat', '2')
             ->orderBy('id', 'DESC')
@@ -37,7 +45,7 @@ class DashboardController extends Controller
         $currenrolled = StudEnrolmentHistory::whereIn('status', ['2', '3'])
             ->where('semester', $currsem->first()->qcesemester)
             ->where('schlyear', $currsem->first()->qceschlyear)
-            ->where('campus', '=', 'MC')
+            ->where('campus', '=', $userCampus)
             ->where('studentID', 'NOT LIKE', '%-G%')
             ->count();
 
@@ -56,8 +64,6 @@ class DashboardController extends Controller
         $schlyearactive = $currsem->first()->qceschlyear ?? null;
         $semesteractive = $currsem->first()->qcesemester ?? null;
 
-        $userCampus = Auth::guard('web')->user()->campus;
-
         $cacheKeyPrefix = "dashboard_{$userCampus}_{$schlyearactive}_{$semesteractive}_";
 
         $collegesFirstSemester = Cache::remember($cacheKeyPrefix . 'currentcolleges', 1000, function () use ($userCampus, $schlyearactive, $semesteractive) {
@@ -67,8 +73,8 @@ class DashboardController extends Controller
                 ->whereIn('college.id', [2, 3, 4, 5, 6, 7, 8])
                 ->where(function ($query) use ($userCampus) {
                     $campuses = explode(', ', $userCampus);
-                    foreach ($campuses as $campus) {
-                        $query->orWhere('college.campus', 'LIKE', '%' . $campus . '%');
+                    foreach ($campuses as $userCampus) {
+                        $query->orWhere('college.campus', 'LIKE', '%' . $userCampus . '%');
                     }
                 })
                 ->where('coasv2_db_enrollment.program_en_history.semester', $semesteractive)
@@ -98,7 +104,7 @@ class DashboardController extends Controller
             $count = QCEfevalrate::where('prog', $college->college_abbr)
                 ->where('semester', '2')
                 ->where('schlyear', '2025-2026')
-                ->where('campus', 'MC')
+                ->where('campus', $userCampus)
                 ->count();
 
             $data[] = $count;
@@ -107,12 +113,13 @@ class DashboardController extends Controller
 
         $currresponses = QCEfevalrate::where('semester', $currsem->first()->qcesemester)
             ->where('schlyear', $currsem->first()->qceschlyear)
-            ->where('campus', '=', 'MC')
+            ->where('campus', '=', $userCampus)
             ->count();
         
         
             
         return view('home.dashboard', compact(
+                            'campuses',
                             'currsem',
                             'currenrolled', 
                             'currfacultySched', 
@@ -127,6 +134,110 @@ class DashboardController extends Controller
                             'colors', 
                             'currresponses', 
                         ));
+    }
+
+    public function filter(Request $request)
+    {
+        $campus = $request->campus;
+        $ratingperiod = $request->ratingperiod;
+
+        $currsem = QCEsemester::find($ratingperiod);
+
+        if (!$currsem) {
+            return response()->json(['error' => 'Invalid rating period'], 400);
+        }
+
+        $semester = $currsem->qcesemester;
+        $schlyear = $currsem->qceschlyear;
+
+        // TOTAL STUDENTS
+        $currenrolled = StudEnrolmentHistory::whereIn('status', ['2', '3'])
+            ->where('semester', $semester)
+            ->where('schlyear', $schlyear)
+            ->where('campus', $campus)
+            ->where('studentID', 'NOT LIKE', '%-G%')
+            ->count();
+
+        // TOTAL FACULTY
+        $currfacultySched = SetClassSchedule::where('semester', $semester)
+            ->where('schlyear', $schlyear)
+            ->where('campus', $campus)
+            ->distinct('faculty_id')
+            ->count('faculty_id');
+
+        // TOTAL RESPONSES
+        $currresponses = QCEfevalrate::where('semester', $semester)
+            ->where('schlyear', $schlyear)
+            ->where('campus', $campus)
+            ->count();
+
+        // BAR CHART DATA
+        $ratecollege = College::whereIn('id', [2,3,4,5,6,7,8])
+            ->orderBy('college_name', 'ASC')
+            ->get();
+
+        $schlyearactive = $currsem->first()->qceschlyear ?? null;
+        $semesteractive = $currsem->first()->qcesemester ?? null;
+
+        $cacheKeyPrefix = "dashboard_{$campus}_{$schlyearactive}_{$semesteractive}_";
+
+        $collegesFirstSemester = Cache::remember($cacheKeyPrefix . 'currentcolleges', 1000, function () use ($campus, $schlyearactive, $semesteractive) {
+            return College::join('coasv2_db_enrollment.program_en_history', function ($join) {
+                    $join->on(DB::raw("SUBSTRING_INDEX(coasv2_db_enrollment.program_en_history.progCod, '-', 1)"), '=', 'college.college_abbr');
+                })
+                ->whereIn('college.id', [2, 3, 4, 5, 6, 7, 8])
+                ->where(function ($query) use ($campus) {
+                    $campuses = explode(', ', $campus);
+                    foreach ($campuses as $campus) {
+                        $query->orWhere('college.campus', 'LIKE', '%' . $campus . '%');
+                    }
+                })
+                ->where('coasv2_db_enrollment.program_en_history.semester', $semesteractive)
+                ->where('coasv2_db_enrollment.program_en_history.schlyear', $schlyearactive)
+                ->where('coasv2_db_enrollment.program_en_history.campus', $campus)
+                ->whereIn('coasv2_db_enrollment.program_en_history.status', [2, 3])
+                ->select(
+                    'college.college_abbr',
+                    'college.colcolor',
+                    DB::raw('COUNT(DISTINCT coasv2_db_enrollment.program_en_history.studentID) as college_count')
+                )
+                ->groupBy('college.id', 'college.college_abbr', 'college.colcolor')
+                ->orderBy('college_name', 'ASC')
+                ->get();
+        });
+
+        $collegelabels = $collegesFirstSemester->pluck('college_abbr');
+        $collegedata = $collegesFirstSemester->pluck('college_count');
+        $collegecolors = $collegesFirstSemester->pluck('colcolor');
+
+        $labels = [];
+        $data = [];
+        $colors = [];
+
+        foreach ($ratecollege as $college) {
+            $labels[] = $college->college_abbr;
+
+            $count = QCEfevalrate::where('prog', $college->college_abbr)
+                ->where('semester', $semester)
+                ->where('schlyear', $schlyear)
+                ->where('campus', $campus)
+                ->count();
+
+            $data[] = $count;
+            $colors[] = $college->colcolor ?? '#4e73df';
+        }
+
+        return response()->json([
+            'currenrolled' => $currenrolled,
+            'currfacultySched' => $currfacultySched,
+            'currresponses' => $currresponses,
+            'collegelabels' => $collegelabels,
+            'collegedata' => $collegedata,
+            'collegecolors' => $collegecolors,
+            'labels' => $labels,
+            'data' => $data,
+            'colors' => $colors
+        ]);
     }
 
     public function getevalresponse() 
