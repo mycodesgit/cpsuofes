@@ -283,7 +283,12 @@
                 }, index * 90); // stagger effect
             });
         });
-        
+        $('#collegeID').on('change', function () {
+            var data = $('#collegeID').select2('data');
+            var color = data[0].element.getAttribute('data-color');
+            
+            $('#eventcolor').val(color);
+        });
     </script>
 
 

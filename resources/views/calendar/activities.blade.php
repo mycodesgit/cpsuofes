@@ -88,12 +88,5 @@
         var eventschedReadRoute = "{{ route('calendar.fetch') }}";
         var eventschedCalendarRoute = "{{ route('calendar.show') }}";
         var eventschedCreateRoute = "{{ route('calendar.create') }}";
-
-        $('#collegeID').on('change', function () {
-            var data = $('#collegeID').select2('data');
-            var color = data[0].element.getAttribute('data-color');
-            
-            $('#eventcolor').val(color);
-        });
     </script>
 @endsection
