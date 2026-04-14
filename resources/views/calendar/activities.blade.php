@@ -61,7 +61,7 @@
                                             <option value="{{ $dataoffice->id }}" data-color="{{ $dataoffice->color }}">{{ $dataoffice->office_name }}</option>
                                         @endforeach
                                     </select>
-                                    <input type="hidden" name="eventcolor" id="eventcolor" class="form-control ">
+                                    <input type="hidden" name="eventcolor" id="eventcolor" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -88,5 +88,12 @@
         var eventschedReadRoute = "{{ route('calendar.fetch') }}";
         var eventschedCalendarRoute = "{{ route('calendar.show') }}";
         var eventschedCreateRoute = "{{ route('calendar.create') }}";
+
+        $('#collegeID').on('change', function () {
+            var data = $('#collegeID').select2('data');
+            var color = data[0].element.getAttribute('data-color');
+            
+            $('#eventcolor').val(color);
+        });
     </script>
 @endsection

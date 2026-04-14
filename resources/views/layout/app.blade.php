@@ -283,6 +283,7 @@
                 }, index * 90); // stagger effect
             });
         });
+        
     </script>
 
 
