@@ -54,7 +54,7 @@ class CalendarController extends Controller
         $request->validate([
             'eventname' => 'required',
             'start' => 'required|date',
-            'end' => 'required',
+            'end' => 'required|date|after_or_equal:start',
             'collegeID' => 'required',
         ]);
 
