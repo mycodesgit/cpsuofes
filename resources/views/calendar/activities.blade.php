@@ -55,7 +55,7 @@
                             <div class="form-row">
                                 <div class="col-md-12">
                                     <label>Office/Department:</label>
-                                    <select name="collegeID" id="collegeID" class="form-control select2bs4">
+                                    <select name="collegeID" id="collegeID" class="form-control select2">
                                         <option disabled selected> --Select-- </option>
                                         @foreach ($office as $dataoffice)
                                             <option value="{{ $dataoffice->id }}" data-color="{{ $dataoffice->color }}">{{ $dataoffice->office_name }}</option>

@@ -263,11 +263,15 @@
 
     <script>
         $(function () {
-            $('.select2').select2();
+            $('.select2').each(function () {
+                $(this).select2({
+                    dropdownParent: $(this).closest('.modal'),
+                });
+            });
 
             $('.select2bs4').select2({
                 theme: 'bootstrap4',
-                //height: '150'
+                height: '100',
             })
         });
         document.addEventListener("DOMContentLoaded", function () {
