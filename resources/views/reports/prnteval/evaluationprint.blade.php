@@ -78,7 +78,7 @@
 
                                                         <div class="col-md-3">
                                                             <label class="mb-1">Course <span class="text-danger">*</span></label>
-                                                            <select class="form-control form-control-sm select2" name="progCod" id="progCod">
+                                                            <select class="form-control form-control-sm select2bs4" name="progCod" id="progCod">
                                                                 <option disabled selected> --Select-- </option>
                                                             </select>
                                                         </div>
