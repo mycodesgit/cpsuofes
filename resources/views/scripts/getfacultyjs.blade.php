@@ -2,10 +2,14 @@
     $(document).ready(function () {
         function fetchFaculty() {
             var campus = $('#campus').val();
+            var dept = $('#dept').val();
+
             if (Array.isArray(campus)) {
                 campus = campus.join(',');
             }
-            var dept = $('#dept').val();
+
+            console.log("Campus:", campus);
+            console.log("Dept:", dept);
 
             if (campus && dept) {
                 $.ajax({
@@ -16,19 +20,27 @@
                         dept: dept
                     },
                     success: function (data) {
-                        $('#faclty').empty();
-                        $('#faclty').append('<option disabled selected>Select a Faculty</option>');
+                        $('#progCod').empty();
+                        $('#progCod').append('<option disabled selected>-- Select Faculty --</option>');
+
                         $.each(data, function (key, value) {
-                            $('#faclty').append('<option value="' + value.fctyid + '">' + value.lname + ', ' + value.fname + '</option>');
+                            $('#progCod').append(
+                                '<option value="' + value.fctyid + '">' +
+                                value.lname + ', ' + value.fname +
+                                '</option>'
+                            );
                         });
+                    },
+                    error: function (xhr) {
+                        console.log("Error:", xhr.responseText);
                     }
                 });
             }
         }
-
-        $('#campus, #dept').change(function () {
+        $('#campus, #dept').on('change', function () {
             fetchFaculty();
         });
+
     });
 
 
