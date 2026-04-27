@@ -93,7 +93,7 @@
                                 </a>
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
-                                <a href="{{ route('facultyFilter', ['campus' => encrypt('CC')]) }}">
+                                <a href="{{ route('studaccountsearch', ['campus' => encrypt('CC')]) }}">
                                     <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
