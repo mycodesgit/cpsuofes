@@ -2,15 +2,10 @@
     $(document).ready(function () {
         function fetchFaculty() {
 
-            var campus = $('#campus').val();
-            var dept = $('#dept').val();
+            var campus = $('#campus').val()?.trim();
+            var dept   = $('#dept').val();
 
-            // if (Array.isArray(campus)) {
-            //     campus = campus.join(',');
-            // }
-
-            console.log("Campus:", campus);
-            console.log("Dept:", dept);
+            console.log("Fetching → Campus:", campus, "| Dept:", dept);
 
             if (campus && dept) {
                 $.ajax({

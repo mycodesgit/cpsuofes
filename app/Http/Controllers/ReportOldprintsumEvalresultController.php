@@ -78,7 +78,12 @@ class ReportOldprintsumEvalresultController extends Controller
 
         $faclty = Faculty::join('addressee', 'faculty.adrID', '=', 'addressee.id')
             ->join('college', 'faculty.faccollege', '=', 'college.college_abbr')
-            ->whereRaw('FIND_IN_SET(?, faculty.campus)', [$campus])
+            ->when($campus, function ($query, $campus) {
+                return $query->whereRaw(
+                    "FIND_IN_SET(?, REPLACE(faculty.campus, ' ', ''))",
+                    [$campus]
+                );
+            })
             ->when($dept, function ($query, $dept) {
                 return $query->where('faculty.faccollege', $dept);
             })
