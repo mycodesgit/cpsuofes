@@ -81,10 +81,10 @@ class ReportOldprintsumEvalresultController extends Controller
             ->join('college', 'faculty.facdept', '=', 'college.college_abbr')
             // ->where('faculty.campus', $campus)
             ->where(function ($q) use ($campusArray) {
-                    foreach ($campusArray as $campus) {
-                        $q->orWhere('faculty.campus', 'LIKE', "%$campus%");
-                    }
-                })
+                foreach ($campusArray as $campus) {
+                    $q->orWhereRaw("FIND_IN_SET(?, faculty.campus)", [$campus]);
+                }
+            })
             ->when($dept, function ($query, $dept) {
                 return $query->where('faculty.facdept', $dept);
             })
