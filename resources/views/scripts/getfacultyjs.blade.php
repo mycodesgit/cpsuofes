@@ -1,6 +1,7 @@
 <script>
     $(document).ready(function () {
         function fetchFaculty() {
+
             var campus = $('#campus').val();
             var dept = $('#dept').val();
 
@@ -20,27 +21,19 @@
                         dept: dept
                     },
                     success: function (data) {
-                        $('#progCod').empty();
-                        $('#progCod').append('<option disabled selected>-- Select Faculty --</option>');
-
+                        $('#faclty').empty();
+                        $('#faclty').append('<option disabled selected>Select a Faculty</option>');
                         $.each(data, function (key, value) {
-                            $('#progCod').append(
-                                '<option value="' + value.fctyid + '">' +
-                                value.lname + ', ' + value.fname +
-                                '</option>'
-                            );
+                            $('#faclty').append('<option value="' + value.fctyid + '">' + value.lname + ', ' + value.fname + '</option>');
                         });
-                    },
-                    error: function (xhr) {
-                        console.log("Error:", xhr.responseText);
                     }
                 });
             }
         }
-        $('#campus, #dept').on('change', function () {
+
+        $('#campus, #dept').change(function () {
             fetchFaculty();
         });
-
     });
 
 
