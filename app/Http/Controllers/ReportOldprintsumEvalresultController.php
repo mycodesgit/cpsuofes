@@ -74,17 +74,11 @@ class ReportOldprintsumEvalresultController extends Controller
     public function getFacultycamp(Request $request)
     {
         $campus = $request->campus;
-        $campusArray = array_map('trim', explode(',', $campus));
         $dept = $request->dept;
 
         $faclty = Faculty::join('addressee', 'faculty.adrID', '=', 'addressee.id')
             ->join('college', 'faculty.faccollege', '=', 'college.college_abbr')
-            // ->where('faculty.campus', $campus)
-            ->where(function ($q) use ($campusArray) {
-                foreach ($campusArray as $campus) {
-                    $q->orWhere('faculty.campus', 'LIKE', "%$campus%");
-                }
-            })
+            ->whereRaw('FIND_IN_SET(?, faculty.campus)', [$campus])
             ->when($dept, function ($query, $dept) {
                 return $query->where('faculty.faccollege', $dept);
             })

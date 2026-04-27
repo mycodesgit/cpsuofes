@@ -5,9 +5,9 @@
             var campus = $('#campus').val();
             var dept = $('#dept').val();
 
-            if (Array.isArray(campus)) {
-                campus = campus.join(',');
-            }
+            // if (Array.isArray(campus)) {
+            //     campus = campus.join(',');
+            // }
 
             console.log("Campus:", campus);
             console.log("Dept:", dept);
@@ -26,6 +26,7 @@
                         $.each(data, function (key, value) {
                             $('#faclty').append('<option value="' + value.fctyid + '">' + value.lname + ', ' + value.fname + '</option>');
                         });
+                        //$('#faclty').trigger('change');
                     }
                 });
             }
