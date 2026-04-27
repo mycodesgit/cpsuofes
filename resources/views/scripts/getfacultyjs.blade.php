@@ -2,6 +2,9 @@
     $(document).ready(function () {
         function fetchFaculty() {
             var campus = $('#campus').val();
+            if (Array.isArray(campus)) {
+                campus = campus.join(',');
+            }
             var dept = $('#dept').val();
 
             if (campus && dept) {
