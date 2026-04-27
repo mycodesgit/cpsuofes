@@ -78,7 +78,7 @@ class ReportOldprintsumEvalresultController extends Controller
         $dept = $request->dept;
 
         $faclty = Faculty::join('addressee', 'faculty.adrID', '=', 'addressee.id')
-            ->join('college', 'faculty.dept', '=', 'college.college_abbr')
+            ->join('college', 'faculty.facdept', '=', 'college.college_abbr')
             // ->where('faculty.campus', $campus)
             ->where(function ($q) use ($campusArray) {
                     foreach ($campusArray as $campus) {
@@ -86,7 +86,7 @@ class ReportOldprintsumEvalresultController extends Controller
                     }
                 })
             ->when($dept, function ($query, $dept) {
-                return $query->where('faculty.dept', $dept);
+                return $query->where('faculty.facdept', $dept);
             })
             ->select('faculty.*', 'faculty.id as fctyid', 'faculty.campus as fcamp', 'college.*', 'addressee.*', 'addressee.id as adrid')
             ->orderBy('faculty.lname')
