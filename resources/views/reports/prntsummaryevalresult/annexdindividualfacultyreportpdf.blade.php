@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>FACULTY EVALUATION AND DEVELOPMENT ACKNOLWEDGEMENT FORM</title>
+	<title>FACULTY EVALUATION AND DEVELOPMENT ACKNOWLEDGEMENT FORM</title>
 	<style>
 		body {
 			font-size: 12pt;
