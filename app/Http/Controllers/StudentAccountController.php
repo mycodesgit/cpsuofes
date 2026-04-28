@@ -39,7 +39,7 @@ class StudentAccountController extends Controller
                 //->where('campus', $campusArray)
                 ->where(function ($q) use ($campusArray) {
                     foreach ($campusArray as $campus) {
-                        $q->orWhereRaw("FIND_IN_SET(?, REPLACE(students.campus, ' ', ''))", [$campus]);
+                        $q->orWhere('campus', 'LIKE', "%$campus%");
                     }
                 })
                 ->first();

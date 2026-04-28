@@ -105,7 +105,7 @@
                                 </a>
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
-                                <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('SP')]) }}">
+                                <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('SC')]) }}">
                                     <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
