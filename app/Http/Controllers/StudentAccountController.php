@@ -37,10 +37,16 @@ class StudentAccountController extends Controller
 
         $student = Student::where('stud_id', $id)
                 //->where('campus', $campusArray)
-                ->where(function ($q) use ($campusArray) {
-                    foreach ($campusArray as $campus) {
-                        $q->orWhere('campus', 'LIKE', "%$campus%");
-                    }
+                // ->where(function ($q) use ($campusArray) {
+                //     foreach ($campusArray as $campus) {
+                //         $q->orWhere('campus', 'LIKE', "%$campus%");
+                //     }
+                // })
+                 ->when($campus, function ($query, $campus) {
+                    return $query->whereRaw(
+                        "FIND_IN_SET(?, REPLACE(campus, ' ', ''))",
+                        [$campus]
+                    );
                 })
                 ->first();
         if ($student) {
