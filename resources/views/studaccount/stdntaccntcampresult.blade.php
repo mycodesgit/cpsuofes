@@ -42,7 +42,7 @@
     </div>
 
     <div class="modal fade" id="addStudentAccntModal" tabindex="-1" role="dialog" aria-labelledby="addStudentAccntModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title" id="addStudentAccntModalLabel">Add New</h6>
@@ -54,7 +54,7 @@
 
                     <div class="modal-body">
                         <div class="form-group">
-                            <div class="form-row">
+                            <div class="row f-3">
                                 <div class="col-md-12">
                                     <label>Student ID No.: <span class="text-danger">*</span></label>
                                     <input type="text" name="studid" class="form-control" oninput="formatInput(this); this.value = this.value.toUpperCase(); fetchStudentName(this.value);" autofocus>
@@ -62,8 +62,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="form-row">
+                        <div class="form-group mt-3">
+                            <div class="row f-3">
                                 <div class="col-md-12">
                                     <label>Name: <span class="text-danger">*</span></label>
                                     <input type="text" id="studentName" class="form-control" readonly>
@@ -71,8 +71,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="form-row">
+                        <div class="form-group mt-3">
+                            <div class="row f-3">
                                 <div class="col-md-12">
                                     <label>Password: <span class="text-danger">*</span></label>
                                     <input type="text" name="password" id="passwordInput" oninput="this.value = this.value.toUpperCase()" placeholder="Enter Password" class="form-control" readonly="">
@@ -82,10 +82,10 @@
                     </div>
                 
                     <div class="modal-footer justify-content-between">
-                        <button type="button" id="generatePassword" class="btn btn-success">
+                        <button type="button" id="generatePassword" class="btn btn-info">
                             <i class="fas fa-key"></i> Generate Pass
                         </button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
                     </div>
                 </form>
             </div>
