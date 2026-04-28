@@ -96,7 +96,7 @@
                     
                     @if(in_array(Auth::guard('web')->user()->role, [0,1,3,4]))
                         <div class="col-md-12">
-                            <div class="card">
+                            <div class="card card-animate">
                                 <div class="card-header pt-3">
                                     <h6 class="card-title">
                                         <i class="ti ti-search"></i> Search Student Evaluation for Teacher
