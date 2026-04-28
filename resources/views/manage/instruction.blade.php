@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="card">
+                        <div class="card card-animate">
                             <div class="card-header pt-3">
                                 <h6 class="card-title">
                                     <i class="fas fa-list"></i> List
