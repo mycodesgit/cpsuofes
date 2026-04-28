@@ -71,7 +71,7 @@
                     data: 'studkiosid',
                     render: function(data, type, row) {
                         if (type === 'display') {
-                            return '<button class="btn btn-primary btn-sm btn-kioskuseredit" data-id="' + row.studkiosid + '" data-studid="' + row.studid + '">' +
+                            return '<button class="btn btn-success btn-sm btn-kioskuseredit text-light" data-id="' + row.studkiosid + '" data-studid="' + row.studid + '">' +
                                 '<i class="fas fa-pen"></i>' +
                                 '</button>';
                         } else {
