@@ -10,7 +10,7 @@
                         <div class="row mb-5 g-5">
                             <div class="col-xl-3 col-md-6 col-12">
                                 <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('MC')]) }}">
-                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
+                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover card-animate">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
                                                 <span class="fs-2 fw-bold mb-0 d-block">Main</span>
@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
                                 <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('VC')]) }}">
-                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
+                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover card-animate">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
                                                 <span class="fs-2 fw-bold mb-0 d-block">Victorias</span>
@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
                                 <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('SCC')]) }}">
-                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
+                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover card-animate">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
                                                 <span class="fs-2 fw-bold mb-0 d-block">San Carlos</span>
@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
                                 <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('HC')]) }}">
-                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
+                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover card-animate">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
                                                 <span class="fs-2 fw-bold mb-0 d-block">Hinigaran</span>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
                                 <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('MP')]) }}">
-                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
+                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover card-animate">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
                                                 <span class="fs-2 fw-bold mb-0 d-block">Moises Padilla</span>
@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
                                 <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('IC')]) }}">
-                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
+                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover card-animate">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
                                                 <span class="fs-2 fw-bold mb-0 d-block">Ilog</span>
@@ -82,7 +82,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
                                 <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('CA')]) }}">
-                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
+                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover card-animate">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
                                                 <span class="fs-2 fw-bold mb-0 d-block">Candoni</span>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
                                 <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('CC')]) }}">
-                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
+                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover card-animate">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
                                                 <span class="fs-2 fw-bold mb-0 d-block">Cauayan</span>
@@ -106,7 +106,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
                                 <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('SC')]) }}">
-                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
+                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover card-animate">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
                                                 <span class="fs-2 fw-bold mb-0 d-block">Sipalay</span>
@@ -118,7 +118,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6 col-12">
                                 <a href="{{ route('studaccountsearch.store', ['campus' => encrypt('HinC')]) }}">
-                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover">
+                                    <div class="card bg-secondary bg-opacity-10 border-secondary border-opacity-25 card-hover card-animate">
                                         <div class="card-body p-5">
                                             <div class="d-flex flex-column">
                                                 <span class="fs-2 fw-bold mb-0 d-block">Hinobaan</span>
