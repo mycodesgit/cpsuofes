@@ -57,10 +57,15 @@ class StudentAccountController extends Controller
         $campusArray = array_map('trim', explode(',', $decryptedCampus));
         $data = KioskUser::join('students', 'kioskstudent.studid', '=', 'students.stud_id')
                     // ->where('students.campus', $campusArray)
-                    ->where(function ($q) use ($campusArray) {
-                        foreach ($campusArray as $campus) {
-                            $q->orWhere('campus', 'LIKE', "%$campus%");
-                        }
+                    ->when(!empty($campusArray), function ($query) use ($campusArray) {
+                        $query->where(function ($q) use ($campusArray) {
+                            foreach ($campusArray as $camp) {
+                                $q->orWhereRaw(
+                                    "FIND_IN_SET(?, REPLACE(students.campus, ' ', ''))",
+                                    [$camp]
+                                );
+                            }
+                        });
                     })
                     ->select('kioskstudent.*', 'kioskstudent.id as studkiosid', 'students.lname', 'students.fname', 'students.mname', 'students.campus')
                     ->get();
