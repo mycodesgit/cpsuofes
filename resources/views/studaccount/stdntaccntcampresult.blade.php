@@ -56,7 +56,7 @@
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-12">
-                                    <label><span class="badge badge-secondary">Student ID No.:</span></label>
+                                    <label>Student ID No.: <span class="text-danger">*</span></label>
                                     <input type="text" name="studid" class="form-control" oninput="formatInput(this); this.value = this.value.toUpperCase(); fetchStudentName(this.value);" autofocus>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-12">
-                                    <label><span class="badge badge-secondary">Name:</span></label>
+                                    <label>Name: <span class="text-danger">*</span></label>
                                     <input type="text" id="studentName" class="form-control" readonly>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-12">
-                                    <label><span class="badge badge-secondary">Password:</span></label>
+                                    <label>Password: <span class="text-danger">*</span></label>
                                     <input type="text" name="password" id="passwordInput" oninput="this.value = this.value.toUpperCase()" placeholder="Enter Password" class="form-control" readonly="">
                                 </div>
                             </div>
