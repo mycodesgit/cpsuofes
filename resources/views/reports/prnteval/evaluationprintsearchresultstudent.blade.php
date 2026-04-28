@@ -7,7 +7,7 @@
                 <h1 class="fs-3 mb-4">Print Evaluation</h1>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card">
+                        <div class="card card-animate">
                             <div class="card-header pt-3">
                                 <h6 class="card-title">
                                     <i class="ti ti-printer"></i> To be print
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card">
+                        <div class="card card-animate">
                             <div class="card-header pt-3">
                                 <h6 class="card-title">
                                     <i class="ti ti-printer"></i> Done print

@@ -7,7 +7,7 @@
                 <h1 class="fs-3 mb-4">Questions</h1>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card">
+                        <div class="card card-animate">
                             <div class="card-header pt-3">
                                 <h6 class="card-title">
                                     <i class="ti ti-plus"></i> Add New
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="card">
+                        <div class="card card-animate">
                             <div class="card-header pt-3">
                                 <h6 class="card-title">
                                     <ul class="nav nav-pills mb-3 bg-light p-2 rounded-2 d-inline-flex" id="pills-tab" role="tablist">

@@ -7,7 +7,7 @@
                 <h1 class="fs-3 mb-4">Student Accounts</h1>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
+                        <div class="card card-animate">
                             <div class="card-header pt-3">
                                 <h5 class="card-title">
                                     <i class="fas fa-list"></i> List

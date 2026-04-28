@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="mb-6">
                 <h1 class="fs-3 mb-4">Faculty</h1>
-                <div class="card">
+                <div class="card card-animate">
                     <div class="card-body">
                         <div>
                             <table id="facltyTable" class="table table-hover">

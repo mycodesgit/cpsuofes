@@ -7,7 +7,7 @@
                 <h1 class="fs-3 mb-4">Print Evaluation</h1>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
+                        <div class="card card-animate">
                             <div class="card-body">
                                 <ul class="nav nav-pills mb-3 bg-light p-2 rounded-2 d-inline-flex" id="pills-tab" role="tablist">
                                     <li class="nav-item" role="presentation">

@@ -10,7 +10,7 @@
                         <form method="post" action="{{ route('toggleEval') }}" id="">
                             @csrf
 
-                            <div class="alert alert-secondary alert-dismissible">
+                            <div class="alert alert-secondary alert-dismissible card-animate">
                                 <div class="form-group mt-3">
                                     <div class="form-row">
                                         <div class="col-8">

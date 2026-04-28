@@ -7,7 +7,7 @@
                 <h1 class="fs-3 mb-4">Instruction</h1>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card">
+                        <div class="card card-animate">
                             <div class="card-header pt-3">
                                 <h6 class="card-title">
                                     <i class="ti ti-plus"></i> Add New
