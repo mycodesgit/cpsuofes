@@ -32,23 +32,26 @@ class StudentAccountController extends Controller
     public function getStudentById(Request $request, $id)
     {
         $campus = $request->query('campus');
-        $decryptedCampus = Crypt::decrypt($campus);
-        $campusArray = array_map('trim', explode(',', $decryptedCampus));
+
+        $campusArray = [];
+        if ($campus) {
+            $decryptedCampus = Crypt::decrypt($campus);
+            $campusArray = array_map('trim', explode(',', $decryptedCampus));
+        }
 
         $student = Student::where('stud_id', $id)
-                //->where('campus', $campusArray)
-                // ->where(function ($q) use ($campusArray) {
-                //     foreach ($campusArray as $campus) {
-                //         $q->orWhere('campus', 'LIKE', "%$campus%");
-                //     }
-                // })
-                 ->when($campus, function ($query, $campus) {
-                    return $query->whereRaw(
-                        "FIND_IN_SET(?, REPLACE(campus, ' ', ''))",
-                        [$campus]
-                    );
-                })
-                ->first();
+            ->when(!empty($campusArray), function ($query) use ($campusArray) {
+                $query->where(function ($q) use ($campusArray) {
+                    foreach ($campusArray as $campus) {
+                        $q->orWhereRaw(
+                            "FIND_IN_SET(?, REPLACE(campus, ' ', ''))",
+                            [$campus]
+                        );
+                    }
+                });
+            })
+            ->first();
+
         if ($student) {
             return response()->json($student);
         } else {
