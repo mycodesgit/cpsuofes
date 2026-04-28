@@ -43,10 +43,12 @@ class StudentAccountController extends Controller
             ->when(!empty($campusArray), function ($query) use ($campusArray) {
                 $query->where(function ($q) use ($campusArray) {
                     foreach ($campusArray as $campus) {
-                        $q->orWhereRaw(
-                            "FIND_IN_SET(?, REPLACE(campus, ' ', ''))",
-                            [$campus]
-                        );
+                        $q->orWhere(function ($sub) use ($campus) {
+                            $sub->where('campus', $campus) // exact match
+                                ->orWhere('campus', 'LIKE', "$campus,%") // start
+                                ->orWhere('campus', 'LIKE', "%,$campus") // end
+                                ->orWhere('campus', 'LIKE', "%,$campus,%"); // middle
+                        });
                     }
                 });
             })
