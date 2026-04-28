@@ -142,7 +142,7 @@
 
 	<div style="margin-top: 20px; text-align: center; font-weight: bold">
 		<p>
-			FACULTY EVALUATION AND DEVELOPMENT ACKNOLWEDGEMENT FORM
+			FACULTY EVALUATION AND DEVELOPMENT ACKNOWLEDGEMENT FORM
 		</p>
 	</div>
 
