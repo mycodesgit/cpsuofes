@@ -19,8 +19,8 @@
                                     <form method="GET" action="{{ route('summaryEvalFilter') }}" id="enrollStud">
                                         @csrf
                                         
-                                        <div class="row">
-                                            <div class="col-md-3 mb-3">
+                                        <div class="row g-3">
+                                            <div class="col-md-3">
                                                 <label>Campus<span class="text-danger">*</span></label>
                                                 <select class="form-control form-control-sm" name="campus" id="campus">
                                                     <option disabled selected> --Select-- </option>
@@ -38,7 +38,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-3 mb-3">
+                                            <div class="col-md-3">
                                                 <label>School Year<span class="text-danger">*</span></label>
                                                 <select class="form-control form-control-sm" name="schlyear" id="schlyear">
                                                     @foreach($currsem as $datacurrsem)
@@ -55,7 +55,7 @@
                                                 <input type="hidden" name="ratingto" id="ratingto">
                                             </div>
 
-                                            <div class="col-md-3 mb-3">
+                                            <div class="col-md-3">
                                                 <label>Semester<span class="text-danger">*</span></label>
                                                 <select class="form-control form-control-sm" name="semester" id="semester">
                                                     <option disabled selected>Select</option>
@@ -65,7 +65,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-3 mb-3">
+                                            <div class="col-md-3">
                                                 <label>College<span class="text-danger">*</span></label>
                                                 <select class="form-control form-control-sm" name="dept" id="dept">
                                                     <option disabled selected> ---Select---</option>
@@ -75,7 +75,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-12 mb-3">
+                                            <div class="col-md-12">
                                                 <label>Faculty<span class="text-danger">*</span></label>
                                                 <select class="form-control form-control-sm select2bs4" name="faclty" id="faclty">
                                                     <option disabled selected> --Select--</option>
@@ -106,7 +106,7 @@
                                     <form method="GET" action="{{ route('subprint_searchresultStore') }}" id="enrollStud">
                                         @csrf
 
-                                        <div class="row container">
+                                        <div class="row g-3">
                                             <div class="col-md-2 mt-2">
                                                 <label class="mb-1">Campus <span class="text-danger">*</span></label>
                                                 <select class="form-control form-control-sm" name="campus" id="campusold">
