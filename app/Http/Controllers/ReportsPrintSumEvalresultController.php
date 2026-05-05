@@ -76,7 +76,7 @@ class ReportsPrintSumEvalresultController extends Controller
         $campus = $request->campus;
         $dept = $request->dept;
 
-        $faclty = Faculty::join('addressee', 'faculty.adrID', '=', 'addressee.id')
+        $faclty = Faculty::join('addressee', 'faculty.prefix', '=', 'addressee.id')
             ->join('college', 'faculty.faccollege', '=', 'college.college_abbr')
             ->when($campus, function ($query, $campus) {
                 return $query->whereRaw(
