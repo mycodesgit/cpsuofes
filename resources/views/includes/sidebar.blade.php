@@ -78,7 +78,7 @@
         </li>
     @endif
 
-    @if(in_array(Auth::guard('web')->user()->id, [1, 2, 3, 4, 5, 6, 7, 8, 12]))
+    @if(in_array(Auth::guard('web')->user()->id, [1, 2, 3, 4, 5, 6, 7, 8, 12, 13]))
         <li>
             <a class="nav-link {{ request()->is('studaccount*') ? 'active' : '' }}" href="{{ route('studaccount.index') }}">
                 <i class="ti ti-user-circle"></i> <span class="nav-text">Students</span>
