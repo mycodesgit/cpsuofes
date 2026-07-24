@@ -35,7 +35,7 @@ class DashboardController extends Controller
         $ratingperiod = $request->query('ratingperiod');
         $userCampus = Auth::guard('web')->user()->campus;
 
-        //$campuses = Campus::all();
+        $campuses = Campus::all();
 
         $currsem = QCEsemester::select('id', 'qceschlyear', 'qcesemester', 'qceratingfrom', 'qceratingto')
             ->where('qcesemstat', '2')
@@ -120,7 +120,7 @@ class DashboardController extends Controller
             
         return view('home.dashboard', 
                         compact(
-                            // 'campuses',
+                            'campuses',
                             'currsem',
                             'currenrolled', 
                             'currfacultySched', 
