@@ -12,7 +12,7 @@
                                 <form id="filterForm">
                                     <div class="form-group mb-3">
                                         <div class="row g-3">
-                                            <div class="col-md-4">
+                                            {{-- <div class="col-md-4">
                                                 <label>Campus: <span class="text-danger">*</span></label>
                                                 <select name="campus" id="campus" class="form-control form-control-sm">
                                                     <option value=""> --Select-- </option>
@@ -20,7 +20,7 @@
                                                         <option value="{{ $campus->code }}">{{ $campus->name }}</option>
                                                     @endforeach
                                                 </select>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-md-4">
                                                 <label>Rating Period: <span class="text-danger">*</span></label>
                                                 <select name="ratingperiod" id="ratingperiod" class="form-control form-control-sm">
