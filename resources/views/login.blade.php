@@ -327,7 +327,8 @@
             const themeIcon = document.getElementById('themeIcon');
             const htmlElement = document.documentElement;
 
-            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            // Force default to 'light' — ignore system preference
+            const savedTheme = localStorage.getItem('theme') || 'light';
             setTheme(savedTheme);
 
             if (themeToggleBtn) {
