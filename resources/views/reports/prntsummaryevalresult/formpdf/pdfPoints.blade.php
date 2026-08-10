@@ -185,7 +185,7 @@
         <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 250px;">
             @if(request('campus') === 'MC')
                 <span style="font-weight: bold; text-transform: uppercase;">{{ $reviewer }} </span> <span style="font-weight: bold;">{{ $rankrate }}</span>
-            @elseif(request('campus') === 'IC' || request('faclty') === 1188)
+            @elseif(request('faclty') === 1188)
                 <span style="font-weight: bold; text-transform: uppercase;">MARY GRACE NOREEN P. LEDUNA-JARANILLA, </span> <span style="font-weight: bold;"> Ph. D.</span>
             @else
                 <span style="font-weight: bold; text-transform: uppercase;">{{ $reviewerCampAd }}</span>
