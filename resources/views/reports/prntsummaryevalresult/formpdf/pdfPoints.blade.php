@@ -183,9 +183,10 @@
     <div class="details" style="margin-top: 30px; margin-left: 25px;">
         <span style="display: inline-block; width: 210px; vertical-align: top;">Reviewed and Discussed with:</span>
         <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 250px;">
-            @if(request('campus') === 'MC' || request('campus') === 'IC')
-                <span style="font-weight: bold; text-transform: uppercase;">{{ $reviewer }}</span>
-                <span style="font-weight: bold;">{{ $rankrate }}</span>
+            @if(request('campus') === 'MC')
+                <span style="font-weight: bold; text-transform: uppercase;">{{ $reviewer }} </span> <span style="font-weight: bold;">{{ $rankrate }}</span>
+            @elseif(request('campus') === 'IC' || request('faclty') === 1188)
+                <span style="font-weight: bold; text-transform: uppercase;">MARY GRACE NOREEN P. LEDUNA-JARANILLA, </span> <span style="font-weight: bold;"> Ph. D.</span>
             @else
                 <span style="font-weight: bold; text-transform: uppercase;">{{ $reviewerCampAd }}</span>
             @endif
