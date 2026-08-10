@@ -135,8 +135,16 @@
             </tr>
             <tr>
                 <td style="font-weight: bold;">1.1 STUDENT EVAL'N. (60%)</td>
-                <td style="text-align: center;"></td>
-                <td style="text-align: center;">{{ $total_student_eval }}</td>
+                 @if(request('semester') == 1)
+                    <td style="text-align: center;">{{ $total_student_eval }}</td>
+                    <td style="text-align: center;"></td>
+                @elseif(request('semester') == 2)
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;">{{ $total_student_eval }}</td>
+                @else
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"></td>
+                @endif
                 <td style="text-align: center;">{{ $total_student_eval }}</td>
                 <td style="text-align: center;">{{ number_format($total_studentEval, 2) }}</td>
             </tr>
@@ -149,8 +157,16 @@
             </tr>
             <tr>
                 <td style="font-weight: bold;">1.2 SUPERVISOR EVAL'N. (40%)</td>
-                <td style="text-align: center;">&nbsp;</td>
-                <td style="text-align: center;">{{ number_format($supervisor_total, 2) }}</td>
+                 @if(request('semester') == 1)
+                    <td style="text-align: center;">{{ number_format($supervisor_total, 2) }}</td>
+                    <td style="text-align: center;"></td>
+                @elseif(request('semester') == 2)
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;">{{ number_format($supervisor_total, 2) }}</td>
+                @else
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"></td>
+                @endif
                 <td style="text-align: center;">{{ number_format($supervisor_total, 2) }}</td>
                 <td style="text-align: center;">{{ number_format($total_supervisorEval, 2) }}</td>
             </tr>
