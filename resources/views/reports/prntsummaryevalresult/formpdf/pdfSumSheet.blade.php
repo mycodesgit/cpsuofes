@@ -80,7 +80,7 @@
     </div>
 
 	<div id="table1" class="table">
-        <table border="1" width="94%" style="border-collapse: collapse; text-align:center; margin-top: 40px; margin-left: 20px; margin-right: 20px;">
+        <table border="1" width="94%" style="border-collapse: collapse; text-align:center; margin-top: 30px; margin-left: 20px; margin-right: 20px;">
             <tr>
                 <th>No. of Student</th>
                 <th>Commitment</th>
