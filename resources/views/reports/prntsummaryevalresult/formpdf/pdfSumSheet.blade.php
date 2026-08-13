@@ -125,7 +125,7 @@
 	</div>    
 
     {{-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br> --}}
-    <div class="details-sm" style="margin-top: 20px;">
+    <div class="details-sm" style="margin-top: 15px;">
         <span style="display: inline-block; width: 80px; vertical-align: top;">Recorded by:</span>
         <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px; font-size: 9pt !important">
             <span style="font-weight: bold; font-size: 9pt !important">{{ $recorder }}</span>
