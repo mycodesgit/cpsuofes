@@ -46,8 +46,8 @@
         }
                    
         $sch_yr        = request('schlyear');
-        $reviewer      = $facDesignateId->fname ?? '' . ' ' . substr($facDesignateId->mname ?? '', 0, 2) . '. ' . $facDesignateId->lname ?? '';
-        $reviewerCampAd      = $facDesignateIdCampusAd->fname ?? '' . ' ' . substr($facDesignateIdCampusAd->mname ?? '', 0, 2) . '. ' . $facDesignateIdCampusAd->lname ?? '';
+        $reviewer      = $facDesignateId->fname . ' ' . substr($facDesignateId->mname, 0, 2) . '. ' . $facDesignateId->lname;
+        $reviewerCampAd      = $facDesignateIdCampusAd->fname . ' ' . substr($facDesignateIdCampusAd->mname, 0, 2) . '. ' . $facDesignateIdCampusAd->lname;
         $rankrate      = $facDesignateId->rankcomma;
         $reviewer_pos  =  $facDesignateId->designation . ', ' . $facDesignateId->college_name = str_replace(' Of ', ' of ', ucwords(strtolower($facDesignateId->college_name)));
         $reviewer_posCampAd  =  $facDesignateIdCampusAd->designation . ', ' . $facDesignateIdCampusAd->college_name = str_replace(' Of ', ' of ', ucwords(strtolower($facDesignateIdCampusAd->college_name)));
