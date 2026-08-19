@@ -55,6 +55,16 @@
 		    position: fixed; /* Change to absolute if needed */
 		    bottom: 0;
 		}
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+        }
+        .signature-block {
+            page-break-inside: avoid;
+            break-inside: avoid;
+            margin-top: 30px;
+            clear: both; /* Prevents layout overlap issues with floating elements */
+        }
 	</style>
 </head>
 <body>   
@@ -124,97 +134,104 @@
         </table>
 	</div>    
 
+    @php
+        // Determine if page break is needed based on row count (> 62)
+        $shouldPageBreak = collect($students)->count() > 62;
+    @endphp
+
     {{-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br> --}}
-    <div class="details-sm" style="margin-top: 30px;">
-        <span style="display: inline-block; width: 80px; vertical-align: top;">Recorded by:</span>
-        <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px; font-size: 9pt !important">
-            <span style="font-weight: bold; font-size: 9pt !important">{{ $recorder }}</span>
+    <div class="signature-block">
+        <div class="details-sm" style="margin-top: 30px;">
+            <span style="display: inline-block; width: 80px; vertical-align: top;">Recorded by:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px; font-size: 9pt !important">
+                <span style="font-weight: bold; font-size: 9pt !important">{{ $recorder }}</span>
+            </div>
         </div>
-    </div>
 
-    <div class="details-sm" style="margin-top: 5px;">
-        <span style="display: inline-block; width: 80px; vertical-align: top;">Position:</span>
-        <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
-            <span>{{ $recorder_pos }}</span>
+        <div class="details-sm" style="margin-top: 5px;">
+            <span style="display: inline-block; width: 80px; vertical-align: top;">Position:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
+                <span>{{ $recorder_pos }}</span>
+            </div>
         </div>
-    </div>
 
-    <div class="details-sm" style="margin-top: 5px;">
-        <span style="display: inline-block; width: 80px; vertical-align: top;">Date:</span>
-        <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
-            <span>{{ $recorder_date }}</span>
+        <div class="details-sm" style="margin-top: 5px;">
+            <span style="display: inline-block; width: 80px; vertical-align: top;">Date:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
+                <span>{{ $recorder_date }}</span>
+            </div>
         </div>
-    </div>
 
-    <div class="details-sm" style="margin-top: 30px;">
-        <span style="display: inline-block; width: 80px; vertical-align: top;">Endorsed by:</span>
-        <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
-            <span style="font-weight: bold">{{ $endorser }}</span>
+        <div class="details-sm" style="margin-top: 30px;">
+            <span style="display: inline-block; width: 80px; vertical-align: top;">Endorsed by:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
+                <span style="font-weight: bold">{{ $endorser }}</span>
+            </div>
         </div>
-    </div>
 
-    <div class="details-sm" style="margin-top: 5px;">
-        <span style="display: inline-block; width: 80px; vertical-align: top;">Position:</span>
-        <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 210px;">
-            <span>{{ $endorser_pos }}</span>
+        <div class="details-sm" style="margin-top: 5px;">
+            <span style="display: inline-block; width: 80px; vertical-align: top;">Position:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 210px;">
+                <span>{{ $endorser_pos }}</span>
+            </div>
         </div>
-    </div>
 
-    <div class="details-sm" style="margin-top: 30px;">
-        <span style="display: inline-block; width: 80px; vertical-align: top;">Conforme:</span>
-        <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
-            <span style="font-weight: bold; text-transform: uppercase;">{{ $fac_name }}</span>
+        <div class="details-sm" style="margin-top: 30px;">
+            <span style="display: inline-block; width: 80px; vertical-align: top;">Conforme:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
+                <span style="font-weight: bold; text-transform: uppercase;">{{ $fac_name }}</span>
+            </div>
+            <div style="text-align: center; width: 205px; margin-left: 88px;">
+                <span>Signature of Ratee</span>
+            </div>
+        </div>    
+        
+        <div style="float: right; margin-top: -183px; margin-right: 23px;">
+        <div class="details-sm">
+            <span style="display: inline-block; width: 165px; vertical-align: top; margin-left: -45px;">Reviewed and Discussed with:</span>
+            <div style="display: inline-block;  vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
+                @if(request('campus') === 'MC')
+                    <span style="font-weight: bold; text-transform: uppercase;">{{ $reviewer }} </span> <span style="font-weight: bold;">{{ $rankrate }}</span>
+                @else
+                    <span style="font-weight: bold; text-transform: uppercase;">{{ $reviewerCampAd }}</span>
+                @endif
+            </div>
         </div>
-         <div style="text-align: center; width: 205px; margin-left: 88px;">
-            <span>Signature of Ratee</span>
-        </div>
-    </div>    
-	
-    <div style="float: right; margin-top: -183px; margin-right: 23px;">
-    <div class="details-sm">
-        <span style="display: inline-block; width: 165px; vertical-align: top; margin-left: -45px;">Reviewed and Discussed with:</span>
-        <div style="display: inline-block;  vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
-            @if(request('campus') === 'MC')
-                <span style="font-weight: bold; text-transform: uppercase;">{{ $reviewer }} </span> <span style="font-weight: bold;">{{ $rankrate }}</span>
-            @else
-                <span style="font-weight: bold; text-transform: uppercase;">{{ $reviewerCampAd }}</span>
-            @endif
-        </div>
-    </div>
 
-    <div class="details-sm" style="margin-top: 5px;">
-        <span style="display: inline-block; width: 165px; vertical-align: top; margin-left: -45px;">Position:</span>
-        <div style="display: inline-block; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
-            @if(request('campus') === 'VC')
-                <span>Administrator, Victorias Campus</span>
-            @elseif (request('campus') === 'SCC')
-                <span>Administrator, San Carlos Campus</span>
-            @elseif (request('campus') === 'HC')
-                <span>Administrator, Hinigaran Campus</span>
-            @elseif (request('campus') === 'MP')
-                <span>Administrator, Moises Padilla Campus</span>
-            @elseif (request('campus') === 'IC')
-                <span>Administrator, Ilog Campus</span>
-            @elseif (request('campus') === 'CA')
-                <span>Administrator, Candoni Campus</span>
-            @elseif (request('campus') === 'CC')
-                <span>Administrator, Cauayan Campus</span>
-            @elseif (request('campus') === 'SC')
-                <span>Administrator, Sipalay Campus</span>
-            @elseif (request('campus') === 'HinC')
-                <span>Administrator, Hinobaan Campus</span>
-            @else
-                <span>{{ $reviewer_pos }}</span>
-            @endif
+        <div class="details-sm" style="margin-top: 5px;">
+            <span style="display: inline-block; width: 165px; vertical-align: top; margin-left: -45px;">Position:</span>
+            <div style="display: inline-block; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
+                @if(request('campus') === 'VC')
+                    <span>Administrator, Victorias Campus</span>
+                @elseif (request('campus') === 'SCC')
+                    <span>Administrator, San Carlos Campus</span>
+                @elseif (request('campus') === 'HC')
+                    <span>Administrator, Hinigaran Campus</span>
+                @elseif (request('campus') === 'MP')
+                    <span>Administrator, Moises Padilla Campus</span>
+                @elseif (request('campus') === 'IC')
+                    <span>Administrator, Ilog Campus</span>
+                @elseif (request('campus') === 'CA')
+                    <span>Administrator, Candoni Campus</span>
+                @elseif (request('campus') === 'CC')
+                    <span>Administrator, Cauayan Campus</span>
+                @elseif (request('campus') === 'SC')
+                    <span>Administrator, Sipalay Campus</span>
+                @elseif (request('campus') === 'HinC')
+                    <span>Administrator, Hinobaan Campus</span>
+                @else
+                    <span>{{ $reviewer_pos }}</span>
+                @endif
+            </div>
         </div>
-    </div>
 
-    <div class="details-sm" style="margin-top: 5px;">
-        <span style="display: inline-block; width: 165px; vertical-align: top; margin-left: -45px;">Date:</span>
-        <div style="display: inline-block; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
-            <span>{{ $reviewer_date }}</span>
+        <div class="details-sm" style="margin-top: 5px;">
+            <span style="display: inline-block; width: 165px; vertical-align: top; margin-left: -45px;">Date:</span>
+            <div style="display: inline-block; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
+                <span>{{ $reviewer_date }}</span>
+            </div>
         </div>
-    </div>
+        </div>
     </div>
 
     <div class="footer">
