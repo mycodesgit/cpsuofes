@@ -25,6 +25,7 @@
         if (request('faclty') == $facDesignateId->fac_id) {
             $reviewer = 'ENGR. ROSE ANN G. JOCSON ';
             $reviewer_pos = 'Quality Assurance Director';
+            $rankrate = '';
         }
         $reviewer_date = ".";
 
