@@ -51,6 +51,10 @@
         $rankrate      = $facDesignateId->rankcomma;
         $reviewer_pos  =  $facDesignateId->designation . ', ' . $facDesignateId->college_name = str_replace(' Of ', ' of ', ucwords(strtolower($facDesignateId->college_name)));
         $reviewer_posCampAd  =  $facDesignateIdCampusAd->designation . ', ' . $facDesignateIdCampusAd->college_name = str_replace(' Of ', ' of ', ucwords(strtolower($facDesignateIdCampusAd->college_name)));
+        if (request('faclty') == $facDesignateId->fac_id) {
+            $reviewer = 'ENGR ' . $reviewer;
+            $reviewer_pos = 'Quality Assurance Director';
+        }
         //$reviewer_pos  = '';
         // $date_signed   = \Carbon\Carbon::now()->format('F d, Y');
         $date_signed   = ".";
