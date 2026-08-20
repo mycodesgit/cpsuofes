@@ -212,26 +212,30 @@
         <div class="details-sm" style="margin-top: 5px;">
             <span style="display: inline-block; width: 165px; vertical-align: top; margin-left: -45px;">Position:</span>
             <div style="display: inline-block; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 205px;">
-                @if(request('campus') === 'VC')
-                    <span>Administrator, Victorias Campus</span>
-                @elseif (request('campus') === 'SCC')
-                    <span>Administrator, San Carlos Campus</span>
-                @elseif (request('campus') === 'HC')
-                    <span>Administrator, Hinigaran Campus</span>
-                @elseif (request('campus') === 'MP')
-                    <span>Administrator, Moises Padilla Campus</span>
-                @elseif (request('campus') === 'IC')
-                    <span>Administrator, Ilog Campus</span>
-                @elseif (request('campus') === 'CA')
-                    <span>Administrator, Candoni Campus</span>
-                @elseif (request('campus') === 'CC')
-                    <span>Administrator, Cauayan Campus</span>
-                @elseif (request('campus') === 'SC')
-                    <span>Administrator, Sipalay Campus</span>
-                @elseif (request('campus') === 'HinC')
-                    <span>Administrator, Hinobaan Campus</span>
+                @if (request('faclty') == $facDesignateIdCampusAd->fac_id)
+                    <span>Quality Assurance Director</span>
                 @else
-                    <span>{{ $reviewer_pos }}</span>
+                    @if(request('campus') === 'VC')
+                        <span>Administrator, Victorias Campus</span>
+                    @elseif (request('campus') === 'SCC')
+                        <span>Administrator, San Carlos Campus</span>
+                    @elseif (request('campus') === 'HC')
+                        <span>Administrator, Hinigaran Campus</span>
+                    @elseif (request('campus') === 'MP')
+                        <span>Administrator, Moises Padilla Campus</span>
+                    @elseif (request('campus') === 'IC')
+                        <span>Administrator, Ilog Campus</span>
+                    @elseif (request('campus') === 'CA')
+                        <span>Administrator, Candoni Campus</span>
+                    @elseif (request('campus') === 'CC')
+                        <span>Administrator, Cauayan Campus</span>
+                    @elseif (request('campus') === 'SC')
+                        <span>Administrator, Sipalay Campus</span>
+                    @elseif (request('campus') === 'HinC')
+                        <span>Administrator, Hinobaan Campus</span>
+                    @else
+                        <span>{{ $reviewer_pos }}</span>
+                    @endif
                 @endif
             </div>
         </div>

@@ -52,12 +52,12 @@
         $reviewer_pos  =  $facDesignateId->designation . ', ' . $facDesignateId->college_name = str_replace(' Of ', ' of ', ucwords(strtolower($facDesignateId->college_name)));
         $reviewer_posCampAd  =  $facDesignateIdCampusAd->designation . ', ' . $facDesignateIdCampusAd->college_name = str_replace(' Of ', ' of ', ucwords(strtolower($facDesignateIdCampusAd->college_name)));
         if (request('faclty') == $facDesignateId->fac_id) {
-            $reviewer = 'ENGR. ROSE ANN G. JOCSON ';
+            $reviewer = 'ENGR. ROSE ANN G. JOCSON';
             $reviewer_pos = 'Quality Assurance Director';
             $rankrate = '';
         }
         if (request('faclty') == $facDesignateIdCampusAd->fac_id) {
-            $reviewerCampAd = 'ENGR. JUAN DELA CRUZ ';
+            $reviewerCampAd = 'ENGR. ROSE ANN G. JOCSON ';
             $reviewer_pos = 'Quality Assurance Director';
             $rankrate = '';
         }
