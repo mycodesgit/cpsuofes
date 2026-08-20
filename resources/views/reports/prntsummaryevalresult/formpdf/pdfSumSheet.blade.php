@@ -232,7 +232,7 @@
                     <span>Administrator, Hinobaan Campus</span>
                 @else
                     @if (request('faclty') == $facDesignateIdCampusAd->fac_id)
-                    <span>{{ $reviewer_posCampAd }}</span>
+                    <span>{{ $reviewer_posCampAd = 'Quality Assurance Director'; }}</span>
                     @else
                     <span>{{ $reviewer_pos }}</span>
                     @endif
