@@ -29,7 +29,8 @@
         }
         if (request('faclty') == $facDesignateIdCampusAd->fac_id) {
             $reviewerCampAd = 'ENGR. ROSE ANN G. JOCSON ';
-            $reviewer_pos = 'Quality Assurance Director';
+            $reviewer_pos = '';
+            $reviewer_posCampAd = 'Quality Assurance Director';
             $rankrate = '';
         }
         $reviewer_date = ".";
