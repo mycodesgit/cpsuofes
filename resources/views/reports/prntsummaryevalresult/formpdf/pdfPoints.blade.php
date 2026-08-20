@@ -194,15 +194,6 @@
                 <span style="font-weight: bold;">
                     {{ $rankrate }}
                 </span>
-
-            @elseif(request('campus') === 'IC' && request('faclty') == 1188)
-                <span style="font-weight: bold; text-transform: uppercase;">
-                    MARY GRACE NOREEN P. LEDUNA-JARANILLA,
-                </span>
-                <span style="font-weight: bold;">
-                    Ph. D.
-                </span>
-
             @else
                 <span style="font-weight: bold; text-transform: uppercase;">
                     {{ $reviewerCampAd }}
