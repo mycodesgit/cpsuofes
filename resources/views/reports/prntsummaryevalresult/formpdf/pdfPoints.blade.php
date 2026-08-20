@@ -57,9 +57,8 @@
             $rankrate = '';
         }
         if (request('faclty') == $facDesignateIdCampusAd->fac_id) {
-            $reviewerCampAd = 'ENGR. ROSE ANN G. JOCSON ';
-            $reviewer_pos = '';
-            $reviewer_posCampAd = 'Quality Assurance Director';
+            $reviewerCampAd = 'ENGR. JUAN DELA CRUZ ';
+            $reviewer_pos = 'Quality Assurance Director';
             $rankrate = '';
         }
         //$reviewer_pos  = '';
@@ -231,11 +230,7 @@
             @elseif (request('campus') === 'HinC')
                 <span>Administrator, Hinobaan Campus</span>
             @else
-                @if (request('faclty') == $facDesignateIdCampusAd->fac_id)
-                <span>{{ $reviewer_posCampAd }}</span>
-                @else
                 <span>{{ $reviewer_pos }}</span>
-                @endif
             @endif
         </div>
     </div>
