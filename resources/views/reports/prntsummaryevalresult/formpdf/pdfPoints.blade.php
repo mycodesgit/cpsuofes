@@ -230,7 +230,11 @@
             @elseif (request('campus') === 'HinC')
                 <span>Administrator, Hinobaan Campus</span>
             @else
-                <span>{{ $reviewer_pos }}</span>
+                @if (request('faclty') == $facDesignateIdCampusAd->fac_id)
+                    <span>Quality Assurance Director</span>
+                @else
+                    <span>{{ $reviewer_pos }}</span>
+                @endif
             @endif
         </div>
     </div>
